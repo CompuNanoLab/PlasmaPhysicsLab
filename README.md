@@ -18,7 +18,7 @@ Please complete the following steps before the lecture:
   
 The material you should go through before the lecture comprises theoretical explanations and exercises with Python code. Here is a summary of the material:
 
-* [Introduction to Computational Plasma Physics]().
+* [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md).
 * [Orbit Theory]().
 * [How to solve Orbit Theory problems with numerical tools]().
 * Exercises on Orbit Theory:
