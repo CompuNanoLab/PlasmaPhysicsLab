@@ -1,7 +1,7 @@
 # Introduction to Computational Plasma Physics
 
 ## The Plasma Physics Problem
-Practically all plasma physics is contained in Maxwell equations and the relativistic kinetic equations that describe the evolution of a particle distribution function  $f_a(\mathbf{x},\mathbf{p},t)$ for each plasma species $a$ in a 6D phase-space.
+Most of the field of plasma physics can be encapsulated within Maxwell's equations and the relativistic kinetic equations governing the evolution of the particle distribution function, denoted as $f_a(\mathbf{x},\mathbf{p},t)$, for each distinct plasma species $a$ within a six-dimensional phase space.
 
 $$\dfrac{\partial f_a}{\partial t}+\dfrac{\mathbf{p}}{\gamma_a m_a} \cdot \dfrac{\partial f_a}{\partial \mathbf{x}}+q_a \left(\mathbf{E}+\dfrac{\mathbf{p}}{\gamma_a m_a}\times\mathbf{B} \right) \cdot \dfrac{\partial f_a}{\partial \mathbf{p}}=C_a$$
 
@@ -13,9 +13,9 @@ $$\nabla \cdot \mathbf{E}=\dfrac{1}{\epsilon_0} \left(\rho_{ext}+\displaystyle\s
      
 $$\nabla \times \mathbf{B}= \mu_0 \left( \mathbf{J}_{ext}+\displaystyle\sum_a \dfrac{q_a}{m_a} \int \dfrac{\mathbf{p}}{\gamma_a} f_a d\mathbf{p}\right)+\epsilon_0\mu_0 \dfrac{\partial \mathbf{E}}{\partial t}$$ 
 
-The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. This is a system of coupled (the fields tell the particles how to move, and the particle motion itself modifies the fields), nonlinear equations and describes vast physics that spans an enormous range of temporal and spatial scales. Hence, over the decades many approximations to these equations have been developed that are often more tractable, allowing one to obtain reasonable results in specific physical situations. Still the frontier in  theoretical and computational plasma physics remains the complete kinetic understanding of plasma from these full set of equations.
+The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. If $C_a$ is set to zero, the system takes the name of the relativistic collisionless Vlasov-Maxwell system. In these equations, the fields dictate the particles how to move, and the particle motion itself modifies the fields. As a result, this is a system of coupled, nonlinear equations, representing a broad spectrum of physics across various temporal and spatial scales. Over time, many approximations to these equations have been developed, often making them more manageable and allowing one to obtain reasonable results in specific physical situations. Nevertheless, the forefront of theoretical and computational plasma physics continues to strive for a comprehensive kinetic comprehension of plasma dynamics, derived from this complete set of equations.
 
-In this lecture, we will quickly survey modern computational techniques to handle problems in plasma physics. 
+In this section, we will quickly survey modern computational techniques to handle problems in plasma physics. 
 
 - Near first-principles simulations methods in which the Vlasov-Maxwell (collisionless) equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
 - Solving fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations and making a closure to approximate the moments not evolved by the fluid equations.
@@ -58,18 +58,19 @@ $$\mathbf{F}^n=\dfrac{q}{m}(\mathbf{E}^n+\mathbf{v}^n\times\mathbf{B}^n)$$
 where, in the last line, it is written the Lorentz force $\mathbf{F}^n$ due to the electric and magnetic fields interpolated at the centre of the macro-particle of position $\mathbf{x}$ at the time $t^n=n\Delta t$. Here appears also the velocity, or analogously the momentum, evaluated at integer times. Since they are known only at half-integer times, an approximation must be used:
 
 $$\mathbf{v}^{n}=\dfrac{\mathbf{p}^n}{\gamma^n} \quad \mathbf{p}^{n}=\dfrac{\mathbf{p}^{n+1/2}+\mathbf{p}^{n-1/2}}{2}$$
+
 Substituting $\mathbf{p}^{n+1/2}$ in the equation for momentum of , one gets:
 
-$$\mathbf{p}^{n}=\mathbf{p}^{n-1/2}+\dfrac{q}{2m}(\mathbf{E}^n+\dfrac{\mathbf{p}^n}{\gamma^n \times\mathbf{B}^n) \Delta t$$
+$$ \mathbf{p}^{n}=\mathbf{p}^{n-1/2}+\dfrac{q}{2m}(\mathbf{E}^n+\dfrac{\mathbf{p}^n}{\gamma^n \times\mathbf{B}^n) \Delta t $$
 
 This equation for $\mathbf{p}^{n}$ can become explicit, introducing some definitions and approximations:
-\begin{equation}
-  \mathbf{b}=\dfrac{q \Delta t \mathbf{B}^n}{2m\gamma^n} \quad \Tilde{\mathbf{p}}=\mathbf{p}^{n-1/2}+\dfrac{q \Delta t \mathbf{E}^n}{2m}\quad \gamma^n=\sqrt{1+\mathbf{p}^n\cdot\mathbf{p}^n}\approx \sqrt{1+\Tilde{\mathbf{p}}^n\cdot\Tilde{\mathbf{p}}^n}
-\end{equation}
-this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The explicit equation can be found by multiplying $\times\mathbf{b}$ equation \ref{sonfolle3}:
-\begin{equation}
-  \mathbf{p}^{n}=\dfrac{1}{1+b^2}\left[\Tilde{\mathbf{p}}+\Tilde{\mathbf{p}}\times \mathbf{b}+\mathbf{b}(\Tilde{\mathbf{p}}\cdot \mathbf{b})\right]
-\end{equation}
+
+$$\mathbf{b}=\dfrac{q \Delta t \mathbf{B}^n}{2m\gamma^n} \quad \Tilde{\mathbf{p}}=\mathbf{p}^{n-1/2}+\dfrac{q \Delta t \mathbf{E}^n}{2m}\quad \gamma^n=\sqrt{1+\mathbf{p}^n\cdot\mathbf{p}^n}\approx \sqrt{1+\Tilde{\mathbf{p}}^n\cdot\Tilde{\mathbf{p}}^n}$$
+
+this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The explicit equation can be found by multiplying $\times\mathbf{b}$ equation:
+
+$$\mathbf{p}^{n}=\dfrac{1}{1+b^2}\left[\Tilde{\mathbf{p}}+\Tilde{\mathbf{p}}\times \mathbf{b}+\mathbf{b}(\Tilde{\mathbf{p}}\cdot \mathbf{b})\right]$$
+
 where $b$ is the magnitude of $\mathbf{b}$.
 Now all the ingredients for the advancement of macro-particle position and momentum are given. This scheme is called \textit{Boris-pusher algorithm}. 
 
