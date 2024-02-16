@@ -1,5 +1,5 @@
 # Introduction to Computational Plasma Physics
-## 
+
 Vast majority of plasma physics is contained in the Vlasov-Maxwell equations that describes the evolution of a particle distribution $f_s(t,\mathbf{x},\mathbf{v})$ function in 6D phase-space.
 
 $$\dfrac{\partial f_s}{\partial t}+ \nabla_\mathbf{x} \cdot (\mathbf{v}f_s)+ \nabla_\mathbf{v} \cdot \left(\dfrac{q_s}{m_s}(\mathbf{E}+\mathbf{v}\times\mathbf{B}\right) f_s)=\left( \dfrac{\partial f_s}{\partial t} \right)_c$$
@@ -18,7 +18,7 @@ In this lecture, we will quickly look at the key modern computational techniques
 
  Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system. 
 
-** Why computational methods have become central in plasma physics? **
+## Why computational methods have become central in plasma physics?
 
 We know the fundamental laws written above that govern plasma physics, but we are simply unable to work out their consequences. Indeed, there are problems for which experiments are difficult or impossible, and the simultaneous interaction of a large number of degrees of freedom makes analytic theoretical treatments impractical. For computer simulation one constructs a numerical model of the system or theory which one wishes to investigate. One then carries out a numerical experiment on a high-speed computer, allowing the system to evolve fromsome initial situation of interest in accordance with the laws used. The computer can give one as much information about the details of the evolution as one desires. One can compare the results of each simulation with theoretical predictions based on simplified analytic models, with experimenta1 observations or with observation of natural phenomena, or one can use the results to predict behavior of unperformed (and often unperformable) experiments.
 
@@ -29,7 +29,34 @@ of fundamental physical aspects, like Collective mechanisms of energy and plasma
 
 * Some theoretical questions can only be answered with computer simulations.
 * providing tools to understand/design experiments or observations.
+
 * 
+
+## Ordinary Differential Equation Solvers
+Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
+
+$$\frac{d\mathbf{x}}{dt} = \mathbf{v}$$ 
+
+$$\frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v}\times\mathbf{B})$$
+
+Approach it with finite-difference time domain schemes, ie. derivatives in time are converted to differences that we solve in discrete timesteps.
+The most widely used method to solve this system of ODEs is the Boris algorithm.
+The Boris algorithm is surprisingly good: it is a second-order, time-centered method that conserves phase-space volume.
+
+other pushers...
+
+## Boris Pusher
+tool for orbit theory
+
+## Hyperbolic Equations
+Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations.
+
+### FDTD
+The Yee-cell preserves the underlying geometric structure of Maxwell equations, and ensures that the divergence relations are maintained in the case of vacuum fields. In essence, the electric field is a vector quantity (associated with lines) while the magnetic field is a bi-vector quantity (associated with surfaces). Hence, the most natural representation on a discrete grid utilizes this geometric fact to build a consistent scheme.
+
+### FV
+We will focus on finite-volume and discontinuous Galerkin schemes for partial differential equations (PDEs), specifically fluid mechanics (Euler equations) and plasma physics (MHD equations, multi-fluid equations and the Vlasov-Maxwell system). 
+
 
 ## Bibliography
 
