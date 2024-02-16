@@ -17,18 +17,18 @@ The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m
 
 In the following sections, we will understand the motivations that lead to the use of computational tools in plasma physics and then quickly survey modern computational techniques employed in this context.
 
-## Why computational methods have become central in plasma physics?
+## Why are computational methods central in plasma physics?
 
 We know the fundamental laws (written above) that govern plasma physics, but "we are simply unable to work out their consequences" ([Dawson,1983](https://doi.org/10.1103/revmodphys.55.403)). 
 
-Indeed, there are problems for which experiments are difficult or impossible, and the simultaneous interaction of a large number of degrees of freedom makes analytic theoretical treatments impractical. 
+In many fields of study, including plasma physics, experiments can be challenging or impossible, and the concurrent interaction of numerous degrees of freedom makes analytical methods unfeasible. Computer simulations are powerful tools to investigate physical scenarios of this kind. 
+One starts constructing a numerical model of the system or theory of interest. Then, one carries out a numerical experiment allowing the system to evolve from some initial situation following the laws used. When required, high-performance computing machines are used.
+Computer simulations can give all the desired information on the system's evolution. These results are then compared with theoretical predictions based on simplified analytic models, with experimental observations or with the observation of natural phenomena, or one can use the results to predict the behaviour of unperformed experiments.
 
-For computer simulation one constructs a numerical model of the system or theory which one wishes to investigate. One then carries out a numerical experiment on a high-speed computer, allowing the system to evolve from some initial situation of interest following the laws used. The computer can give one as much information about the details of the evolution as one desires. One can compare the results of each simulation with theoretical predictions based on simplified analytic models, with experimental observations or with the observation of natural phenomena, or one can use the results to predict behaviour of unperformed (and often unperformable) experiments.
+With computer simulations, we can get results of immediate practical interest, for example about the performance of a fusion device, of an accelerator, or of an electronic device for generating radiation. Or we gain insight and understanding of fundamental physical aspects, like collective mechanisms of energy and plasma transport across a magnetic field, the interaction of the solar wind with planetary magnetospheres, the generation of radiation by energetic plasma, the collapse of a gas cloud to form a star, the evolution of a galaxy, etc.
 
-With computer simulations, we can get results of immediate practical interest, for example about the performance of a fusion device, of an accelerator, or of an electronic device for generating radiation. Or we gain insight and understanding of fundamental physical aspects, like collective mechanisms of energy and plasma transport across a magnetic field, collective mechanisms of transport in a fluid, the nature of hydrodynamic turbulence, the interaction of the solar wind with planetary magnetospheres, the generation of radiation by energetic plasma, the collapse of a gas cloud to form a star, the evolution of a galaxy, and the steps by which a complex chemical reaction takes place.
-
-* Some theoretical questions can only be answered with computer simulations.
-* Provide tools to understand/design experiments or observations.
+So the answer to the starting question is:
+Because some theoretical questions in plasma physics can only be answered with computer simulations which also provide tools to understand/design experiments or observations.
 
 ## Major computational schemes in plasma physics
 In particular, we will focus on the following topics 
