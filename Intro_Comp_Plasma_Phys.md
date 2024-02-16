@@ -1,20 +1,25 @@
 # Introduction to Computational Plasma Physics
 
-Vast majority of plasma physics is contained in the Vlasov-Maxwell equations that describes the evolution of a particle distribution $f_s(t,\mathbf{x},\mathbf{v})$ function in 6D phase-space.
+## The Plasma Physics Problem
+Practically all plasma physics is contained in Maxwell equations and the relativistic kinetic equations that describe the evolution of a particle distribution function  $f_a(\mathbf{x},\mathbf{p},t)$ for each plasma species $a$ in a 6D phase-space.
 
-$$\dfrac{\partial f_s}{\partial t}+ \nabla_\mathbf{x} \cdot (\mathbf{v}f_s)+ \nabla_\mathbf{v} \cdot \left(\dfrac{q_s}{m_s}(\mathbf{E}+\mathbf{v}\times\mathbf{B}\right) f_s)=\left( \dfrac{\partial f_s}{\partial t} \right)_c$$
+$$\dfrac{\partial f_a}{\partial t}+\dfrac{\mathbf{p}}{\gamma_a m_a} \cdot \dfrac{\partial f_a}{\partial \mathbf{x}}+q_a \left(\mathbf{E}+\dfrac{\mathbf{p}}{\gamma_a m_a}\times\mathbf{B} \right) \cdot \dfrac{\partial f_a}{\partial \mathbf{p}}=C_a$$
 
-where the right-hand side describes the effect of collisions. Of course, the electromagnetic fields are determined from Maxwell equations:
+$$\nabla \cdot \mathbf{B} = 0$$
+     
+$$\nabla \times \mathbf{E} =-\dfrac{\partial \mathbf{B}}{\partial t}$$
+     
+$$\nabla \cdot \mathbf{E}=\dfrac{1}{\epsilon_0} \left(\rho_{ext}+\displaystyle\sum_a q_a \int f_a d\mathbf{p} \right)$$
+     
+$$\nabla \times \mathbf{B}= \mu_0 \left( \mathbf{J}_{ext}+\displaystyle\sum_a \dfrac{q_a}{m_a} \int \dfrac{\mathbf{p}}{\gamma_a} f_a d\mathbf{p}\right)+\epsilon_0\mu_0 \dfrac{\partial \mathbf{E}}{\partial t}$$ 
 
-$$\begin{split}\epsilon_0\mu_0 \frac{\partial \mathbf{E}}{\partial t}- \nabla_\mathbf{x} \times \mathbf{B} &= -\mu_0  \sum_s q_s \int_{-\infty}^{\infty} v f_s d\mathbf{v}^3 \\ \frac{\partial \mathbf{B}}{\partial t}+ \nabla_\mathbf{x} \times \mathbf{E} &= 0 \\ \nabla_\mathbf{x}\cdot\mathbf{E} &=\frac{1}{\epsilon_0}\sum_s q_s \int_{-\infty}^{\infty} f_s d\mathbf{v}^3 \\ \nabla_\mathbf{x}\cdot\mathbf{B} &= 0.\end{split}$$
+The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. This is a system of coupled (the fields tell the particles how to move, and the particle motion itself modifies the fields), nonlinear equations and describes vast physics that spans an enormous range of temporal and spatial scales. Hence, over the decades many approximations to these equations have been developed that are often more tractable, allowing one to obtain reasonable results in specific physical situations. Still the frontier in  theoretical and computational plasma physics remains the complete kinetic understanding of plasma from these full set of equations.
 
-Suitable modifications are required to account for relativistic effects. the problem is highly nonlinear: the fields tell the particles how to move, and the particle motion itself modifies the fields. The Vlasov-Maxwell system is a formidable system of coupled, nonlinear equations and describes vast physics that spans an enormous range of temporal and spatial scales. Hence, over the decades many approximations to the Vlasov-Maxwell equations have been developed that are often more tractable, allowing one to obtain reasonable results in specific physical situations. Of course, the frontier in computational and theoretical plasma physics remains the complete kinetic understanding of plasma from the full Vlasov-Maxwell equations.
+In this lecture, we will quickly survey modern computational techniques to handle problems in plasma physics. 
 
-In this lecture, we will quickly look at the key modern computational techniques to handle various problems in plasma physics. 
-
-- Near first-principles simulations methods in which the Vlasov-Maxwell equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
-- Solving fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations and making a closure to approximate the moments not evolved by the fluid equations. Here we will study the modern approach based on the theory of hyperbolic PDEs and Riemann solvers. We will also look at the special requirements of solvers that are required to study fusion problems.
-- Directly discretizing the Vlasov-Maxwell equations as a PDE in 6D. This is an emerging area of active research and has applications to study of turbulence in fusion machines and also exploring fundamental plasma physics in phase-space.
+- Near first-principles simulations methods in which the Vlasov-Maxwell (collisionless) equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
+- Solving fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations and making a closure to approximate the moments not evolved by the fluid equations.
+- Directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is an area of active research and has applications to study of turbulence in fusion machines and also exploring fundamental plasma physics in phase-space.
 
  Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system. 
 
@@ -25,12 +30,8 @@ We know the fundamental laws written above that govern plasma physics, but we ar
 With computer simulations we can get results of immediate practical interest, for example about the performance of a fusion device, the performance of an accelerator, the performance of an electronic device for generating radiation. Or we gain insight and understanding
 of fundamental physical aspects, like Collective mechanisms of energy and plasma transport across a magnetic field, collective mechanisms of transport in a fluid, the nature of hydrodynamic turbulence, the interaction of the solar wind with planetary magnetospheres, the generation of radiation by energetic plasma, the collapse of a gas cloud to form a star, the evolution of a galaxy, and the steps by which a complex chemical reaction takes place.
 
-
-
 * Some theoretical questions can only be answered with computer simulations.
 * providing tools to understand/design experiments or observations.
-
-* 
 
 ## Ordinary Differential Equation Solvers
 Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
@@ -64,4 +65,3 @@ We will focus on finite-volume and discontinuous Galerkin schemes for partial di
 * Kawata, S. (2023). Computational Plasma Science: Physics and Selected Simulation Examples. Germany: Springer Nature Singapore.
 * Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
 * Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
-* [Link to an online course by Ammar Hakim](https://cmpp.readthedocs.io/en/latest/)
