@@ -46,8 +46,32 @@ The Boris algorithm is surprisingly good: it is a second-order, time-centered me
 
 other pushers...
 
-## Boris Pusher
-tool for orbit theory
+### Boris Pusher
+Leap-frog algorithm is used also for the discretization in time of particle position $\mathbf{x}$ and velocity $\mathbf{v}$ (or momentum $\mathbf{p}$). The integration scheme follows from  considering only temporal discretization, with 
+
+$$\mathbf{x}^{n+1}=\mathbf{x}^n+ \mathbf{v}^{n+1/2}\Delta t$$  
+
+$$\mathbf{p}^{n+1/2}=\mathbf{p}^{n-1/2}+\mathbf{F}^n\Delta t$$
+
+$$\mathbf{F}^n=\dfrac{q}{m}(\mathbf{E}^n+\mathbf{v}^n\times\mathbf{B}^n)$$
+
+where, in the last line, it is written the Lorentz force $\mathbf{F}^n$ due to the electric and magnetic fields interpolated at the centre of the macro-particle of position $\mathbf{x}$ at the time $t^n=n\Delta t$. Here appears also the velocity, or analogously the momentum, evaluated at integer times. Since they are known only at half-integer times, an approximation must be used:
+
+$$\mathbf{v}^{n}=\dfrac{\mathbf{p}^n}{\gamma^n} \quad \mathbf{p}^{n}=\dfrac{\mathbf{p}^{n+1/2}+\mathbf{p}^{n-1/2}}{2}$$
+Substituting $\mathbf{p}^{n+1/2}$ in the equation for momentum of , one gets:
+
+$$\mathbf{p}^{n}=\mathbf{p}^{n-1/2}+\dfrac{q}{2m}(\mathbf{E}^n+\dfrac{\mathbf{p}^n}{\gamma^n \times\mathbf{B}^n) \Delta t$$
+
+This equation for $\mathbf{p}^{n}$ can become explicit, introducing some definitions and approximations:
+\begin{equation}
+  \mathbf{b}=\dfrac{q \Delta t \mathbf{B}^n}{2m\gamma^n} \quad \Tilde{\mathbf{p}}=\mathbf{p}^{n-1/2}+\dfrac{q \Delta t \mathbf{E}^n}{2m}\quad \gamma^n=\sqrt{1+\mathbf{p}^n\cdot\mathbf{p}^n}\approx \sqrt{1+\Tilde{\mathbf{p}}^n\cdot\Tilde{\mathbf{p}}^n}
+\end{equation}
+this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The explicit equation can be found by multiplying $\times\mathbf{b}$ equation \ref{sonfolle3}:
+\begin{equation}
+  \mathbf{p}^{n}=\dfrac{1}{1+b^2}\left[\Tilde{\mathbf{p}}+\Tilde{\mathbf{p}}\times \mathbf{b}+\mathbf{b}(\Tilde{\mathbf{p}}\cdot \mathbf{b})\right]
+\end{equation}
+where $b$ is the magnitude of $\mathbf{b}$.
+Now all the ingredients for the advancement of macro-particle position and momentum are given. This scheme is called \textit{Boris-pusher algorithm}. 
 
 ## Hyperbolic Equations
 Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations.
