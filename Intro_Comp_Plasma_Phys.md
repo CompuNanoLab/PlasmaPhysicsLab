@@ -1,7 +1,7 @@
 # Introduction to Computational Plasma Physics
 
-## The Plasma Physics Problem
-Most of the field of plasma physics can be encapsulated within Maxwell's equations and the relativistic kinetic equations governing the evolution of the particle distribution function, denoted as $f_a(\mathbf{x},\mathbf{p},t)$, for each distinct plasma species $a$ within a six-dimensional phase space.
+## The plasma physics problem
+Most of the field of plasma physics can be encapsulated within Maxwell's equations and the relativistic kinetic equations governing the evolution of the particle distribution function, denoted as $f_a(\mathbf{x},\mathbf{p},t)$, for each distinct plasma species $a$ within a six-dimensional (6D) phase space.
 
 $$\dfrac{\partial f_a}{\partial t}+\dfrac{\mathbf{p}}{\gamma_a m_a} \cdot \dfrac{\partial f_a}{\partial \mathbf{x}}+q_a \left(\mathbf{E}+\dfrac{\mathbf{p}}{\gamma_a m_a}\times\mathbf{B} \right) \cdot \dfrac{\partial f_a}{\partial \mathbf{p}}=C_a$$
 
@@ -13,27 +13,33 @@ $$\nabla \cdot \mathbf{E}=\dfrac{1}{\epsilon_0} \left(\rho_{ext}+\displaystyle\s
      
 $$\nabla \times \mathbf{B}= \mu_0 \left( \mathbf{J}_{ext}+\displaystyle\sum_a \dfrac{q_a}{m_a} \int \dfrac{\mathbf{p}}{\gamma_a} f_a d\mathbf{p}\right)+\epsilon_0\mu_0 \dfrac{\partial \mathbf{E}}{\partial t}$$ 
 
-The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. If $C_a$ is set to zero, the system takes the name of the relativistic collisionless Vlasov-Maxwell system. In these equations, the fields dictate the particles how to move, and the particle motion itself modifies the fields. As a result, this is a system of coupled, nonlinear equations, representing a broad spectrum of physics across various temporal and spatial scales. Over time, many approximations to these equations have been developed, often making them more manageable and allowing one to obtain reasonable results in specific physical situations. Nevertheless, the forefront of theoretical and computational plasma physics continues to strive for a comprehensive kinetic comprehension of plasma dynamics, derived from this complete set of equations. Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
+The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. If $C_a$ is set to zero, the system takes the name of the relativistic collisionless Vlasov-Maxwell system. In these equations, the fields dictate how particles move, and the particle motion itself modifies the fields. As a result, this is a system of coupled, nonlinear equations, representing a broad spectrum of physics across various temporal and spatial scales. Over time, many approximations to these equations have been developed, often making them more manageable and allowing one to obtain reasonable results in specific physical situations. Nevertheless, the forefront of theoretical and computational plasma physics continues to strive for a comprehensive kinetic comprehension of plasma dynamics, derived from this complete set of equations. 
 
-In the following sections, we will understand the motivations that lead to the use of computational tools in plasma physics and then quickly survey modern computational techniques employed in this context. In particular, we will focus on the following topics 
-
-- Simulation methods in which the Vlasov-Maxwell (collisionless) equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
-- Solving fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations and making a closure to approximate the moments not evolved by the fluid equations.
-- Directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is an area of active research and has applications to study of turbulence in fusion machines and also exploring fundamental plasma physics in phase-space.
-- Monte Carlo methods to 
-
+In the following sections, we will understand the motivations that lead to the use of computational tools in plasma physics and then quickly survey modern computational techniques employed in this context.
 
 ## Why computational methods have become central in plasma physics?
 
-We know the fundamental laws written above that govern plasma physics, but we are simply unable to work out their consequences. Indeed, there are problems for which experiments are difficult or impossible, and the simultaneous interaction of a large number of degrees of freedom makes analytic theoretical treatments impractical. For computer simulation one constructs a numerical model of the system or theory which one wishes to investigate. One then carries out a numerical experiment on a high-speed computer, allowing the system to evolve from some initial situation of interest in accordance with the laws used. The computer can give one as much information about the details of the evolution as one desires. One can compare the results of each simulation with theoretical predictions based on simplified analytic models, with experimenta1 observations or with observation of natural phenomena, or one can use the results to predict behavior of unperformed (and often unperformable) experiments.
+We know the fundamental laws (written above) that govern plasma physics, but "we are simply unable to work out their consequences" ([Dawson,1983](https://doi.org/10.1103/revmodphys.55.403)). 
 
-With computer simulations we can get results of immediate practical interest, for example about the performance of a fusion device, the performance of an accelerator, the performance of an electronic device for generating radiation. Or we gain insight and understanding
-of fundamental physical aspects, like Collective mechanisms of energy and plasma transport across a magnetic field, collective mechanisms of transport in a fluid, the nature of hydrodynamic turbulence, the interaction of the solar wind with planetary magnetospheres, the generation of radiation by energetic plasma, the collapse of a gas cloud to form a star, the evolution of a galaxy, and the steps by which a complex chemical reaction takes place.
+Indeed, there are problems for which experiments are difficult or impossible, and the simultaneous interaction of a large number of degrees of freedom makes analytic theoretical treatments impractical. 
+
+For computer simulation one constructs a numerical model of the system or theory which one wishes to investigate. One then carries out a numerical experiment on a high-speed computer, allowing the system to evolve from some initial situation of interest following the laws used. The computer can give one as much information about the details of the evolution as one desires. One can compare the results of each simulation with theoretical predictions based on simplified analytic models, with experimental observations or with the observation of natural phenomena, or one can use the results to predict behaviour of unperformed (and often unperformable) experiments.
+
+With computer simulations, we can get results of immediate practical interest, for example about the performance of a fusion device, of an accelerator, or of an electronic device for generating radiation. Or we gain insight and understanding of fundamental physical aspects, like collective mechanisms of energy and plasma transport across a magnetic field, collective mechanisms of transport in a fluid, the nature of hydrodynamic turbulence, the interaction of the solar wind with planetary magnetospheres, the generation of radiation by energetic plasma, the collapse of a gas cloud to form a star, the evolution of a galaxy, and the steps by which a complex chemical reaction takes place.
 
 * Some theoretical questions can only be answered with computer simulations.
-* providing tools to understand/design experiments or observations.
+* Provide tools to understand/design experiments or observations.
 
 ## Major computational schemes in plasma physics
+In particular, we will focus on the following topics 
+
+- Simulation methods in which the Vlasov-Maxwell (collisionless) equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
+- Solving fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations and making a closure to approximate the moments not evolved by the fluid equations.
+- Directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D.
+- Monte Carlo methods to
+
+Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
+Vlasov codes: This is an area of active research and has applications to the study of turbulence in fusion machines and also exploring fundamental plasma physics in phase-space
 
 ## Ordinary Differential Equation Solvers
 Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
