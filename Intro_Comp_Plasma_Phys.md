@@ -33,7 +33,8 @@ So the answer to the starting question is... because some theoretical questions 
 
 Computer simulation of plasmas comprises two general areas based on kinetic and fluid descriptions. This is achieved either by solving numerically the plasma kinetic equations ) or by "particle" simulation, which simply computes the motions of a collection of charged particles, interacting with each other and with externally applied fields. Kinetic simulation has been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles. MHD simulation, on the other hand, has generally been applied to large-scale problems directly related to the behavior of experimental devices. 
 
-![immagine](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/2b38c139-32bc-4cb4-b980-b18f888fa7ff)
+![immagine](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75519b74-0858-42ca-8017-264db1cd09a1)
+
 
  Hierarchical nature of physical structure
 Complexity of collective phenomena
