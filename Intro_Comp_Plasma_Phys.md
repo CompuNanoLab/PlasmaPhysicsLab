@@ -30,6 +30,18 @@ Computational plasma physics can provide results of immediate practical interest
 So the answer to the starting question is... because some theoretical questions in plasma physics can only be answered with computer simulations which notably provide tools to understand and design experiments, observations, and applications.
 
 ## Major computational schemes in plasma physics
+
+Computer simulation of plasmas comprises two general areas based on kinetic and fluid descriptions. This is achieved either by solving numerically the plasma kinetic equations ) or by "particle" simulation, which simply computes the motions of a collection of charged particles, interacting with each other and with externally applied fields. Kinetic simulation has been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles. MHD simulation, on the other hand, has generally been applied to large-scale problems directly related to the behavior of experimental devices. 
+
+![immagine](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/2b38c139-32bc-4cb4-b980-b18f888fa7ff)
+
+ Hierarchical nature of physical structure
+Complexity of collective phenomena
+many unresolved problems involve the hierarchical nature
+of physical structures, i.e., a kind of structure made up of many layers of
+different yet intimately interrelated physical aspects. In short,
+the plasma exhibits a variety of instabilities and phenomena of various time scales and spatial scales that are intimately related to each other
+
 In particular, we will focus on the following topics 
 
 - Simulation methods in which the Vlasov-Maxwell (collisionless) equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
