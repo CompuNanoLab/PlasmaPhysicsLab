@@ -35,12 +35,13 @@ As pointed out, many approximations to the kinetic equations to describe a plasm
 
 Computational plasma physics follows the hierarchy of the different plasma models implementing various numerical strategies for each of them. Computer simulations of plasmas compries two general areas based on kinetic and fluid descriptions connected by hybrid approaches. Image 1 is a tentative classification of numerical strategies employed in plasma physics.
 
-One very accurate approach, able to describe non-equilibrium conditions, consists in solving numerically the plasma kinetic equations. This is achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D.
-Vlasov codes: This is an area of active research and has applications to the study of turbulence in fusion machines and also exploring fundamental plasma physics in phase-space
-
-) or by "particle" simulation, which simply computes the motions of a collection of charged particles, interacting with each other and with externally applied fields. Kinetic simulation has been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles. MHD simulation, on the other hand, has generally been applied to large-scale problems directly related to the behavior of experimental devices. 
-
 ![immagine](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75519b74-0858-42ca-8017-264db1cd09a1)
+
+One very accurate approach consists in solving numerically the plasma kinetic equations. This can be achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is the approach of **Vlasov codes**, an area of active research in computational plasma physics to explore fundamental plasma physics in phase-space. Vlasov-Maxwell systems can be approximately solved also with **Particle codes**. They simply compute the motions of a collection of charged particles representative of many real particles and interacting with each other and with externally applied fields. Kinetic simulations have been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
+
+ MHD simulation, on the other hand, has generally been applied to large-scale problems directly related to the behavior of experimental devices. 
+
+
 
 
  Hierarchical nature of physical structure
@@ -56,8 +57,13 @@ In particular, we will focus on the following topics
 - 
 - Monte Carlo methods to
 
+
+
+## ODE
+
+
 Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
-Vlasov codes: This is an area of active research and has applications to the study of turbulence in fusion machines and also exploring fundamental plasma physics in phase-space function is conserved. The macro-particle equations-of-motion are
+ ...function is conserved. The macro-particle equations-of-motion are
 
 $$\frac{d\mathbf{x}}{dt} = \mathbf{v}$$ 
 
