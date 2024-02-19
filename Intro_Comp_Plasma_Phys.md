@@ -31,7 +31,7 @@ So the answer to the starting question is... because some theoretical questions 
 
 ## Major computational schemes in plasma physics
 
-As pointed out, many approximations to the kinetic equations to describe a plasma have been developed to make the problem manageable in specific physics situations. This has led, starting from the full kinetic model to the kinetic collisionless Vlasov-Maxwell system, the multi-fluid model and magnetohydrodynamics (MHD). Since plasma exhibits a hierarchical nature with a variety of instabilities and phenomena at various time scales and spatial scales, the adoption of multiple theoretical models suited for different scales seems a natural approach. Yet, the problem of understanding plasma collective behaviours remains extremely complex due to the interrelation between phenomena belonging to different layers of this spatial and temporal hierarchical structure.
+As pointed out, many approximations to the kinetic equations to describe a plasma have been developed to make the problem manageable in specific physics situations. This has led, starting from the full kinetic model to the kinetic collisionless Vlasov-Maxwell system, and the multi-fluid model and magnetohydrodynamics (MHD) where we neglect individual particles in favour of a continuous fluid description. Since plasma exhibits a hierarchical nature with a variety of instabilities and phenomena at various time scales and spatial scales, the adoption of multiple theoretical models suited for different scales seems a natural approach. Yet, the problem of understanding plasma collective behaviours remains extremely complex due to the interrelation between phenomena belonging to different layers of this spatial and temporal hierarchical structure.
 
 Computational plasma physics follows the hierarchy of the different plasma models implementing various numerical strategies for each of them. Computer simulations of plasmas comprise two general areas based on kinetic and fluid descriptions connected by hybrid approaches. [Figure 1](\ref{fig1}) is a tentative classification of numerical strategies employed in plasma physics.
 
@@ -41,29 +41,15 @@ Computational plasma physics follows the hierarchy of the different plasma model
 
 One very accurate procedure consists in solving numerically the plasma kinetic equations. This can be achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is the approach of **Vlasov codes**, an area of active research in computational plasma physics to explore fundamental plasma physics in phase space. The Vlasov-Maxwell system can be approximately solved also with **Particle codes**. They simply compute the motions of a collection of charged particles, representative of many real particles, interacting with each other and with externally applied fields. The finite-difference-time-domain particle-in-cell method (FDTD PIC) which we will briefly discuss in the following sections belongs to this category. In general, kinetic simulations have been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. However, they ignore collisions and require huge amounts of computational resources limiting their applicability to the whole plasma physics scenario.
 
-**MHD codes**, on the other hand, have generally been applied to large-scale problems directly related to the behaviour of experimental devices. MHD simulations practically solve fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations, making a closure to approximate the moments not evolved by the equations themselves. The older of the two methods, the fluid simulation method28 is conceptually
-straightforward as long as we can regard the many-body system as being
-composed of so many particles that we can smear out the individual particles
-into a continuous fluid.
+**Fluid/MHD codes**, on the other hand, have generally been applied to large-scale problems directly related to the behaviour of experimental devices. Fluid simulations practically solve fluid equations that are obtained from taking moments of the kinetic equations, making a closure to approximate the moments not evolved by the equations themselves. This usually means that some transport coefficients like mobility, diffusion coefficient, and averaged collision frequency must be provided as input parameters. Fluid codes are older and established approaches conceptually
+straightforward and generally exploit the numerical techniques employed in computational fluid dynamics. Besides large scales, fluid codes can be efficiently applied to study dense plasmas, but they fail to capture kinetic effects associated with non-thermal particles.
 
-"hybrid"
-codes, in which for example, fluid and particle treatments are applied to
-different components of a given plasma, and through the introduction of
-particle-hydrodynamic codes, in which fluid equations are solved by particle
-methods.n this chapter we particularly focus on the guiding-center method.
-This method exhibits a partially fluid-like behavior in the direction perpendic-
-ular to the ambient magnetic field. However, in the guiding-center method it is
-paramount to treat the dynamics parallel to the magnetic field as particle-like. luid-like electrons and particle-like
-ions.
+In between kinetic and fluid codes stand **hybrid codes** that can exploit various strategies. One strategy consists in simultaneously applying fluid and particle treatments to different species of a given plasma, for example considering fluid-like electrons and particle-like ions. In other cases, the hybrid character comes from solving fluid equations with particle methods. In the guiding-center method, fluid-like treatment is adopted in the direction perpendicular to the ambient magnetic field while the dynamics parallel to the magnetic field as particle-like. 
 
-- Monte Carlo methods to
-- . This method uti-
-lizes the random number generation and probability distribution to calculate
-integrals of various moments of the probability distribution function,creation and annihila-
-tion of particles are as essential
+We conclude the survey of computational schemes with a mention of **Monte Carlo methods**. They can be employed in multiple ways and also coupled with the approaches listed above. They allow for achieving a numerical description of what happens at long timescales when collisional events prevail. Random number generation and probability distribution can be used both to calculate integrals of various moments of the distribution function and to describe the transport of radiation and processes that include the creation and annihilation of particles.
 
 ## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
-
+Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. 
  Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
 
 ## ODE
@@ -136,6 +122,7 @@ We will focus on finite-volume and discontinuous Galerkin schemes for partial di
 ## Bibliography
 
 * Tajima, T. (2004). Computational Plasma Physics: With Applications To Fusion And Astrophysics. United Kingdom: Avalon Publishing.
-* [PIC code Smilei](https://smileipic.github.io/Smilei/)
+* Jardin, S. (2010). Computational Methods in Plasma Physics. United States: CRC Press.
 * Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
 * Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
+* * [PIC code Smilei](https://smileipic.github.io/Smilei/)
