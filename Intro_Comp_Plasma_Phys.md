@@ -39,11 +39,28 @@ Computational plasma physics follows the hierarchy of the different plasma model
 |:--:| 
 |**Figure 1** *Classification of numerical strategies employed in plasma physics and their properties in relation to plasma physics models.*|
 
-One very accurate procedure consists in solving numerically the plasma kinetic equations. This can be achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is the approach of **Vlasov codes**, an area of active research in computational plasma physics to explore fundamental plasma physics in phase space. The Vlasov-Maxwell system can be approximately solved also with **Particle codes**. They simply compute the motions of a collection of charged particles, representative of many real particles, interacting with each other and with externally applied fields. The finite-difference-time-domain particle-in-cell method (FDTD PIC) which we will briefly discuss in the following sections belongs to this category. In general, kinetic simulations have been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. However, they require huge amounts of computational resources generally limiting their applicability to the whole plasma physics scenario.
+One very accurate procedure consists in solving numerically the plasma kinetic equations. This can be achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is the approach of **Vlasov codes**, an area of active research in computational plasma physics to explore fundamental plasma physics in phase space. The Vlasov-Maxwell system can be approximately solved also with **Particle codes**. They simply compute the motions of a collection of charged particles, representative of many real particles, interacting with each other and with externally applied fields. The finite-difference-time-domain particle-in-cell method (FDTD PIC) which we will briefly discuss in the following sections belongs to this category. In general, kinetic simulations have been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. However, they ignore collisions and require huge amounts of computational resources limiting their applicability to the whole plasma physics scenario.
 
-**MHD codes**, on the other hand, have generally been applied to large-scale problems directly related to the behaviour of experimental devices. MHD simulations practically solve fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations, making a closure to approximate the moments not evolved by the equations themselves.
+**MHD codes**, on the other hand, have generally been applied to large-scale problems directly related to the behaviour of experimental devices. MHD simulations practically solve fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations, making a closure to approximate the moments not evolved by the equations themselves. The older of the two methods, the fluid simulation method28 is conceptually
+straightforward as long as we can regard the many-body system as being
+composed of so many particles that we can smear out the individual particles
+into a continuous fluid.
+
+"hybrid"
+codes, in which for example, fluid and particle treatments are applied to
+different components of a given plasma, and through the introduction of
+particle-hydrodynamic codes, in which fluid equations are solved by particle
+methods.n this chapter we particularly focus on the guiding-center method.
+This method exhibits a partially fluid-like behavior in the direction perpendic-
+ular to the ambient magnetic field. However, in the guiding-center method it is
+paramount to treat the dynamics parallel to the magnetic field as particle-like. luid-like electrons and particle-like
+ions.
 
 - Monte Carlo methods to
+- . This method uti-
+lizes the random number generation and probability distribution to calculate
+integrals of various moments of the probability distribution function,creation and annihila-
+tion of particles are as essential
 
 ## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
 
@@ -53,7 +70,9 @@ One very accurate procedure consists in solving numerically the plasma kinetic e
 
 
 Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
- ...function is conserved. The macro-particle equations-of-motion are
+
+## Ordinary Differential Equation Solvers
+Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
 
 $$\frac{d\mathbf{x}}{dt} = \mathbf{v}$$ 
 
@@ -66,6 +85,11 @@ The Boris algorithm is surprisingly good: it is a second-order, time-centered me
 other pushers...
 
 ### Boris Pusher
+
+t is an accurate second-
+order scheme for the acceleration equation, i.e., the error is proportional to
+(At)2 ; (b) It is explicit and very simple (does not require any extra infor-
+mation); and (c) It is stable and neutral within the threshold At value.
 Leap-frog algorithm is used also for the discretization in time of particle position $\mathbf{x}$ and velocity $\mathbf{v}$ (or momentum $\mathbf{p}$). The integration scheme follows from  considering only temporal discretization, with 
 
 $$\mathbf{x}^{n+1}=\mathbf{x}^n+ \mathbf{v}^{n+1/2}\Delta t$$  
@@ -95,6 +119,10 @@ $$\mathbf{p}^{n}=\dfrac{1}{1+b^2}\left[\Tilde{\mathbf{p}}+\Tilde{\mathbf{p}}\tim
 where $b$ is the magnitude of $\mathbf{b}$.
 Now all the ingredients for the advancement of macro-particle position and momentum are given. This scheme is called \textit{Boris-pusher algorithm}. 
 
+The
+Runge-Kutta methods-10 is a popular and powerful method for integrating
+nonlinear differential equations.
+
 ## Hyperbolic Equations
 Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations.
 
@@ -108,6 +136,6 @@ We will focus on finite-volume and discontinuous Galerkin schemes for partial di
 ## Bibliography
 
 * Tajima, T. (2004). Computational Plasma Physics: With Applications To Fusion And Astrophysics. United Kingdom: Avalon Publishing.
-* Kawata, S. (2023). Computational Plasma Science: Physics and Selected Simulation Examples. Germany: Springer Nature Singapore.
+* [PIC code Smilei](https://smileipic.github.io/Smilei/)
 * Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
 * Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
