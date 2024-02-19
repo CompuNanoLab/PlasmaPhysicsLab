@@ -46,19 +46,19 @@ straightforward and generally exploit the numerical techniques employed in compu
 
 In between kinetic and fluid codes stand **hybrid codes** that can exploit various strategies. One strategy consists in simultaneously applying fluid and particle treatments to different species of a given plasma, for example considering fluid-like electrons and particle-like ions. In other cases, the hybrid character comes from solving fluid equations with particle methods. In the guiding-center method, fluid-like treatment is adopted in the direction perpendicular to the ambient magnetic field while the dynamics parallel to the magnetic field is particle-like. 
 
-We conclude the survey of computational schemes with a mention of **transport and Monte Carlo methods**. They can be employed in multiple ways and also coupled with the approaches listed above. They allow for achieving a numerical description of what happens at long timescales when collisional events prevail. Random number generation and probability distribution can be used both to calculate integrals of various moments of the distribution function and to describe the transport of radiation and processes that include the creation and annihilation of particles. we
-often introduce collisions artificially by the Monte-Carlo method
-The transport equations by nature most often take the form of the diffu-
-sion equation.
+We conclude the survey of computational schemes with a mention of **transport and Monte Carlo methods**. They allow for achieving a numerical description of what happens at long timescales when collisions and diffusion prevail and decide on the transport of energy and particles in the plasma. The transport equations by nature most often take the form of the diffusion equation and can be solved numerically. Monte Carlo methods can be employed in multiple ways and also coupled with the approaches listed above for example to introduce collisional events artificially and to include the creation and annihilation of particles.
 
 ## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
 Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. 
- Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
-
-## ODE
+Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
 
 
 Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
+
+
+
+Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations. The Yee-cell preserves the underlying geometric structure of Maxwell equations, and ensures that the divergence relations are maintained in the case of vacuum fields. In essence, the electric field is a vector quantity (associated with lines) while the magnetic field is a bi-vector quantity (associated with surfaces). Hence, the most natural representation on a discrete grid utilizes this geometric fact to build a consistent scheme.
+
 
 ## Ordinary Differential Equation Solvers
 Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
@@ -71,7 +71,6 @@ Approach it with finite-difference time-domain schemes, ie. derivatives in time 
 The most widely used method to solve this system of ODEs is the Boris algorithm.
 The Boris algorithm is surprisingly good: it is a second-order, time-centered method that conserves phase-space volume.
 
-other pushers...
 
 ### Boris Pusher
 
@@ -112,15 +111,6 @@ The
 Runge-Kutta methods-10 is a popular and powerful method for integrating
 nonlinear differential equations.
 
-## Hyperbolic Equations
-Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations.
-
-### FDTD
-The Yee-cell preserves the underlying geometric structure of Maxwell equations, and ensures that the divergence relations are maintained in the case of vacuum fields. In essence, the electric field is a vector quantity (associated with lines) while the magnetic field is a bi-vector quantity (associated with surfaces). Hence, the most natural representation on a discrete grid utilizes this geometric fact to build a consistent scheme.
-
-### FV
-We will focus on finite-volume and discontinuous Galerkin schemes for partial differential equations (PDEs), specifically fluid mechanics (Euler equations) and plasma physics (MHD equations, multi-fluid equations and the Vlasov-Maxwell system). 
-
 
 ## Bibliography
 
@@ -128,4 +118,4 @@ We will focus on finite-volume and discontinuous Galerkin schemes for partial di
 * Jardin, S. (2010). Computational Methods in Plasma Physics. United States: CRC Press.
 * Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
 * Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
-* [PIC code Smilei](https://smileipic.github.io/Smilei/)
+* [Open source PIC code Smilei](https://smileipic.github.io/Smilei/)
