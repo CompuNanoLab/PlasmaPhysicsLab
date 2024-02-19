@@ -46,7 +46,10 @@ straightforward and generally exploit the numerical techniques employed in compu
 
 In between kinetic and fluid codes stand **hybrid codes** that can exploit various strategies. One strategy consists in simultaneously applying fluid and particle treatments to different species of a given plasma, for example considering fluid-like electrons and particle-like ions. In other cases, the hybrid character comes from solving fluid equations with particle methods. In the guiding-center method, fluid-like treatment is adopted in the direction perpendicular to the ambient magnetic field while the dynamics parallel to the magnetic field is particle-like. 
 
-We conclude the survey of computational schemes with a mention of **transport and Monte Carlo methods**. They can be employed in multiple ways and also coupled with the approaches listed above. They allow for achieving a numerical description of what happens at long timescales when collisional events prevail. Random number generation and probability distribution can be used both to calculate integrals of various moments of the distribution function and to describe the transport of radiation and processes that include the creation and annihilation of particles.
+We conclude the survey of computational schemes with a mention of **transport and Monte Carlo methods**. They can be employed in multiple ways and also coupled with the approaches listed above. They allow for achieving a numerical description of what happens at long timescales when collisional events prevail. Random number generation and probability distribution can be used both to calculate integrals of various moments of the distribution function and to describe the transport of radiation and processes that include the creation and annihilation of particles. we
+often introduce collisions artificially by the Monte-Carlo method
+The transport equations by nature most often take the form of the diffu-
+sion equation.
 
 ## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
 Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. 
