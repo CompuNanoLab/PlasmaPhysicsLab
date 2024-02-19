@@ -49,18 +49,48 @@ In between kinetic and fluid codes stand **hybrid codes** that can exploit vario
 We conclude the survey of computational schemes with a mention of **transport and Monte Carlo methods**. They allow for achieving a numerical description of what happens at long timescales when collisions and diffusion prevail and decide on the transport of energy and particles in the plasma. The transport equations by nature most often take the form of the diffusion equation and can be solved numerically. Monte Carlo methods can be employed in multiple ways and also coupled with the approaches listed above for example to introduce collisional events artificially and to include the creation and annihilation of particles.
 
 ## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
-Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. 
-Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
+Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. Since their invention, the development of new algorithms and the availability of more powerful computers has allowed continuous progress of particle simulation from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in three dimensions and tracking millions of particles.
+
+collisionless $\omega_p^{-1} \less\less \nu_{coll}^{-1}$ but collisions, ionization and quantum effects may be included with Monte Carlo strategies
+relativistic $ T>> m_ec^2$
+
+replace (i.e. sample) the distribution function of every species with a
+collection of computational particles – the macro-particles – each one
+representing multiple physical particles
+
+
+
+each macro-particle has definite momentum → Dirac delta distribution in p, spatial extension → shape function S in x, weight w # physical particles/macro-particle
+
+PIC ansatz
+
+relation with Vlasov equation
+
+equations ....
+
+core loop commented
+
+They are used in various contexts:
+* laser-plasma acceleration [Fonseca et al. Plasma Physics and Controlled Fusion 50.12 (2008)](https://doi.org/10.1088/0741-3335/50/12/124034)
+* nuclear fusion [Yin et al. Physics of Plasmas 16.11 (2009)](https://doi.org/10.1063/1.3250928)
+* plasma propulsion ([example](https://gauss-supercomputing.de/))
+* astrophysics [Inchingolo et al. 58th Annual Meeting of the APS Division
+of Plasma Physics, 8, 61 (2016)](https://loureirogroup.mit.edu/magnetorotational-instability)
+* low-temperature plasmas [Tonneau at al. Plasma Sources Science and
+Technology 29.11 (2020)](https://doi.org/10.1088/1361-6595/abb3a0)
+
+Maxwell equations are easily solved by direct integration with finite differences on a spatial grid in 1D, 2D or 3D.
+
 
 
 Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
 
 
-
 Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations. The Yee-cell preserves the underlying geometric structure of Maxwell equations, and ensures that the divergence relations are maintained in the case of vacuum fields. In essence, the electric field is a vector quantity (associated with lines) while the magnetic field is a bi-vector quantity (associated with surfaces). Hence, the most natural representation on a discrete grid utilizes this geometric fact to build a consistent scheme.
 
 
-## Ordinary Differential Equation Solvers
+### Particle Pusher
+
 Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
 
 $$\frac{d\mathbf{x}}{dt} = \mathbf{v}$$ 
@@ -70,9 +100,6 @@ $$\frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v}\times\mathbf{B})$
 Approach it with finite-difference time-domain schemes, ie. derivatives in time are converted to differences that we solve in discrete timesteps.
 The most widely used method to solve this system of ODEs is the Boris algorithm.
 The Boris algorithm is surprisingly good: it is a second-order, time-centered method that conserves phase-space volume.
-
-
-### Boris Pusher
 
 t is an accurate second-
 order scheme for the acceleration equation, i.e., the error is proportional to
