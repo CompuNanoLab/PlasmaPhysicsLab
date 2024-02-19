@@ -31,33 +31,23 @@ So the answer to the starting question is... because some theoretical questions 
 
 ## Major computational schemes in plasma physics
 
-As pointed out, many approximations to the kinetic equations to describe a plasma have been developed to make the problem manageable in specific physics situations. This have lead, starting from the kinetic model to the development of the multi fluid and single fluid models of a plasma. Since plasma exhibits a hierarchical nature with a variety of instabilities and phenomena at various time scales and spatial scales, the adoption of multiple theoretical models seems a natural approach. The problem of understanding plasma collective behaviours still remains extremely complex due to the intrralation between phenomena belonging to different layers of this spatial and temporal hierarchical structure.
+As pointed out, many approximations to the kinetic equations to describe a plasma have been developed to make the problem manageable in specific physics situations. This has led, starting from the full kinetic model to the kinetic collisionless Vlasov-Maxwell system, the multi-fluid model and magnetohydrodynamics (MHD). Since plasma exhibits a hierarchical nature with a variety of instabilities and phenomena at various time scales and spatial scales, the adoption of multiple theoretical models suited for different scales seems a natural approach. Yet, the problem of understanding plasma collective behaviours remains extremely complex due to the interrelation between phenomena belonging to different layers of this spatial and temporal hierarchical structure.
 
-Computational plasma physics follows the hierarchy of the different plasma models implementing various numerical strategies for each of them. Computer simulations of plasmas compries two general areas based on kinetic and fluid descriptions connected by hybrid approaches. Image 1 is a tentative classification of numerical strategies employed in plasma physics.
+Computational plasma physics follows the hierarchy of the different plasma models implementing various numerical strategies for each of them. Computer simulations of plasmas comprise two general areas based on kinetic and fluid descriptions connected by hybrid approaches. [Figure 1](\ref{fig1}) is a tentative classification of numerical strategies employed in plasma physics.
 
-![immagine](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75519b74-0858-42ca-8017-264db1cd09a1)
+|![immagine \label{fig1}](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75519b74-0858-42ca-8017-264db1cd09a1)|
+|:--:| 
+|**Figure 1** *Classification of numerical strategies employed in plasma physics and their properties in relation to plasma physics models.*|
 
-One very accurate approach consists in solving numerically the plasma kinetic equations. This can be achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is the approach of **Vlasov codes**, an area of active research in computational plasma physics to explore fundamental plasma physics in phase-space. Vlasov-Maxwell systems can be approximately solved also with **Particle codes**. They simply compute the motions of a collection of charged particles representative of many real particles and interacting with each other and with externally applied fields. Kinetic simulations have been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
+One very accurate procedure consists in solving numerically the plasma kinetic equations. This can be achieved by directly discretizing the Vlasov-Maxwell equations as a partial differential equation in 6D. This is the approach of **Vlasov codes**, an area of active research in computational plasma physics to explore fundamental plasma physics in phase space. The Vlasov-Maxwell system can be approximately solved also with **Particle codes**. They simply compute the motions of a collection of charged particles, representative of many real particles, interacting with each other and with externally applied fields. The finite-difference-time-domain particle-in-cell method (FDTD PIC) which we will briefly discuss in the following sections belongs to this category. In general, kinetic simulations have been particularly successful in dealing with basic physical problems in which the particle distributions deviate significantly from a local Maxwellian distribution. However, they require huge amounts of computational resources generally limiting their applicability to the whole plasma physics scenario.
 
- MHD simulation, on the other hand, has generally been applied to large-scale problems directly related to the behavior of experimental devices. 
+**MHD codes**, on the other hand, have generally been applied to large-scale problems directly related to the behaviour of experimental devices. MHD simulations practically solve fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations, making a closure to approximate the moments not evolved by the equations themselves.
 
-
-
-
- Hierarchical nature of physical structure
-Complexity of collective phenomena
-many unresolved problems involve the hierarchical nature
-of physical structures, i.e., a kind of structure made up of many layers of
-different yet intimately interrelated physical aspects. 
-
-In particular, we will focus on the following topics 
-
-- Simulation methods in which the Vlasov-Maxwell (collisionless) equation is solved using the finite-difference-time-domain particle-in-cell method (FDTD PIC).
-- Solving fluid equations that are obtained from taking moments of the Vlasov-Maxwell equations and making a closure to approximate the moments not evolved by the fluid equations.
-- 
 - Monte Carlo methods to
 
+## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
 
+ Since then, the development of new algorithms and the availability of more powerful computers has allowed particle simulation to progress from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in multiple dimensions and more than 10^6 particles.
 
 ## ODE
 
