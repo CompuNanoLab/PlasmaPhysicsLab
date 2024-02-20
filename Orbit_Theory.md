@@ -6,22 +6,35 @@ $$ m \dfrac{d^2\mathbf{x}}{dt^2}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})$$
 
 In the following, we explore different cases of assigned fields.
 
-## $\mtahbf{B}$ uniform and constant
+## $\mathbf{B}$ uniform and constant
 
 The above differential equation reduces to:
 
-$$ m \dfrac{d^2\mathbf{x}}{dt^2}=m\dfrac{d\mathbf{v}}{dt}=q\mathbf{v}\times\mathbf{B}$$
+$$ m \dfrac{d^2\mathbf{x}}{dt^2}=m\dfrac{d\mathbf{v}}{dt}=q(\mathbf{v}\times\mathbf{B})$$
 
-Instead of solving it (we will do it numerically), we can try to derive useful info on the conserved quantities. Multiplying by $\cdot \mathbf{v}$ and by $\cdot \mathbf{B}$, we get:
+We can start to derive useful information on the conserved quantities. Multiplying by $\cdot \mathbf{v}$ and by $\cdot \mathbf{B}$, we get:
 
 $$\dfrac{dv^2}{dt}=0 \quad \mathbf{B}\cdot\dfrac{d\mathbf{v}}{dt} =0$$
 
 Let's define the component of the velocity parallel to the magnetic field as:
 
-$$v_{//}=\mathbf{v}\cdot\dfrac{\mathbf{B}}{B}$$
+$$v_\parallel=\mathbf{v}\cdot\dfrac{\mathbf{B}}{B}$$
 
-$v_{//}$, $v^2$, and $v_{\perp}^2$ are constant during the particle motion,
+$v_\parallel$, $v^2$, and $v_{\perp}^2$ are constant during the particle motion. This suggests to use of cylindrical coordinates. Introducing the **cyclotron frequency** $\omega_c=qB/m$:
 
+$$\dfrac{dv_x}{dt}=\omega_c v_y \quad \dfrac{dv_y}{dt}=-\omega_c v_x \quad v_z=v_\parallel=const$$
+
+which solved finally leads to
+
+$$ x(t)=x_c+\rho_L \sin(\omega t+ \phi_0) \quad y(t)=y_c+\rho_L \cos(\omega t+ \phi_0)$$
+
+where $(x_c,y_c)$ is called guide center or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the larmor radius. The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. The motion is called cyclotron motion. The motion is analogous to a current flowing in a coil and produces a magnetic field opposite to the imposed $\mathbf{B}$ (diamagnetic behaviour).
+
+## $\mathbf{B}$ and \mathbf{F} uniform and constant
+
+In this case, we have an additional force $\mathbf{F}$ of arbitrary orientation that could be the result of a constant electric field applied to the charge. The equation of motion now is:
+
+$$m\dfrac{d\mathbf{v}}{dt}=q(\mathbf{v}\times\mathbf{B})+\mathbf{F}$$
 
 
 
