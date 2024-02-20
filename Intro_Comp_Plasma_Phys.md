@@ -95,21 +95,21 @@ These equations of motion are used inside the PIC algorithm. In the following, w
 * Evaluation of the current density field on the spatial grid nodes from macro-particle charges, positions and velocities.
 * Determination of the electromagnetic field on the grid solving Maxwell equations with the computed current density.
 * Interpolation of the fields from the grid nodes to the macro-particles positions;
-* Update of macro-particle momenta and positions with the Lorentz force acting on them;
+* Update of macro-particle momenta and positions with the Lorentz force acting on them (particle pushing);
 
-These operations constitute a loop (see [Figure 2](\ref{fig2})) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase.
+These operations constitute a loop (see [Figure 2](\ref{fig2})) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase. The following section is devoted to explaining better the last step of the loop devoted to particle pushing.
 
 ### Particle Pusher
 
-Particle-in-cell methods are based on pushing macro-particles. These represent the motion of characteristics in phase-space, along which the distribution function is conserved. The macro-particle equations-of-motion are
+Particle-in-cell methods are based on pushing macro-particles following the macro-particle equations of motion for each species s:
 
-$$\frac{d\mathbf{x}}{dt} = \mathbf{v}$$ 
+$$\frac{d\mathbf{x_p}}{dt} = \dfrac{\mathbf{p}_p}{\gamma_p m_s}$$ 
 
-$$\frac{d\mathbf{v}}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v}\times\mathbf{B})$$
+$$\frac{d\mathbf{p}_p}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v}\times\mathbf{B})$$
 
 Approach it with finite-difference time-domain schemes, ie. derivatives in time are converted to differences that we solve in discrete timesteps.
 The most widely used method to solve this system of ODEs is the Boris algorithm.
-The Boris algorithm is surprisingly good: it is a second-order, time-centered method that conserves phase-space volume.
+
 
 t is an accurate second-
 order scheme for the acceleration equation, i.e., the error is proportional to
@@ -147,6 +147,7 @@ Now all the ingredients for the advancement of macro-particle position and momen
 The
 Runge-Kutta methods-10 is a popular and powerful method for integrating
 nonlinear differential equations.
+The Boris algorithm is surprisingly good: it is a second-order, time-centered method that conserves phase-space volume.
 Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
 
 ## Bibliography
