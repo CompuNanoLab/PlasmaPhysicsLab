@@ -3,7 +3,7 @@
 ## The plasma physics problem
 Most of the field of plasma physics can be encapsulated within Maxwell's equations and the relativistic kinetic equations governing the evolution of the particle distribution function, denoted as $f_a(\mathbf{x},\mathbf{p},t)$, for each distinct plasma species $a$ within a six-dimensional (6D) phase space.
 
-$$\dfrac{\partial f_a}{\partial t}+\dfrac{\mathbf{p}}{\gamma_a m_a} \cdot \dfrac{\partial f_a}{\partial \mathbf{x}}+q_a \left(\mathbf{E}+\dfrac{\mathbf{p}}{\gamma_a m_a}\times\mathbf{B} \right) \cdot \dfrac{\partial f_a}{\partial \mathbf{p}}=C_a$$
+$$\dfrac{\partial f_a}{\partial t}+\mathbf{v} \cdot \dfrac{\partial f_a}{\partial \mathbf{x}}+ \mathbf{F}_L \cdot \dfrac{\partial f_a}{\partial \mathbf{p}}=C_a$$
 
 $$\nabla \cdot \mathbf{B} = 0$$
      
@@ -11,9 +11,9 @@ $$\nabla \times \mathbf{E} =-\dfrac{\partial \mathbf{B}}{\partial t}$$
      
 $$\nabla \cdot \mathbf{E}=\dfrac{1}{\epsilon_0} \left(\rho_{ext}+\displaystyle\sum_a q_a \int f_a d\mathbf{p} \right)$$
      
-$$\nabla \times \mathbf{B}= \mu_0 \left( \mathbf{J}_{ext}+\displaystyle\sum_a \dfrac{q_a}{m_a} \int \dfrac{\mathbf{p}}{\gamma_a} f_a d\mathbf{p}\right)+\epsilon_0\mu_0 \dfrac{\partial \mathbf{E}}{\partial t}$$ 
+$$\nabla \times \mathbf{B}= \mu_0 \left( \mathbf{J}_{ext}+\displaystyle\sum_a q_a \int \mathbf{v} f_a d\mathbf{p}\right)+\epsilon_0\mu_0 \dfrac{\partial \mathbf{E}}{\partial t}$$ 
 
-The $C_a$ term describes the effect of collisions and $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. If $C_a$ is set to zero, we talk about the relativistic collisionless Vlasov-Maxwell system. In these equations, the fields dictate how particles move, and the particle motion itself modifies the fields. As a result, this is a system of coupled, nonlinear equations, representing a broad spectrum of physics across various temporal and spatial scales. Over time, many approximations to these equations have been developed, often making them more manageable and allowing one to obtain reasonable results in specific physical situations. Nevertheless, the forefront of theoretical and computational plasma physics continues to strive for a comprehensive kinetic comprehension of plasma dynamics, derived from this complete set of equations. 
+The $C_a$ term describes the effect of collisions, $\mathbf{F}_ L = q_a \left(\mathbf{E}+\mathbf{v}\times\mathbf{B} \right)$, and $\mathbf{v}=\mathbf{p}/(\gamma_a m_a)$ with $\gamma_{a}=\left(1+p^2/(m_a^2c^2)\right)^{\frac{1}{2}}$. If $C_a$ is set to zero, we talk about the relativistic collisionless Vlasov-Maxwell system. In these equations, the fields dictate how particles move, and the particle motion itself modifies the fields. As a result, this is a system of coupled, nonlinear equations, representing a broad spectrum of physics across various temporal and spatial scales. Over time, many approximations to these equations have been developed, often making them more manageable and allowing one to obtain reasonable results in specific physical situations. Nevertheless, the forefront of theoretical and computational plasma physics continues to strive for a comprehensive kinetic comprehension of plasma dynamics, derived from this complete set of equations. 
 
 In the following sections, we will understand the motivations that lead to the use of computational tools in plasma physics and then quickly survey modern computational techniques employed in this context.
 
@@ -50,11 +50,7 @@ We conclude the survey of computational schemes with a mention of **transport an
 
 ## Particle-In-Cell (PIC) method
 
-Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. 
-They approximately solve Vlasov-Maxwell system by replacing (sampling) the distribution function of every species with a
-collection of computational particles – the macro-particles – each one
-representing multiple physical particles. Particle-In-Cell methods specifically adopt this strategy and make macro-particles evolve self-consistently with electromagnetic fields computed with Maxwell equations on a discrete spatial grid. 
-Since the invention of PIC methods (Dawson, 1983), the development of new algorithms and the availability of more powerful computers has allowed continuous progress of PIC simulation from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in three dimensions and tracking millions of maxro-particles.
+Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. They approximately solve the Vlasov-Maxwell system by replacing (sampling) the distribution function of every plasma species with a collection of computational particles – the macro-particles – each one representing multiple physical particles. Particle-In-Cell (PIC) methods specifically adopt this strategy and make macro-particles evolve self-consistently with electromagnetic fields computed with Maxwell equations on a discrete spatial grid. Since the invention of PIC methods ([Dawson,1983](https://doi.org/10.1103/revmodphys.55.403)), the development of new algorithms and the availability of more powerful computers has allowed continuous progress of PIC simulation from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in three dimensions and tracking millions of macro-particles.
 
 Their success is manifest in the fact that they are employed in several different contexts:
 * laser-plasma acceleration [Fonseca et al. Plasma Physics and Controlled Fusion 50.12 (2008)](https://doi.org/10.1088/0741-3335/50/12/124034)
@@ -65,42 +61,43 @@ of Plasma Physics, 8, 61 (2016)](https://loureirogroup.mit.edu/magnetorotational
 * low-temperature plasmas [Tonneau at al. Plasma Sources Science and
 Technology 29.11 (2020)](https://doi.org/10.1088/1361-6595/abb3a0)
 
-Usually, PIC codes solve the relativistic Vlasov-Maxwell systems therefore their domain of applicability are relativistic ($ T>> m_ec^2$) and
-collisionless plasmas in which the time scale of collision events is much larger than the one of plasma oscillations ($\omega_p^{-1} \less\less \nu_{coll}^{-1}$). Howeber, collisions, ionization and quantum effects not taken into account by the core PIC algorithm may be included with Monte Carlo strategies.
+Usually, PIC codes solve the relativistic Vlasov-Maxwell systems therefore their domain of applicability is relativistic ($T\gg m_ec^2$) and collisionless plasmas in which the time scale of collision events is much larger than the one of plasma oscillations ($\omega_p^{-1} \ll \nu_{coll}^{-1}$). However, collisions, ionization and quantum effects not taken into account by the core PIC algorithm may be included with Monte Carlo strategies.
 
-Let's explore the PIC method in more details to understand it's relation to the Vlasov equation. 
+Let's explore the PIC method in more detail to understand its relation to the Vlasov equation. The starting assumption is that the plasma species distribution function can be approximated in the following way:
 
-The starting assumption is that the plasma species distribution function can be approximated in the following way
+$$f_a (\mathbf{x}, \mathbf{p}, t)\approx f_h (\mathbf{x}, \mathbf{p}, t)=\sum_{p=1}^{N_{a}} w_{pa} S(\mathbf{x}- \mathbf{x}_ {pa} (t))\delta(\mathbf{p}-\mathbf{p}_{pa}(t))$$
 
-... PIC ansatz...
+where $S$ is the **shape function** evenly localized around $\mathbf{x}=0$ and normalized to unity, i.e. its integral over the whole space gives one. Practically, each macro-particle has definite momentum, i.e. is represented by a Dirac delta distribution in $\mathbf{p}$, a finite spatial extension described by the shape function, and a weight $w$ which represents the number of physical particles per macro-particle.
 
-where ...
-Practically, each macro-particle has definite momentum, therefore is represented by a Dirac delta distribution in $\mathbf{p}$,a finite spatial extension described by the shape function $S$ in $\mathbf{x}$, and a weight $w$ which represents the number of physical particles per macro-particle.
+If we put this assumption in the Vlasov equation and calculate its moments we get the equations of motion of the macro-particles.
 
-If we put this assumption in the Vlasov equation and calculate it's moments we get the equation of motion of the maxro-particles:
+0<sup>th</sup> moment:
 
-equations ....
+$$ \int \int \left[\dfrac{\partial f_h}{\partial t}+\mathbf{v}\cdot\dfrac{\partial f_h}{\partial \mathbf{x}}+\mathbf{F}_ L\cdot\dfrac{\partial f_ h}{\partial \mathbf{p}}\right] d\mathbf{p}d\mathbf{x}=0 \quad \Longrightarrow \quad \dfrac{dw_{pa}}{dt}=0$$
 
-we use the right-hand side equations inside the PIC algorithm. In the following we will focus on the simpler scheme of finite-difference-time-domain (FDTD) PIC codes having in mind that alternatives exist, for example employing spectral methods, i.e. Fourier transform to solve fields.
-So, we simply adopt a temporal and spatial discretization. Every time step $\delta t$ starting from initial conditions, the PIC algorithm follows these steps to evolve the plasma dynamics:
+1<sup>st</sup> moment in $\mathbf{x}$:
 
-* computes the electric and magnetic fields with Maxwell equations. Maxwell equations are easily solved by direct integration with finite differences on a spatial grid in 1D, 2D or 3D.
+$$\int \int \mathbf{x}\left[\dfrac{\partial f_h}{\partial t}+\mathbf{v}\cdot\dfrac{\partial f_h}{\partial \mathbf{x}}+\mathbf{F}_ L\cdot\dfrac{\partial f_ h}{\partial \mathbf{p}}\right] d\mathbf{p}d\mathbf{x}=0 \quad \Longrightarrow \quad\dfrac{ d\mathbf{x} _ {pa}}{dt}=\mathbf{v} _ {pa}$$
 
-* Inter
+2<sup>nd</sup> moment in $\mathbf{p}$:
 
+$$\int \int \mathbf{p}\left[\dfrac{\partial f_h}{\partial t}+\mathbf{v}\cdot\dfrac{\partial f_h}{\partial \mathbf{x}}+\mathbf{F}_ L\cdot\dfrac{\partial f_ h}{\partial \mathbf{p}}\right] d\mathbf{p}d\mathbf{x}=0 \quad \Longrightarrow \quad \dfrac{d \mathbf{p}_ {pa}}{dt}=q_a \left(\mathbf{E}_ {pa}+\mathbf{v}_ {pa}\times\mathbf{B}_ {pa}\right)$$
 
-core loop commented
+where:
 
-They are used in 
+$$\mathbf{E}_ {pa}(t)=\int \mathbf{E}(\mathbf{x},t)S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}$$
 
+$$\mathbf{B}_ {pa}(t)=\int \mathbf{B}(\mathbf{x},t)S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}$$
 
+These equations of motion are used inside the PIC algorithm. In the following, we will focus on the simpler scheme of finite-difference-time-domain (FDTD) PIC: we adopt a temporal discretization, a spatial grid in 1D,2D or 3D, and spatial and time derivatives are computed with second-order centred finite differences according to the [**leap-frog scheme**]
+(https://en.wikipedia.org/wiki/Leapfrog_integration) that will be discussed later. Starting from initial conditions, every time step $\delta t$, the PIC algorithm follows these steps to evolve the plasma dynamics:
 
+* Evaluation of the current density field on the spatial grid nodes from macro-particle charges, positions and velocities.
+* Determination of the electromagnetic field on the grid solving Maxwell equations with the computed current density.
+* Interpolation of the fields from the grid nodes to the macro-particles positions;
+* Update of macro-particle momenta and positions with the Lorentz force acting on them;
 
-Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
-
-
-Hyperbolic equations describe a broad class of physical problems and are essentially characterized by finite propagation speed of disturbances. Examples of hyperbolic equations include Maxwell equations, Euler equations for ideal fluids and ideal MHD equations. The Yee-cell preserves the underlying geometric structure of Maxwell equations, and ensures that the divergence relations are maintained in the case of vacuum fields. In essence, the electric field is a vector quantity (associated with lines) while the magnetic field is a bi-vector quantity (associated with surfaces). Hence, the most natural representation on a discrete grid utilizes this geometric fact to build a consistent scheme.
-
+These operations constitute a loop (see [Figure 2](\ref{fig2})) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase.
 
 ### Particle Pusher
 
@@ -150,7 +147,7 @@ Now all the ingredients for the advancement of macro-particle position and momen
 The
 Runge-Kutta methods-10 is a popular and powerful method for integrating
 nonlinear differential equations.
-
+Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
 
 ## Bibliography
 
