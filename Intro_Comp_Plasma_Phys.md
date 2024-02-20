@@ -103,52 +103,41 @@ These operations constitute a loop (see [Figure 2](\ref{fig2})) that can be reit
 
 Particle-in-cell methods are based on pushing macro-particles following the macro-particle equations of motion for each species s:
 
-$$\frac{d\mathbf{x_p}}{dt} = \dfrac{\mathbf{p}_p}{\gamma_p m_s}$$ 
+$$\frac{d\mathbf{x_p}}{dt} =  \mathbf{v}_p = \dfrac{\mathbf{p}_p}{\gamma_p m_s}$$ 
 
-$$\frac{d\mathbf{p}_p}{dt} = \frac{q}{m}(\mathbf{E} + \mathbf{v}\times\mathbf{B})$$
+$$\frac{d\mathbf{p}_p}{dt} = q_s (\mathbf{E} + \mathbf{v}\times\mathbf{B})$$
 
-Approach it with finite-difference time-domain schemes, ie. derivatives in time are converted to differences that we solve in discrete timesteps.
-The most widely used method to solve this system of ODEs is the Boris algorithm.
-
-
-t is an accurate second-
-order scheme for the acceleration equation, i.e., the error is proportional to
-(At)2 ; (b) It is explicit and very simple (does not require any extra infor-
-mation); and (c) It is stable and neutral within the threshold At value.
-Leap-frog algorithm is used also for the discretization in time of particle position $\mathbf{x}$ and velocity $\mathbf{v}$ (or momentum $\mathbf{p}$). The integration scheme follows from  considering only temporal discretization, with 
+Let's approach the problem with finite-difference time-domain schemes, ie. derivatives in time are converted to differences in discrete timesteps. In particular, we use the leap-frog algorithm to discretize in time particle position $\mathbf{x}$ and velocity $\mathbf{v}$ (or momentum $\mathbf{p}$) and then update them at staggered time points so that they "leapfrog" over each other.  These are the discretized equations: 
 
 $$\mathbf{x}^{n+1}=\mathbf{x}^n+ \mathbf{v}^{n+1/2}\Delta t$$  
 
 $$\mathbf{p}^{n+1/2}=\mathbf{p}^{n-1/2}+\mathbf{F}^n\Delta t$$
 
-$$\mathbf{F}^n=\dfrac{q}{m}(\mathbf{E}^n+\mathbf{v}^n\times\mathbf{B}^n)$$
+$$\mathbf{F}^n= q_s (\mathbf{E}^n+\mathbf{v}^n\times\mathbf{B}^n)$$
 
-where, in the last line, it is written the Lorentz force $\mathbf{F}^n$ due to the electric and magnetic fields interpolated at the centre of the macro-particle of position $\mathbf{x}$ at the time $t^n=n\Delta t$. Here appears also the velocity, or analogously the momentum, evaluated at integer times. Since they are known only at half-integer times, an approximation must be used:
+where the last line reports the Lorentz force $\mathbf{F}^n$ due to the electric and magnetic fields interpolated at the center of the macro-particle of position $\mathbf{x}$ at the time $t^n=n\Delta t$. The velocity, or analogously the momentum, evaluated at integer times appears in the Lorentz force. Since they are known only at half-integer times, an approximation must be used:
 
-$$\mathbf{v}^{n}=\dfrac{\mathbf{p}^n}{\gamma^n} \quad \mathbf{p}^{n}=\dfrac{\mathbf{p}^{n+1/2}+\mathbf{p}^{n-1/2}}{2}$$
+$$\mathbf{v}^{n}=\dfrac{\mathbf{u}^n}{\gamma^n} \quad \mathbf{u}^{n}=\dfrac{\mathbf{u}^{n+1/2}+\mathbf{u}^{n-1/2}}{2}$$
 
-Substituting $\mathbf{p}^{n+1/2}$ in the equation for momentum of, one gets:
+Substituting $\mathbf{u}^{n+1/2}$ in the equation for momentum:
 
-$$ \mathbf{p}^{n} =\mathbf{p}^{n-1/2} +\dfrac{q}{2m} (\mathbf{E}^n+\dfrac{ \mathbf{p}^n}{\gamma^n \times\mathbf{B}^n}) \Delta t $$
+$$ \mathbf{u}^{n} =\mathbf{u}^{n-1/2} +\dfrac{q_s}{2m_s} (\mathbf{E}^n+\dfrac{ \mathbf{u}^n}{\gamma^n} \times\mathbf{B}^n) \Delta t $$
 
-This equation for $\mathbf{p}^{n}$ can become explicit, introducing some definitions and approximations:
+This equation for $\mathbf{u}^{n}$ can become explicit introducing some definitions and approximations:
 
-$$\mathbf{b}=\dfrac{q \Delta t \mathbf{B}^n}{2m\gamma^n}$$
+$$\mathbf{b}=\dfrac{q_s \Delta t \mathbf{B}^n}{2m_s\gamma^n}$$
 
-$$\Tilde{\mathbf{p}}=\mathbf{p}^{n-1/2}+\dfrac{q \Delta t \mathbf{E}^n}{2m}\quad \gamma^n=\sqrt{1+\mathbf{p}^n\cdot\mathbf{p}^n}\approx \sqrt{1+\Tilde{\mathbf{p}}^n\cdot\Tilde{\mathbf{p}}^n}$$
+$$\mathbf{u}^-=\mathbf{u}^{n-1/2}+\dfrac{q \Delta t \mathbf{E}^n}{2m}\quad \gamma^n=\sqrt{1+\mathbf{u}^n\cdot\mathbf{u}^n}\approx \sqrt{1+\mathbf{u} ^-\cdot\mathbf{u} ^-}$$
 
-this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The explicit equation can be found by multiplying $\times\mathbf{b}$ equation:
+this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The equation for $ mathbf{u}^{n} now is:
 
-$$\mathbf{p}^{n}=\dfrac{1}{1+b^2}\left[\Tilde{\mathbf{p}}+\Tilde{\mathbf{p}}\times \mathbf{b}+\mathbf{b}(\Tilde{\mathbf{p}}\cdot \mathbf{b})\right]$$
+$$ \mathbf{u}^{n} =\mathbf{u}^- + \mathbf{u}^{n}\times \mathbf{b} $$
 
-where $b$ is the magnitude of $\mathbf{b}$.
-Now all the ingredients for the advancement of macro-particle position and momentum are given. This scheme is called \textit{Boris-pusher algorithm}. 
+and the final explicit equation can be found with some algebraic passages (hints: apply $\times\mathbf{b}$ and $\cdot\mathbf{b}$ to both sides of this equation to get two useful relations and apply a couple of vector identities):
 
-The
-Runge-Kutta methods-10 is a popular and powerful method for integrating
-nonlinear differential equations.
-The Boris algorithm is surprisingly good: it is a second-order, time-centered method that conserves phase-space volume.
-Much of modern computational plasma physics is focused on inventing schemes that preserve at least some of the conservations and other properties of the continuous Vlasov-Maxwell system.
+$$\mathbf{u}^{n}=\dfrac{1}{1+b^2}\left[\mathbf{u} ^ -+\mathbf{u} ^-\times \mathbf{b}+\mathbf{b}(\mathbf{u} ^-\cdot \mathbf{b})\right]$$
+
+where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the advancement of macro-particle position and momentum are given. This scheme is called the **Boris pusher**. This algorithm is a stable, explicit, second-order, and time-centered method that conserves phase-space volume and it is widely used to solve acceleration problems.
 
 ## Bibliography
 
