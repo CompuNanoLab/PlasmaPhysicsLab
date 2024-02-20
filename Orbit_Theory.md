@@ -28,13 +28,34 @@ which solved finally leads to
 
 $$ x(t)=x_c+\rho_L \sin(\omega t+ \phi_0) \quad y(t)=y_c+\rho_L \cos(\omega t+ \phi_0)$$
 
-where $(x_c,y_c)$ is called guide center or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the larmor radius. The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. The motion is called cyclotron motion. The motion is analogous to a current flowing in a coil and produces a magnetic field opposite to the imposed $\mathbf{B}$ (diamagnetic behaviour).
+where $(x_c,y_c)$ is called guiding center or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the larmor radius. The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. The motion is called cyclotron motion. The motion is analogous to a current flowing in a coil and produces a magnetic field opposite to the imposed $\mathbf{B}$ (diamagnetic behaviour).
 
-## $\mathbf{B}$ and \mathbf{F} uniform and constant
+## $\mathbf{B}$ and $\mathbf{F}$ uniform and constant
 
 In this case, we have an additional force $\mathbf{F}$ of arbitrary orientation that could be the result of a constant electric field applied to the charge. The equation of motion now is:
 
 $$m\dfrac{d\mathbf{v}}{dt}=q(\mathbf{v}\times\mathbf{B})+\mathbf{F}$$
+
+We decompose this equation considering different components:
+
+$$m\dfrac{d\mathbf{v}_\paralle}{dt}=\mathbf{F} _\parrallel \quad m\dfrac{d\mathbf{v} _ \perp'}{dt}=q(\mathbf{v} _\perp'\times\mathbf{B}) \quad m\dfrac{d\mathbf{v} _{\perp c}}{dt}=q(\mathbf{v} _{\perp c}\times\mathbf{B})+\mathbf{F}$$
+
+where $\mathbf{v}_\perp=\mathbf{v} _ \perp'+\mathbf{v} _{\perp c}$$ so a component follows the circular motion described above while the other is the velocity of the guiding center that now might also move.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
