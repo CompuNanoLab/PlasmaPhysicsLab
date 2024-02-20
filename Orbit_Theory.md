@@ -50,6 +50,8 @@ This equation represents a **drift of the guiding center** orthogonal both to $\
 
 $$\mathbf{v} _{\perp c} =\mathbf{v}_E= c \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
 
+## $\mathbf{B}$ and $\mathbf{F}$ non-uniform and constant
+
 
 
 
