@@ -17,7 +17,6 @@ Alternative:
 The material you should go through before the lecture comprises theoretical explanations and exercises with Python code. Here is a list of the material:
 * [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md)
 * [Orbit Theory](./Orbit_Theory.md)
-* [How to solve Orbit Theory problems with numerical tools](./Numerical_Orbit_Theory.md)
 * Exercises on Orbit Theory:
     - [Exercise 1](./Exercise1.ipybn)
     - [Exercise 2](./Exercise2.ipybn)
