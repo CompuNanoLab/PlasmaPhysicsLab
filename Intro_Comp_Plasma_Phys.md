@@ -48,29 +48,15 @@ In between kinetic and fluid codes stand **hybrid codes** that can exploit vario
 
 We conclude the survey of computational schemes with a mention of **transport and Monte Carlo methods**. They allow for achieving a numerical description of what happens at long timescales when collisions and diffusion prevail and decide on the transport of energy and particles in the plasma. The transport equations by nature most often take the form of the diffusion equation and can be solved numerically. Monte Carlo methods can be employed in multiple ways and also coupled with the approaches listed above for example to introduce collisional events artificially and to include the creation and annihilation of particles.
 
-## Finite-Difference-Time-Domain Particle-In-Cell (FDTM PIC) method
-Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. Since their invention, the development of new algorithms and the availability of more powerful computers has allowed continuous progress of particle simulation from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in three dimensions and tracking millions of particles.
+## Particle-In-Cell (PIC) method
 
-collisionless $\omega_p^{-1} \less\less \nu_{coll}^{-1}$ but collisions, ionization and quantum effects may be included with Monte Carlo strategies
-relativistic $ T>> m_ec^2$
-
-replace (i.e. sample) the distribution function of every species with a
+Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. 
+They approximately solve Vlasov-Maxwell system by replacing (sampling) the distribution function of every species with a
 collection of computational particles – the macro-particles – each one
-representing multiple physical particles
+representing multiple physical particles. Particle-In-Cell methods specifically adopt this strategy and make macro-particles evolve self-consistently with electromagnetic fields computed with Maxwell equations on a discrete spatial grid. 
+Since the invention of PIC methods (Dawson, 1983), the development of new algorithms and the availability of more powerful computers has allowed continuous progress of PIC simulation from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in three dimensions and tracking millions of maxro-particles.
 
-
-
-each macro-particle has definite momentum → Dirac delta distribution in p, spatial extension → shape function S in x, weight w # physical particles/macro-particle
-
-PIC ansatz
-
-relation with Vlasov equation
-
-equations ....
-
-core loop commented
-
-They are used in various contexts:
+Their success is manifest in the fact that they are employed in several different contexts:
 * laser-plasma acceleration [Fonseca et al. Plasma Physics and Controlled Fusion 50.12 (2008)](https://doi.org/10.1088/0741-3335/50/12/124034)
 * nuclear fusion [Yin et al. Physics of Plasmas 16.11 (2009)](https://doi.org/10.1063/1.3250928)
 * plasma propulsion ([example](https://gauss-supercomputing.de/))
@@ -79,7 +65,34 @@ of Plasma Physics, 8, 61 (2016)](https://loureirogroup.mit.edu/magnetorotational
 * low-temperature plasmas [Tonneau at al. Plasma Sources Science and
 Technology 29.11 (2020)](https://doi.org/10.1088/1361-6595/abb3a0)
 
-Maxwell equations are easily solved by direct integration with finite differences on a spatial grid in 1D, 2D or 3D.
+Usually, PIC codes solve the relativistic Vlasov-Maxwell systems therefore their domain of applicability are relativistic ($ T>> m_ec^2$) and
+collisionless plasmas in which the time scale of collision events is much larger than the one of plasma oscillations ($\omega_p^{-1} \less\less \nu_{coll}^{-1}$). Howeber, collisions, ionization and quantum effects not taken into account by the core PIC algorithm may be included with Monte Carlo strategies.
+
+Let's explore the PIC method in more details to understand it's relation to the Vlasov equation. 
+
+The starting assumption is that the plasma species distribution function can be approximated in the following way
+
+... PIC ansatz...
+
+where ...
+Practically, each macro-particle has definite momentum, therefore is represented by a Dirac delta distribution in $\mathbf{p}$,a finite spatial extension described by the shape function $S$ in $\mathbf{x}$, and a weight $w$ which represents the number of physical particles per macro-particle.
+
+If we put this assumption in the Vlasov equation and calculate it's moments we get the equation of motion of the maxro-particles:
+
+equations ....
+
+we use the right-hand side equations inside the PIC algorithm. In the following we will focus on the simpler scheme of finite-difference-time-domain (FDTD) PIC codes having in mind that alternatives exist, for example employing spectral methods, i.e. Fourier transform to solve fields.
+So, we simply adopt a temporal and spatial discretization. Every time step $\delta t$ starting from initial conditions, the PIC algorithm follows these steps to evolve the plasma dynamics:
+
+* computes the electric and magnetic fields with Maxwell equations. Maxwell equations are easily solved by direct integration with finite differences on a spatial grid in 1D, 2D or 3D.
+
+* Inter
+
+
+core loop commented
+
+They are used in 
+
 
 
 
