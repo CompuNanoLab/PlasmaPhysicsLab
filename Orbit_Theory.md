@@ -70,6 +70,7 @@ where $\mu=\langle 1/2 m v_\perp^2\rangle/B(\mathbf{x}_c)$ is the local average 
 
 A further decomposition of $\mathbf{x}_c$ in components parallel and perpendicular to  the magnetic field and imposing stationary behaviour we can found all the drifts to which the guiding center is subject in this case of non-uniform magnetic field. Here is the list of drifts and their meaning:
 
+<!---
 * **$\nabla B$ drift**
   $$\mathbf{x}_{\perp c}=-\dfrac{c\mu}{qB^2}\nabla B \times \mathbf{B}$$
 
@@ -79,7 +80,7 @@ A further decomposition of $\mathbf{x}_c$ in components parallel and perpendicul
 
 * **polarization drift**:
   $$\mathbf{x}_{\perp c}=-\dfrac{mc^2}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
-
+--->
 
 
 
