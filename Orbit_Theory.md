@@ -50,9 +50,23 @@ This equation represents a **drift of the guiding center** orthogonal both to $\
 
 $$\mathbf{v} _{\perp c} =\mathbf{v}_E= c \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
 
-## $\mathbf{B}$ and $\mathbf{F}$ non-uniform and constant
+## $\mathbf{B}$ and $\mathbf{E}$ non-uniform and constant
 
+Let's start from defining the scales of variation of the system:
 
+$$ L_\parallel= \left|\dfrac{\nabla_\parallel B}{B}\right|^{-1} \quad L_\perp= \left|\dfrac{\nabla_\perp B}{B}\right|^{-1}$$
+
+If $L_\parallel$ is much larger than the step of the helical motion $v_\parallel 2\pi/\omega_c$ (space transversed in one period of cyclotron motion in the direction parallel to $\mathbf{B}$) and if $L_\perp$ is much llarger than the Larmor radius, we can say that the particle will act as if the magnetic field is locally constant with the guiding center moving along the field lines. Therefore the variation of $\mathbf{B}$ is treated as an higher order correction. This is the guiding center approximation, proven valid in many cases of practical interest.
+
+We decouple the motion in the following way:
+
+$$ \mathbf{x}=\mathbf{x}_c+\mathbf{x}' \quad \mathbf{v}=\mathbf{v}_c+\mathbf{v}' $$
+
+where $x'\ll x_c$. Now we can expand the magnetic field around the guiding center position and by averaging over the cyclotron period we can derive the equation for the guiding center:
+
+$$m\dfrac{d\mathbf{v}_c}{dt}=q[\mathbf{v}_c\times\mathbf{B}(\mathbf{x}_c)]-\mu\nabla B(\mathbf{x}_c)+q\mathbf{E}(\mathbf{x}_c)$$
+
+where $\mu=\langle 1/2 m v_\perp^2\rangle/B(\mathbf{x}_c)$. Instead, $\mathbf{v}'$ is described by the cyclotron motion around the guiding center.
 
 
 
