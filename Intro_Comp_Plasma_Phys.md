@@ -33,9 +33,9 @@ So the answer to the starting question is... because some theoretical questions 
 
 As pointed out, many approximations to the kinetic equations to describe a plasma have been developed to make the problem manageable in specific physical situations. This has led, starting from the full kinetic model to the kinetic collisionless Vlasov-Maxwell system, and the multi-fluid model and magnetohydrodynamics (MHD) where we neglect individual particles in favour of a continuous fluid description. Since plasma exhibits a hierarchical nature with a variety of instabilities and phenomena at various time scales and spatial scales, the adoption of multiple theoretical models suited for different scales seems a reasonable approach. Yet, the problem of understanding plasma collective behaviours remains extremely complex due to the interrelation between phenomena belonging to different layers of this spatial and temporal hierarchical structure.
 
-Computational plasma physics follows the hierarchy of the different plasma models implementing various numerical strategies for each of them. Computer simulations of plasmas comprise two general areas based on kinetic and fluid descriptions connected by hybrid approaches. [Figure 1](\ref{fig1}) is a tentative classification of numerical strategies employed in plasma physics.
+Computational plasma physics follows the hierarchy of the different plasma models implementing various numerical strategies for each of them. Computer simulations of plasmas comprise two general areas based on kinetic and fluid descriptions connected by hybrid approaches. [Figure 1](\cite{fig1}) is a tentative classification of numerical strategies employed in plasma physics.
 
-|![immagine \label{fig1}](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75519b74-0858-42ca-8017-264db1cd09a1)|
+|![imagine \ref{fig1}](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/df96fe0a-4ab2-4a20-932e-e2e2e4810e93)|
 |:--:| 
 |**Figure 1** *Classification of numerical strategies employed in plasma physics and their properties in relation to plasma physics models.*|
 
@@ -94,10 +94,14 @@ These equations of motion are used inside the PIC algorithm. In the following, w
 
 * Evaluation of the current density field on the spatial grid nodes from macro-particle charges, positions and velocities.
 * Determination of the electromagnetic field on the grid solving Maxwell equations with the computed current density.
-* Interpolation of the fields from the grid nodes to the macro-particles positions;
-* Update of macro-particle momenta and positions with the Lorentz force acting on them (particle pushing);
+* Interpolation of the fields from the grid nodes to the macro-particles positions.
+* Update of macro-particle momenta and positions with the Lorentz force acting on them (particle pushing).
 
-These operations constitute a loop (see [Figure 2](\ref{fig2})) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase. The following section is devoted to explaining better the last step of the loop devoted to particle pushing.
+These operations constitute a loop (see [Figure 2](\cite{fig2})) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase. The following section is devoted to explaining better the last step of the loop devoted to particle pushing.
+
+|![imagine \ref{fig2}](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/35ffc328-c75d-4f89-937f-cc4e41cfabf3)|
+|:--:| 
+|**Figure 2** *Core loop of the particle-in-cell method.*|
 
 ### Particle Pusher
 
