@@ -18,8 +18,8 @@ The material you should go through before the lecture comprises theoretical expl
 * [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md)
 * [Orbit Theory](./Orbit_Theory.md)
 * Exercises on Orbit Theory:
-    - [Exercise 1](./Exercise1.ipybn)
-    - [Exercise 2](./Exercise2.ipybn)
-    - [Exercise 3](./Exercise3.ipybn)
+    - [Exercise 1](./Exercise1.ipynb)
+    - [Exercise 2](./Exercise2.ipynb)
+    - [Exercise 3](./Exercise3.ipynb)
 
 For doubts and questions, contact Marta Galbiati ([marta.galbiati@polimi.it](marta.galbiati@polimi.it)).
