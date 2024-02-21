@@ -133,7 +133,7 @@ $$\mathbf{b}=\dfrac{q_s \Delta t \mathbf{B}^n}{2m_s\gamma^n}$$
 
 $$\mathbf{u}^-=\mathbf{u}^{n-1/2}+\dfrac{q \Delta t \mathbf{E}^n}{2m}\quad \gamma^n=\sqrt{1+\mathbf{u}^n\cdot\mathbf{u}^n}\approx \sqrt{1+\mathbf{u} ^-\cdot\mathbf{u} ^-}$$
 
-this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The equation for $ mathbf{u}^{n}$ now is:
+this last approximation is a consequence of the fact that terms proportional to $(\Delta t)^2$ have been ignored consistently with the accuracy in time of the leap-frog scheme. The equation for $\mathbf{u}^{n}$ now is:
 
 $$ \mathbf{u}^{n} =\mathbf{u}^- + \mathbf{u}^{n}\times \mathbf{b} $$
 
