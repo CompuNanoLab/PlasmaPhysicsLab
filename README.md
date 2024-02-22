@@ -3,7 +3,7 @@
 This repository contains the material for the lecture of the Laboratory of Plasma Physics course scheduled on 29th February 2024. This lecture is provided in flipped class mode. The material for the lecture comprises two documents to read and three exercises in Python on Jupyter Notebooks.
 
 Please complete the following steps before the lecture:
-1. Download this repository. By clicking on **Code** on the top right of this page.
+1. Download this repository. Click on **<> Code** on the top right of this page.
 2. Install Python and Jupyter on your PC. Some useful links:
    - If you don't know what is a Jupyter Notebook: [Beginner guide to Jupyter Notebooks](https://jupyter-notebook-beginner-guide.readthedocs.io/en/latest/index.html).
    - Basic Python installation guide: [Link to python.org](https://wiki.python.org/moin/BeginnersGuide/Download).
