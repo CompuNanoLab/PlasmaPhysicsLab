@@ -46,10 +46,18 @@ where $\mathbf{v}_\perp=\mathbf{v} _ \perp'+\mathbf{v} _{\perp c}$ so a componen
 We want to find a stationary solution for the guiding center if possible, by imposing that the time derivative of $\mathbf{v} _{\perp c}$ is zero:
 
 $$\mathbf{v} _{\perp c} = \dfrac{\mathbf{F} _\perp \times \mathbf{B}} {q B^2}$$
-
+Thus, one sees that any force with a component perpendic-
+ular to B causes a particle to drift perpendicular to both F
+and B.
 This equation represents a **drift of the guiding center** orthogonal both to $\mathbf{F} _\perp$ and $\mathbf{B}$. The larmor radius in this case changes based on the position of the particle. If $\mathbf{F}=q\mathbf{E}$ the guiding center drift is called ExB drift and is independent of the particle kind:
 
 $$\mathbf{v} _{\perp c} =\mathbf{v}_E= c \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
+
+An example is the drift due to a constant gravitational
+force Fg = mg perpendicular to the magnetic field. The re-
+sulting drift velocity, vg = mg/qB, is in opposite directions
+for electrons and ions (see Fig. 3). However, in laboratory plasmas vg is far to small to
+be of importance (2 × 10−8m/s in a magnetic field B = 5 T). 
 
 ## $\mathbf{B}$ and $\mathbf{E}$ non-uniform and non-constant
 
