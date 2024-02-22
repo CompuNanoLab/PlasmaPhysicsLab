@@ -29,7 +29,7 @@ which solved finally leads to
 
 $$ x(t)=x_c+\rho_L \sin(\omega t+ \phi_0) \quad y(t)=y_c+\rho_L \cos(\omega t+ \phi_0)$$
 
-where $(x_c,y_c)$ is called guiding center or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the larmor radius. The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. The motion is called cyclotron motion. The motion is analogous to a current flowing in a coil and produces a magnetic field opposite to the imposed $\mathbf{B}$ (diamagnetic behaviour).
+where $(x_c,y_c)$ is called guiding center or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the larmor radius. The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. The motion is called cyclotron motion. The motion is analogous to a current flowing in a coil and produces a magnetic field opposite to the imposed $\mathbf{B}$ (diamagnetic behaviour). 
 
 ## $\mathbf{B}$ and $\mathbf{F}$ uniform and constant
 
@@ -51,13 +51,15 @@ ular to B causes a particle to drift perpendicular to both F
 and B.
 This equation represents a **drift of the guiding center** orthogonal both to $\mathbf{F} _\perp$ and $\mathbf{B}$. The larmor radius in this case changes based on the position of the particle. If $\mathbf{F}=q\mathbf{E}$ the guiding center drift is called ExB drift and is independent of the particle kind:
 
-$$\mathbf{v} _{\perp c} =\mathbf{v}_E= c \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
+$$\mathbf{v} _{\perp c} =\mathbf{v}_E= \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
 
 An example is the drift due to a constant gravitational
 force Fg = mg perpendicular to the magnetic field. The re-
 sulting drift velocity, vg = mg/qB, is in opposite directions
 for electrons and ions (see Fig. 3). However, in laboratory plasmas vg is far to small to
-be of importance (2 × 10−8m/s in a magnetic field B = 5 T). 
+be of importance (2 × 10−8m/s in a magnetic field B = 5 T). does not depend on the sign of the charge or the particles. It
+is also independent of the particle mass and therefore iden-
+tical for ions and electrons.
 
 ## $\mathbf{B}$ and $\mathbf{E}$ non-uniform and non-constant
 
@@ -66,7 +68,9 @@ Let's start from defining spatial and temporal scales of variation of the system
 $$ L_\parallel= \left|\dfrac{\nabla_\parallel B}{B}\right|^{-1} \quad L_\perp= \left|\dfrac{\nabla_\perp B}{B}\right|^{-1} \quad T_B=\dfrac{1}{B} \dfrac{\partial B}{\partial t}$$
 
 If $L_\parallel$ is much larger than the step of the helical motion $v_\parallel 2\pi/\omega_c$ (space transversed in one period of cyclotron motion in the direction parallel to $\mathbf{B}$), if $L_\perp$ is much larger than the Larmor radius, and if $T_B$, the variation f $B$ in time is much smaller than $\omega_c$, we can say that the particle will act as if the magnetic field is locally constant with the guiding center moving along the field lines. Therefore the variation of $\mathbf{B}$ is treated as an higher order correction. This is the guiding center approximation, proven valid in many cases of practical interest.
-
+The analysis has shown that the perpendicular particle motion can be decomposed into
+two components: the fast gyro motion and the slower guiding center motion comprising
+primarily the guiding center drifts.
 We decouple the motion in the following way:
 
 $$ \mathbf{x}=\mathbf{x}_c+\mathbf{x}' \quad \mathbf{v}=\mathbf{v}_c+\mathbf{v}' $$
@@ -79,17 +83,25 @@ where $\mu=\langle 1/2 m v_\perp^2\rangle/B(\mathbf{x}_c)$ is the local average 
 
 A further decomposition of $\mathbf{x}_c$ in components parallel and perpendicular to  the magnetic field and imposing stationary behaviour we can found all the drifts to which the guiding center is subject in this case of non-uniform magnetic field. Here is the list of drifts and their meaning:
 
-<!---
-* **$\nabla B$ drift**
+* **$\nabla B$ drift**The other inhomogeneity that results in a drift is the
+transverse gradient of the magnetic field strength. The parti-
+cle orbit has a smaller radius of curvature on that part of its
+orbit located in the stronger magnetic field. This leads to a
+drift perpendicular to both the magnetic field and its gradi-
+ent.
   $$\mathbf{x}_{\perp c}=-\dfrac{c\mu}{qB^2}\nabla B \times \mathbf{B}$$
 
-* **inertial drift**:
+* **inertial drift**: due to curvature of the magnetic field lines
   $$\mathbf{x}_{\perp c}=-\dfrac{mc}{qB^2} \mathbf{F}_c \times \mathbf{B}$$
   where $\mathbf{F}_c$ is the centrifugal force felt by the particle
 
-* **polarization drift**:
-  $$\mathbf{x}_{\perp c}=-\dfrac{mc^2}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
---->
+* **polarization drift**: ExB drift is not constant if the elctric field depends on time depends
+on the charge and the mass of the particle.
+  $$\mathbf{x}_{\perp c}=-\dfrac{m}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
+
+## Bibliography
+
+* Freidberg, J. P. (2008). Plasma Physics and Fusion Energy. (n.p.): Cambridge University Press. Chapter 8.
 
 
 
