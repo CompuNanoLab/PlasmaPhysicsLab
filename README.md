@@ -11,8 +11,8 @@ Please complete the following steps before the lecture:
    - Visual Studio Code + Python installation guide: [Link to VS Code](https://code.visualstudio.com/docs/python/python-tutorial#__install-a-python-interpreter).
    - Installing Jupyter using Anaconda: [Link to Installing the classic Jupyter Notebook interface](https://docs.jupyter.org/en/latest/install/notebook-classic.html).
 4. Read and work on the material in your downloaded version of this repository with your Python compiler and the code editor of your choice.
-   Alternative if you don't want to install anything:
-    * use [Google Colab](https://colab.research.google.com/). 
+   
+   Alternative if you don't want to install anything: use [Google Colab](https://colab.research.google.com/). 
  
  Here is a list of the material:
 * [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md)
