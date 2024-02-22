@@ -20,7 +20,8 @@ Let's define the component of the velocity parallel to the magnetic field as:
 
 $$v_\parallel=\mathbf{v}\cdot\dfrac{\mathbf{B}}{B}$$
 
-$v_\parallel$, $v^2$, and $v_{\perp}^2$ are constant during the particle motion. This suggests to use of cylindrical coordinates. Introducing the **cyclotron frequency** $\omega_c=qB/m$:
+$v_\parallel$, $v^2$, and $v_{\perp}^2$ are constant during the particle motion. In practice, the kinetic particle energy remains constant because the Lorentz force is always perpendicular to the velocity and can
+thus change only its direction, but not its magnitude. This suggests to use cylindrical coordinates. Introducing the **cyclotron frequency** $\omega_c=qB/m$:
 
 $$\dfrac{dv_x}{dt}=\omega_c v_y \quad \dfrac{dv_y}{dt}=-\omega_c v_x \quad v_z=v_\parallel=const$$
 
