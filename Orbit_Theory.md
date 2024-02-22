@@ -6,6 +6,14 @@ $$ m \dfrac{d^2\mathbf{x}}{dt^2}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})$$
 
 In the following, we explore different cases of assigned fields.
 
+No attempt is made at self-consistency – for example,
+to include the currents and corresponding induced magnetic fields resulting from the flow
+of charged particles. The fields are simply specified as known quantities.
+
+Second,
+these drifts are largely responsible for the currents that flow in the plasma and are therefore
+essential for the ultimate development of self-consistent models. like in fusion devices
+
 ## $\mathbf{B}$ uniform and constant
 
 The above differential equation reduces to:
@@ -30,6 +38,14 @@ which solved finally leads to
 $$ x(t)=x_c+\rho_L \sin(\omega t+ \phi_0) \quad y(t)=y_c+\rho_L \cos(\omega t+ \phi_0)$$
 
 where $(x_c,y_c)$ is called guiding center or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the larmor radius. The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. The motion is called cyclotron motion. The motion is analogous to a current flowing in a coil and produces a magnetic field opposite to the imposed $\mathbf{B}$ (diamagnetic behaviour). 
+
+The fastest and dominant behavior corresponds to gyro motion in which particles
+move freely along magnetic field lines and rotate in small circular orbits perpendicular to
+the magnetic field.
+
+The next contribution to the hierarchy of frequencies involves slow spatial and time
+variations in the fields, which lead to important modifications of the basic gyro motion.
+This regime is known as “guiding center motion.”
 
 ## $\mathbf{B}$ and $\mathbf{F}$ uniform and constant
 
@@ -62,6 +78,10 @@ is also independent of the particle mass and therefore iden-
 tical for ions and electrons.
 
 ## $\mathbf{B}$ and $\mathbf{E}$ non-uniform and non-constant
+
+that the fields vary slowly in space with respect to the gyro radius and slowly in time
+with respect to the inverse gyro frequency. to understand
+particle confinement
 
 Let's start from defining spatial and temporal scales of variation of the system:
 
