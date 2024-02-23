@@ -38,7 +38,6 @@ the perpendicular velocity $v_\perp$ and decreases as the magnetic field $B$ inc
  
 The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. This kind of motion is called **cyclotron motion** or gyro motion. The guiding center  is the center of the particle orbit which exhibits good confinement perpendicular to the direction of the magnetic field and no confinement parallel to the magnetic field. The motion is analogous to a current flowing in a coil and produces a magnetic field that always opposes the applied $\mathbf{B}$: the gyro motion is diamagnetic.
 
-
 ## $\mathbf{B}$ and $\mathbf{F}$ uniform and constant
 
 In this case, we have an additional force $\mathbf{F}$ of arbitrary orientation. For example, it could be the result of a constant electric field applied to the charge. The equation of motion now is:
@@ -47,33 +46,23 @@ $$m\dfrac{d\mathbf{v}}{dt}=q(\mathbf{v}\times\mathbf{B})+\mathbf{F}$$
 
 We decompose this equation considering different components:
 
-$$m\dfrac{d\mathbf{v}_\parallel}{dt}=\mathbf{F} _\parallel \quad m\dfrac{d\mathbf{v} _ \perp'}{dt}=q(\mathbf{v} _\perp'\times\mathbf{B}) \quad m\dfrac{d\mathbf{v} _{\perp c}}{dt}=q(\mathbf{v} _{\perp c}\times\mathbf{B})+\mathbf{F}$$
+$$m\dfrac{d\mathbf{v}_\parallel}{dt}=\mathbf{F} _\parallel \quad m\dfrac{d\mathbf{v} _ \perp'}{dt}=q(\mathbf{v} _\perp'\times\mathbf{B}) \quad m\dfrac{d\mathbf{v} _{\perp c}}{dt}=q(\mathbf{v} _{\perp c}\times\mathbf{B})+\mathbf{F} _\perp$$
 
-where $\mathbf{v}_\perp=\mathbf{v} _ \perp'+\mathbf{v} _{\perp c}$ so a component follows the circular motion described above while the other is the velocity of the guiding center that now might also move.
+where $\mathbf{v}_\perp=\mathbf{v} _ \perp'+\mathbf{v} _{\perp c}$. In the parallel direction, there is a constant acceleration due to the parallel electric field. In the perpendicular direction, we have a component that follows the circular motion described in the previous section while another component is the velocity of the guiding center that now might also move.
 
 We want to find a stationary solution for the guiding center if possible, by imposing that the time derivative of $\mathbf{v} _{\perp c}$ is zero:
 
 $$\mathbf{v} _{\perp c} = \dfrac{\mathbf{F} _\perp \times \mathbf{B}} {q B^2}$$
-Thus, one sees that any force with a component perpendic-
-ular to B causes a particle to drift perpendicular to both F
-and B.
-constant acceleration
-due to the parallel electric field
 
-This equation represents a **drift of the guiding center** orthogonal both to $\mathbf{F} _\perp$ and $\mathbf{B}$. The larmor radius in this case changes based on the position of the particle. If $\mathbf{F}=q\mathbf{E}$ the guiding center drift is called ExB drift and is independent of the particle kind:
+This equation represents a **drift of the guiding center** orthogonal both to $\mathbf{F} _\perp$ and $\mathbf{B}$. The larmor radius in this case changes based on the position of the particle. 
+
+If $\mathbf{F}=q\mathbf{E}$ the guiding center drift is called ExB drift:
 
 $$\mathbf{v} _{\perp c} =\mathbf{v}_E= \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
 
-An example is the drift due to a constant gravitational
-force Fg = mg perpendicular to the magnetic field. The re-
-sulting drift velocity, vg = mg/qB, is in opposite directions
-for electrons and ions (see Fig. 3). However, in laboratory plasmas vg is far to small to
-be of importance (2 × 10−8m/s in a magnetic field B = 5 T). does not depend on the sign of the charge or the particles. It
-is also independent of the particle mass and therefore iden-
-tical for ions and electrons.
+It is independent of the particle charge and mass. In other words, electrons and ions, for example, drift with the same velocity.
 
-It is also independent of the mass and charge. In other
-words, electrons and ions drift with the same velocity.
+Another example is the drift due to a constant gravitational force $F_g = mg$ perpendicular to the magnetic field. The resulting drift velocity, $v_g = mg/qB$ depends on the particle charge and mass. However, in laboratory plasmas, $v_g$ is far too small to be of importance.
 
 ## $\mathbf{B}$ and $\mathbf{E}$ non-uniform and non-constant
 
