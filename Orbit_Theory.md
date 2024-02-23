@@ -94,7 +94,7 @@ Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpe
 
 * **curvature drift** due to the curvature of the magnetic field lines. This drift is caused by the centrifugal force exerted on the particle.
   
-  $$\mathbf{v}_{\perp c}=-\dfrac{\mathbf{F}_c \times \mathbf{B}}{qB^2}$$
+  $$\mathbf{v}_{\perp c}=\dfrac{\mathbf{F}_c \times \mathbf{B}}{qB^2}$$
   
   where $\mathbf{F}_c=m v _\parallel^2 \mathbf{R_c}/R_c^2$ is the centrifugal force felt by the particle.
 
