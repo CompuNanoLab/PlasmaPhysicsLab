@@ -66,27 +66,13 @@ Another example is the drift due to a constant gravitational force $F_g = mg$ pe
 
 ## $\mathbf{B}$ and $\mathbf{E}$ non-uniform and non-constant
 
-By following the velocity and position of the guiding center for more general
-fields one obtains an accurate picture of the average particle location, differing from the
-exact orbit by only a small deviation of order of the gyro radius
-
-The fastest and dominant behavior corresponds to gyro motion in which particles move freely along magnetic field lines and rotate in small circular orbits perpendicular to the magnetic field.
-The next contribution to the hierarchy of frequencies involves slow spatial and time
-variations in the fields, which lead to important modifications of the basic gyro motion.
-This regime is known as “guiding center motion.”
-that the fields vary slowly in space with respect to the gyro radius and slowly in time
-with respect to the inverse gyro frequency. to understand
-particle confinement
-
-Let's start from defining spatial and temporal scales of variation of the system:
+Let's start by defining spatial and temporal scales of variation of the system:
 
 $$ L_\parallel= \left|\dfrac{\nabla_\parallel B}{B}\right|^{-1} \quad L_\perp= \left|\dfrac{\nabla_\perp B}{B}\right|^{-1} \quad T_B=\dfrac{1}{B} \dfrac{\partial B}{\partial t}$$
 
-If $L_\parallel$ is much larger than the step of the helical motion $v_\parallel 2\pi/\omega_c$ (space transversed in one period of cyclotron motion in the direction parallel to $\mathbf{B}$), if $L_\perp$ is much larger than the Larmor radius, and if $T_B$, the variation f $B$ in time is much smaller than $\omega_c$, we can say that the particle will act as if the magnetic field is locally constant with the guiding center moving along the field lines. Therefore the variation of $\mathbf{B}$ is treated as an higher order correction. This is the guiding center approximation, proven valid in many cases of practical interest.
-The analysis has shown that the perpendicular particle motion can be decomposed into
-two components: the fast gyro motion and the slower guiding center motion comprising
-primarily the guiding center drifts.
-We decouple the motion in the following way:
+If $L_\parallel$ is much larger than the step of the helical motion $v_\parallel 2\pi/\omega_c$ (space transversed in one period of cyclotron motion in the direction parallel to $\mathbf{B}$), if $L_\perp$ is much larger than the Larmor radius, and if $T_B$, the variation of $B$ in time is much smaller than $\omega_c$, we can say that the particle will act as if the magnetic field is locally constant with the guiding center moving along the field lines. These considerations provide a strategy for studying particle orbits in arbitrary fields: by following the velocity and position of the guiding center one obtains an accurate picture of the average particle location, differing from the exact orbit by only a small deviation of the order of the Larmor radius. In this picture, the fastest and dominant behaviour corresponds to the cyclotron motion along magnetic field lines in which particles rotate in small circular orbits perpendicular to the magnetic field. At lower frequencies, slow spatial and time variations in the fields induce modifications of the basic cyclotron motion. Therefore, the variation of $\mathbf{B}$ is treated as a higher-order correction in the gyro motion. This is the **guiding center approximation**, proven valid in many cases of practical interest.
+
+The analytical approach to the problem consists in decoupling the motion in a fast gyro motion and the slower guiding center motion comprising primarily the guiding center drifts:
 
 $$ \mathbf{x}=\mathbf{x}_c+\mathbf{x}' \quad \mathbf{v}=\mathbf{v}_c+\mathbf{v}' $$
 
@@ -94,32 +80,29 @@ where $x'\ll x_c$. Now we can expand the magnetic field around the guiding cente
 
 $$m\dfrac{d\mathbf{v}_c}{dt}=q[\mathbf{v}_c\times\mathbf{B}(\mathbf{x}_c)]-\mu\nabla B(\mathbf{x}_c)+q\mathbf{E}(\mathbf{x}_c)$$
 
-where $\mu=\langle 1/2 m v_\perp^2\rangle/B(\mathbf{x}_c)$ is the local average moment associated to the cyclotron motion. Instead, $\mathbf{v}'$ is described by the cyclotron motion around the guiding center.
+where $\mu=\langle \frac{1}{2} m v_\perp^2\rangle/B(\mathbf{x}_c)$ is the local average moment associated to the cyclotron motion. Instead, $\mathbf{v}'$ is described by the cyclotron motion around the guiding center.
 
-A further decomposition of $\mathbf{x}_c$ in components parallel and perpendicular to  the magnetic field and imposing stationary behaviour we can found all the drifts to which the guiding center is subject in this case of non-uniform magnetic field. Here is the list of drifts and their meaning:
+Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpendicular to  the magnetic field and imposing stationary behaviour we can find all the drifts to which the guiding center is subject in this case of non-uniform magnetic field. Here is the list of drifts and their meaning:
 
-* **$\nabla B$ drift**The other inhomogeneity that results in a drift is the
-transverse gradient of the magnetic field strength. The parti-
-cle orbit has a smaller radius of curvature on that part of its
-orbit located in the stronger magnetic field. This leads to a
-drift perpendicular to both the magnetic field and its gradi-
-ent.
-  $$\mathbf{x}_{\perp c}=-\dfrac{c\mu}{qB^2}\nabla B \times \mathbf{B}$$
+* **ExB drift** due to the electric field perpendicular to the magnetic field. The particle orbit has a larger radius of curvature on that part of its orbit in which the electric field accelerate the charge, i.e. increase its velocity. This drift is perpendicular to both the magnetic field and the electric field.
 
-* **inertial drift**: due to curvature of the magnetic field lines
-  $$\mathbf{x}_{\perp c}=-\dfrac{mc}{qB^2} \mathbf{F}_c \times \mathbf{B}$$
-  where $\mathbf{F}_c$ is the centrifugal force felt by the particle
+  $$\mathbf{v} _{\perp c} =\mathbf{v}_E= \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
 
-* **polarization drift**: ExB drift is not constant if the elctric field depends on time depends
-on the charge and the mass of the particle.
-  $$\mathbf{x}_{\perp c}=-\dfrac{m}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
+* **$\nabla B$ drift** due to the transverse gradient of the magnetic field strength. The particle orbit has a smaller radius of curvature on that part of its orbit located in the stronger magnetic field. This drift is perpendicular to both the magnetic field and its gradient.
 
-Second,
-these drifts are largely responsible for the currents that flow in the plasma and are therefore
-essential for the ultimate development of self-consistent models. like in fusion devices
+  $$\mathbf{v}_{\perp c}=-\dfrac{\mu}{qB^2}\nabla B \times \mathbf{B}$$
 
-The main conclusion from this chapter is that a magnetic field can quite effectively
-confine charged particles in the perpendicular direction.
+* **curvature drift** due to the curvature of the magnetic field lines. This drift is caused by the centrifugal force exerted on the particle.
+  
+  $$\mathbf{v}_{\perp c}=-\dfrac{\mathbf{F}_c \times \mathbf{B}}{qB^2}$$
+  
+  where $\mathbf{F}_c=m v _\parallel^2 \mathbf{R_c}/R_c^2$ is the centrifugal force felt by the particle.
+
+* **polarization drift** due to the lag of particle motion behind the changing electric field: ExB drift is not constant if the electric field depends on time. It depends on the charge and the mass of the particle.
+
+  $$\mathbf{v}_{\perp c}=-\dfrac{m}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
+
+These drifts are essential for understanding the currents that flow in a plasma in many situations of practical interest for plasma-based devices.
 
 ## Bibliography
 
