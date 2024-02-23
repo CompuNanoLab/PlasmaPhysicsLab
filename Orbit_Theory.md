@@ -100,7 +100,7 @@ Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpe
 
 * **polarization drift** due to the lag of particle motion behind the changing electric field: ExB drift is not constant if the electric field depends on time. It depends on the charge and the mass of the particle.
 
-  $$\mathbf{v}_{\perp c}=-\dfrac{m}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
+  $$\mathbf{v}_{\perp c}=\dfrac{m}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
 
 These drifts are essential for understanding the currents that flow in a plasma in many situations of practical interest for plasma-based devices.
 
