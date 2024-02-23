@@ -33,10 +33,10 @@ which, once solved, leads to:
 
 $$ x(t)=x_c+\rho_L \sin(\omega t+ \phi_0) \quad y(t)=y_c+\rho_L \cos(\omega t+ \phi_0)$$
 
-where $(x_c,y_c)$ is called **guiding center** or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the cyclotron, gyro or **Larmor radius**. Note that the cyclotron frequency increases with the magnetic field $B$. Also the electron gyro frequency is much larger than the ion gyro frequency, and the gyro radius increases with
+where $(x_c,y_c)$ is called **guiding center** or Larmor centre, and $\rho_L=v_\perp/\omega_c$ is the cyclotron, gyro or **Larmor radius**. Note that the cyclotron frequency increases with the magnetic field $B$. Also, the electron gyro frequency is much larger than the ion gyro frequency, and the gyro radius increases with
 the perpendicular velocity $v_\perp$ and decreases as the magnetic field $B$ increases.
  
-The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along the direction of the $\mathbf{B}$ field the motion is uniform. The sign of the charge decides on the direction of the circular motion. This kind of motion is called **cyclotron motion** or gyro motion. The guiding center  is the center of the particle orbit which exhibits good confinement perpendicular to the direction of the magnetic field and no confinement parallel to the magnetic field. The motion is analogous to a current flowing in a coil and produces a magnetic field that always opposes the applied $\mathbf{B}$: the gyro motion is diamagnetic.
+The solutions describe a circular uniform motion in the $x-y$ plane characterized by the Larmor radius while along, the direction of the $\mathbf{B}$ field, the motion is uniform. The sign of the charge decides the direction of the circular motion. This kind of motion is called **cyclotron motion** or gyro motion. The guiding center  is the center of the particle orbit which exhibits good confinement perpendicular to the direction of the magnetic field and no confinement parallel to the magnetic field. The motion is analogous to a current flowing in a coil and produces a magnetic field that always opposes the applied $\mathbf{B}$: the gyro motion is diamagnetic.
 
 ## $\mathbf{B}$ and $\mathbf{F}$ uniform and constant
 
@@ -82,9 +82,9 @@ $$m\dfrac{d\mathbf{v}_c}{dt}=q[\mathbf{v}_c\times\mathbf{B}(\mathbf{x}_c)]-\mu\n
 
 where $\mu=\langle \frac{1}{2} m v_\perp^2\rangle/B(\mathbf{x}_c)$ is the local average moment associated to the cyclotron motion. Instead, $\mathbf{v}'$ is described by the cyclotron motion around the guiding center.
 
-Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpendicular to  the magnetic field and imposing stationary behaviour we can find all the drifts to which the guiding center is subject in this case of non-uniform magnetic field. Here is the list of drifts and their meaning:
+Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpendicular to  the magnetic field and imposing stationary behaviour we can find all the drifts to which the guiding center is subject. Here is the list of drifts and their meaning:
 
-* **ExB drift** due to the electric field perpendicular to the magnetic field. The particle orbit has a larger radius of curvature on that part of its orbit in which the electric field accelerate the charge, i.e. increase its velocity. This drift is perpendicular to both the magnetic field and the electric field.
+* **ExB drift** due to the electric field perpendicular to the magnetic field. The particle orbit has a larger radius of curvature on that part of its orbit in which the electric field accelerates the charge, i.e. increases its velocity. This drift is perpendicular to both the magnetic field and the electric field.
 
   $$\mathbf{v} _{\perp c} =\mathbf{v}_E= \dfrac{\mathbf{E} \times \mathbf{B}} {B^2}$$
 
@@ -102,7 +102,7 @@ Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpe
 
   $$\mathbf{v}_{\perp c}=\dfrac{m}{qB^2} \dfrac{d\mathbf{E} _\perp}{dt}$$
 
-These drifts are essential for understanding the currents that flow in a plasma in many situations of practical interest for plasma-based devices.
+These drifts are essential for understanding the currents that flow in plasma in many situations of practical interest for plasma-based devices.
 
 ## Bibliography
 
