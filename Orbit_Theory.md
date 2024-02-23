@@ -1,23 +1,14 @@
 # Particle Orbit Theory
 
-Particle orbit theory studies the dynamics of a single charged particle in assigned electric and magnetic fields. This will be the context to which we apply some of the numerical schemes discussed in the [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md). Charged particle dynamics provides useful hints to understand the physical behaviour of a charged population, and, thus, of a plasma. In the following, we adopt a classical description (not relativistic or quantum) and suppose that the field behaviour is completely given. Let's leave the more accurate self-consistent treatment of electromagnetic fields and particle motion to the numerical studies. The charged particle dynamics comes from solving the following ordinary differential equation:
+Particle orbit theory studies the dynamics of a single charged particle in assigned electric and magnetic fields. This will be the context to which we will apply some of the numerical schemes discussed in the [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md). Charged particle dynamics provides useful hints to understand the physical behaviour of a charged population, and, thus, of a plasma. In the following, we adopt a classical description (not relativistic or quantum) and suppose that the field behaviour is completely given, no attempt is made at self-consistency. More accurate and self-consistent treatment of electromagnetic fields and particle motion to include the currents and induced fields resulting from the flow of charges can be done numerically. 
 
-$$ m \dfrac{d^2\mathbf{x}}{dt^2}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})$$
+The charged particle dynamics comes from solving the following ordinary differential equations:
 
-In the following, we explore different cases of assigned fields. In general, B = B (r, t) and E = E (r, t) are functions of three dimensions plus time.
-Equation (8.2) is thus a set of coupled, non-linear, ordinary differential equations for the
-unknowns v and r as functions of t.
+$$\dfrac{d\mathbf{x}}{dt}= \mathbf{v}$$
 
-No attempt is made at self-consistency – for example,
-to include the currents and corresponding induced magnetic fields resulting from the flow
-of charged particles. The fields are simply specified as known quantities.
+$$m \dfrac{d\mathbf{v}}{dt}=q(\mathbf{E}+\mathbf{v}\times\mathbf{B})$$
 
-Second,
-these drifts are largely responsible for the currents that flow in the plasma and are therefore
-essential for the ultimate development of self-consistent models. like in fusion devices
-
-The main conclusion from this chapter is that a magnetic field can quite effectively
-confine charged particles in the perpendicular direction.
+In general, $\mathbf{B} = \mathbf{B}(\mathbf{x}, t)$ and $\mathbf{E} = \mathbf{E}(\mathbf{x}, t)$ are functions of three spatial dimensions and of time. Therefore, we have a set of coupled, non-linear, ordinary differential equations for the unknowns $v$ and $x$ as functions of $t$.
 
 ## $\mathbf{B}$ uniform and constant
 
@@ -71,6 +62,14 @@ increases with the magnetic field B: high B → high ωc . Also the electron gyr
 much larger than the ion gyro frequency by the ratio m i /m e . The gyro radius increases with
 the perpendicular velocity v⊥ and decreases as the magnetic field B increases: high v⊥ , low
 B→ large rL .
+
+Second,
+these drifts are largely responsible for the currents that flow in the plasma and are therefore
+essential for the ultimate development of self-consistent models. like in fusion devices
+
+The main conclusion from this chapter is that a magnetic field can quite effectively
+confine charged particles in the perpendicular direction.
+
 
 ## $\mathbf{B}$ and $\mathbf{F}$ uniform and constant
 
