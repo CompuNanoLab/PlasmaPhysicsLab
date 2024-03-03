@@ -69,7 +69,7 @@ $$f_a (\mathbf{x}, \mathbf{p}, t)\approx f_h (\mathbf{x}, \mathbf{p}, t)=\sum_{p
 
 where $S$ is the **shape function** evenly localized around $\mathbf{x}=0$ and normalized to unity, i.e. its integral over the whole space gives one. Practically, each macro-particle has definite momentum, i.e. is represented by a Dirac delta distribution in $\mathbf{p}$, a finite spatial extension described by the shape function, and a weight $w$ which represents the number of physical particles per macro-particle.
 
-If we put this assumption in the Vlasov equation and calculate its moments we get the equations of motion of the macro-particles.
+If we put this assumption in the Vlasov equation and calculate its moments we get the equations of motion of the macro-particles. See the [appendix](#appendix) for the detailed calculations.
 
 0<sup>th</sup> moment:
 
@@ -143,6 +143,24 @@ $$\mathbf{u}^{n}=\dfrac{1}{1+b^2}\left[\mathbf{u} ^ -+\mathbf{u} ^-\times \mathb
 
 where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the advancement of macro-particle position and momentum are given. This scheme is called the **Boris pusher**. This algorithm is a stable, explicit, second-order, and time-centered method that conserves phase-space volume and it is widely used to solve acceleration problems.
 
+## <a name="appendix"></a>Appendix
+
+Let's explicit the moment of zero order in the x-y-z components:
+
+$$ \int \int \left[\dfrac{\partial f_h}{\partial t}+v_x\dfrac{\partial f_h}{\partial x}+v_y\dfrac{\partial f_h}{\partial y}+v_z\dfrac{\partial f_h}{\partial z}+F_ {Lx}\dfrac{\partial f_ h}{\partial px}+F_ {Ly}\dfrac{\partial f_ h}{\partial py}+F_ {Lz}\dfrac{\partial f_ h}{\partial pz}\right] dp_xdp_ydp_zdxdydz=0$$
+
+$\int\dfrac{\partial f_h}{\partial x}dx$, $\int\dfrac{\partial f_h}{\partial p_x}dp_x$,  and analogous terms in $y$ and $z$ are zero because we require compact support for the shape function $S$ like the Dirac delta (i.e. it is zero outside a small range). The conservation of the macro-particle weight w_{pa} follows from the first term where the time derivative can be taken out of the integrations.
+
+In the moment of first order, due to the same reasons, the only non-zero elements are:
+
+$$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=\dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}= \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
+
+where the symmetry of $S$ has been used to delete the first term in the sum.
+
+
+
+
+ 
 ## Bibliography
 
 * Tajima, T. (2004). Computational Plasma Physics: With Applications To Fusion And Astrophysics. United Kingdom: Avalon Publishing.
