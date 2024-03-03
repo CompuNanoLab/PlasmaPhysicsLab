@@ -175,23 +175,19 @@ exploiting integration by parts. The second equation of motion is easily retriev
 
 |<img src="https://ars.els-cdn.com/content/image/1-s2.0-S0021999114004392-gr010.jpg" width="500">|
 |:--:| 
-|*Vlasov Simulation*|
+|*Vlasov Simulation ([link]())*|
 
 |<img src="./pic_example1.png" width="500">|
 |:--:| 
-|*PIC Simulation of laser-plasma interaction*|
+|*PIC Simulation of laser-plasma interaction ([link](https://doi.org/10.1140/epjti/s40485-023-00102-8))*|
 
 |<img src="./mhd_example.jpg" width="500">|
 |:--:| 
-|*MHD simulation of solar wind interaction with Mars*|
+|*MHD simulation of solar wind interaction with Mars ([link](https://www.researchgate.net/figure/Global-time-dependent-MHD-simulation-of-the-Mars-solar-wind-interaction-under-quiescent_fig2_335201497))*|
 
 |<img src="https://theory.pppl.gov/images/research/highlight_000047.png" width="500">|
 |:--:| 
-|*Gyrokinetic Tokamak Simulation*|
-
-|<img src="./pic_example2.png" width="500">|
-|:--:| 
-|*PIC Simulation of laser-plasma interaction with Monte-Carlo for photon emission*|
+|*Gyrokinetic Tokamak Simulation [link](https://theory.pppl.gov/research/research.php?rid=10)*|
  
 ## Bibliography
 
