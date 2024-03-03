@@ -153,7 +153,9 @@ $\int\frac{\partial f_h}{\partial x}dx$, $\int\frac{\partial f_h}{\partial p_x}d
 
 In the moment of first order, due to the same reasons, the only non-zero elements are the element
 
-$$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=\sum w_{pa} \left( \dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} \right)= \sum w_{pa} \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
+$$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=$$
+
+$$=\sum w_{pa} \left( \dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} \right)= \sum w_{pa} \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
 
 where the symmetry of $S$ has been used to delete one term, and elements like the following for every coordinate $x$, $y$ and $z$:
 
