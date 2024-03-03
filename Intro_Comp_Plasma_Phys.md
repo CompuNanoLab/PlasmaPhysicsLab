@@ -145,21 +145,29 @@ where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the adva
 
 ## <a name="appendix"></a>Appendix
 
-Let's explicit the moment of zero order in the x-y-z components:
+Let's write explicitly the moment of zero order in the x-y-z components:
 
 $$ \int \int \left[\dfrac{\partial f_h}{\partial t}+v_x\dfrac{\partial f_h}{\partial x}+v_y\dfrac{\partial f_h}{\partial y}+v_z\dfrac{\partial f_h}{\partial z}+F_ {Lx}\dfrac{\partial f_ h}{\partial px}+F_ {Ly}\dfrac{\partial f_ h}{\partial py}+F_ {Lz}\dfrac{\partial f_ h}{\partial pz}\right] dp_xdp_ydp_zdxdydz=0$$
 
-$\int\dfrac{\partial f_h}{\partial x}dx$, $\int\dfrac{\partial f_h}{\partial p_x}dp_x$,  and analogous terms in $y$ and $z$ are zero because we require compact support for the shape function $S$ like the Dirac delta (i.e. it is zero outside a small range). The conservation of the macro-particle weight w_{pa} follows from the first term where the time derivative can be taken out of the integrations.
+$\int\frac{\partial f_h}{\partial x}dx$, $\int\frac{\partial f_h}{\partial p_x}dp_x$,  and analogous terms in $y$ and $z$ are zero because we require a compact support for the shape function $S$ like the Dirac delta (i.e. it is zero outside a small range). The conservation of the macro-particle weight $w_{pa}$ follows from the first term where the time derivative can be taken out of the integrations.
 
-In the moment of first order, due to the same reasons, the only non-zero elements are:
+In the moment of first order, due to the same reasons, the only non-zero elements are the element
 
-$$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=\dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}= \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
+$$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=\sum w_{pa} \left( \dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} \right)= \sum w_{pa} \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
 
-where the symmetry of $S$ has been used to delete the first term in the sum.
+where the symmetry of $S$ has been used to delete the first term in the sum, and elements like the following for every coordinate x, y and z:
 
+$$\int \int x v_x \dfrac{\partial f_h}{\partial x} d\mathbf{p}d\mathbf{x}=-\int \int  v_x  f_h d\mathbf{p}d\mathbf{x} = - \sum w_{pa} v_{pax}$$
 
+using integration by part in x. This leads to the first equation of motion for the macroparticle. The second-order moment has the term
 
+$$\dfrac{\partial}{\partial t} \int \int \mathbf{p} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial\mathbf{p}_ {pa} (t)}{\partial t} $$
 
+using the property of the Dirac delta inside $f_h$, and other non-zero terms like:
+
+$$\int \int p_x F_{Lx} \dfrac{\partial f_h}{\partial p_x} d\mathbf{p}d\mathbf{x}=-\int \int  F_{Lx}  f_h d\mathbf{p}d\mathbf{x} = - \sum w_{pa} q_a \int\left(E_x(\mathbf{x},t)+(\mathbf{v}_ {pa}\times\mathbf{B}(\mathbf{x},t))_ x\right) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}$$
+
+exploiting integration by parts. The second equation of motion is easily retrieved considering the same relations for all components.
  
 ## Bibliography
 
