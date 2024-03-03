@@ -145,7 +145,7 @@ where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the adva
 
 ## <a name="appendix"></a>Appendix
 
-Let's write explicitly the moment of zero order in the x-y-z components:
+Let's write explicitly the moment of zero order in the $x-y-z$ components:
 
 $$ \int \int \left[\dfrac{\partial f_h}{\partial t}+v_x\dfrac{\partial f_h}{\partial x}+v_y\dfrac{\partial f_h}{\partial y}+v_z\dfrac{\partial f_h}{\partial z}+F_ {Lx}\dfrac{\partial f_ h}{\partial px}+F_ {Ly}\dfrac{\partial f_ h}{\partial py}+F_ {Lz}\dfrac{\partial f_ h}{\partial pz}\right] dp_xdp_ydp_zdxdydz=0$$
 
@@ -155,11 +155,11 @@ In the moment of first order, due to the same reasons, the only non-zero element
 
 $$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=\sum w_{pa} \left( \dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} \right)= \sum w_{pa} \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
 
-where the symmetry of $S$ has been used to delete one term, and elements like the following for every coordinate x, y and z:
+where the symmetry of $S$ has been used to delete one term, and elements like the following for every coordinate $x$, $y$ and $z$:
 
 $$\int \int x v_x \dfrac{\partial f_h}{\partial x} d\mathbf{p}d\mathbf{x}=-\int \int  v_x  f_h d\mathbf{p}d\mathbf{x} = - \sum w_{pa} v_{pax}$$
 
-using integration by part in x. This leads to the first equation of motion for the macroparticle. The second-order moment has the term
+using integration by part in $x$. Considering all components, these terms lead to the first equation of motion for the macroparticle. The second-order moment has the term
 
 $$\dfrac{\partial}{\partial t} \int \int \mathbf{p} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial\mathbf{p}_ {pa} (t)}{\partial t} $$
 
