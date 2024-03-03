@@ -170,6 +170,28 @@ using the property of the Dirac delta inside $f_h$, and other non-zero terms lik
 $$\int \int p_x F_{Lx} \dfrac{\partial f_h}{\partial p_x} d\mathbf{p}d\mathbf{x}=-\int \int  F_{Lx}  f_h d\mathbf{p}d\mathbf{x} = - \sum w_{pa} q_a \int\left(E_x(\mathbf{x},t)+(\mathbf{v}_ {pa}\times\mathbf{B}(\mathbf{x},t))_ x\right) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}$$
 
 exploiting integration by parts. The second equation of motion is easily retrieved considering the same relations for all components.
+
+## Images
+
+|<img src="https://ars.els-cdn.com/content/image/1-s2.0-S0021999114004392-gr010.jpg" width="500">|
+|:--:| 
+|*Vlasov Simulation*|
+
+|![immagine](./pic_example1.png)|
+|:--:| 
+|*PIC Simulation of laser-plasma interaction*|
+
+|<img src="https://www.researchgate.net/profile/Beatriz-Sanchez-Cano/publication/335202869/figure/fig2/AS:792457050607617@1565947892421/Global-time-dependent-MHD-simulation-of-the-Mars-solar-wind-interaction-under-quiescent.jpg" width="500">|
+|:--:| 
+|*MHD simulation of solar wind interaction with Mars*|
+
+|<img src="https://theory.pppl.gov/images/research/highlight_000047.png" width="500">)|
+|:--:| 
+|*Gyrokinetic Tokamak Simulation*|
+
+|![immagine](./pic_example2.png)|
+|:--:| 
+|*PIC Simulation of laser-plasma interaction with Monte-Carlo for photon emission*|
  
 ## Bibliography
 
