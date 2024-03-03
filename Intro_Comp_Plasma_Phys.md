@@ -175,7 +175,7 @@ exploiting integration by parts. The second equation of motion is easily retriev
 
 |<img src="https://ars.els-cdn.com/content/image/1-s2.0-S0021999114004392-gr010.jpg" width="500">|
 |:--:| 
-|*Vlasov Simulation ([link]())*|
+|*Vlasov Simulation ([link](https://ars.els-cdn.com/content/image/1-s2.0-S0021999114004392-gr010.jpg))*|
 
 |<img src="./pic_example1.png" width="500">|
 |:--:| 
@@ -187,7 +187,7 @@ exploiting integration by parts. The second equation of motion is easily retriev
 
 |<img src="https://theory.pppl.gov/images/research/highlight_000047.png" width="500">|
 |:--:| 
-|*Gyrokinetic Tokamak Simulation [link](https://theory.pppl.gov/research/research.php?rid=10)*|
+|*Gyrokinetic Tokamak Simulation ([link](https://theory.pppl.gov/research/research.php?rid=10))*|
  
 ## Bibliography
 
