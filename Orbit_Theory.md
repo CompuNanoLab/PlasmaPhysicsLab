@@ -104,6 +104,18 @@ Using a further decomposition of $\mathbf{v}_c$ in components parallel and perpe
 
 These drifts are essential for understanding the currents that flow in plasma in many situations of practical interest for plasma-based devices.
 
+## Thomson Parabola Spectrometer
+
+This is the case of uniform and constant electric and magnetic fields applied perpendicular to the particle initial velocity. If the mass of the charged particle is large, then it undergoes small deflections and can be collected on a screen. On the screen, for ions of different starting energy, we see traces of parabolic shape depending on the ratio $Z/m$. 
+
+|![immagine](https://www.researchgate.net/profile/Paul-Bolton/publication/257530143/figure/fig10/AS:269783841112075@1441332888469/Operation-principle-of-the-Thomson-parabola-spectrometer-a-Schematic-of-the.png)|
+|:--:| 
+|*Setup for measurements with Thomson parabola spectrometer ([link](http://dx.doi.org/10.1016/j.ejmp.2013.09.002))*|
+
+|![immagine](./parabola.png)|
+|:--:| 
+|*Thomson parabola ion traces*|
+
 ## Bibliography
 
 * Freidberg, J. P. (2008). Plasma Physics and Fusion Energy. (n.p.): Cambridge University Press. Chapter 8.
