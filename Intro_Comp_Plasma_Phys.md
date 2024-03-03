@@ -181,6 +181,10 @@ exploiting integration by parts. The second equation of motion is easily retriev
 |:--:| 
 |*PIC Simulation of laser-plasma interaction*|
 
+|<img src="./mhd_example.jpg" width="500">|
+|:--:| 
+|*MHD simulation of solar wind interaction with Mars*|
+
 |<img src="https://theory.pppl.gov/images/research/highlight_000047.png" width="500">|
 |:--:| 
 |*Gyrokinetic Tokamak Simulation*|
