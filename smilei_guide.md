@@ -142,7 +142,7 @@ make happi
 To run efficiently in parallel on your machine you need to know your architecture.
 For example, you can find out the number of threads per core and cores per socket on your machine with the command: `lscpu` (Linux) or `sysctl -a | grep machdep.cpu` (MacOS).
 
-Copy from the smilei/bin directory the executable (smilei) and an input file (input.py) in a directory of your choice and move there.
+Copy from the `smilei/bin` directory the executable (smilei) and an input file (input.py) in a directory of your choice and move there.
 Set the number of threads per core depending on the machine 
 for example, if Thread(s) per core = 2 (in the output of the `lscpu` command), then
 ```
