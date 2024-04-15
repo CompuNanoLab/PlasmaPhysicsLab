@@ -1,5 +1,5 @@
 # Lecture on Particle-in-cell simulations for Laser-plasma Interaction
-This folder contains the material for the lecture of the Laboratory of Plasma Physics course scheduled on 29th April 2024. This lecture is provided in flipped class mode. The material for the lecture comprises one document to read, one exercises in Python on Jupyter Notebooks, and one simulation to perform with the Particle-In-Cell (PIC) code [Smilei](https://smileipic.github.io/Smilei/).
+This folder contains the material for the lecture of the Laboratory of Plasma Physics course scheduled on 29th April 2024. This lecture is provided in flipped class mode. The material for the lecture comprises one document to read, one exercise in Python on Jupyter Notebooks, and one simulation to perform with the Particle-In-Cell (PIC) code [Smilei](https://smileipic.github.io/Smilei/).
 
 Please follow the following steps before this lecture:
 1. Read the material in this repository (you can do it by simply clicking on the link below).
