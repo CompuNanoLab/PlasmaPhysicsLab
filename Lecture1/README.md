@@ -1,6 +1,10 @@
 # Lecture on Computational Plasma Physics and Orbit Theory
 This folder contains the material for the lecture of the Laboratory of Plasma Physics course scheduled on 29th February 2024. This lecture is provided in flipped class mode. The material for the lecture comprises two documents to read and three exercises in Python on Jupyter Notebooks.
 
+Please follow the following steps before this lecture:
+1. Read the material in this repository (you can do it by simply clicking on the links below).
+2. Try to work on the exercises in your downloaded version of this repository with your Python compiler and the code editor of your choice.
+
  Here is a list of the material:
 * [Introduction to Computational Plasma Physics](./Intro_Comp_Plasma_Phys.md)
 * [Orbit Theory](./Orbit_Theory.md)
