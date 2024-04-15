@@ -35,7 +35,7 @@ First install Homebrew via:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-Once installed, to use Homebrew on the command line it is necessary to modify the ".zprofile" on your home by running the following commands:
+Once installed, to use Homebrew on the command line you need to modify the ".zprofile" on your home by running the following commands:
 ```bash
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/<your_account>/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)""
@@ -64,20 +64,10 @@ pip install h5py ipython pint sphinx matplotlib dev numpy scipy
 ```
 Then, follow the related instructions for each case.
 
-# MacOS
-
-The easiest way to install the necessary dependencies is by using alternatively **Homebrew** (check Basics.md for previous steps needed to install Homebrew and Python on your Mac).
+To install the necessary dependencies for Smilei :
 ```
 brew update
-brew install openmpi
-brew install hdf5-mpi
-brew install libomp
-brew install adios2
-brew install ccache
-brew install cmake
-brew install fftw
-brew install pkg-config
-brew install openblas
+brew install openmpi hdf5-mpi libomp adios2 ccache cmake fftw pkg-config openblas
 ```
 The dependencies will install also *numpy*, which you should have already installed when creating the virtual environment for Python. You'd rather uninstall it by using:
 ```
@@ -91,51 +81,37 @@ To check the version of your C++ compiler use the command:
 ```
 brew info gcc
 ```
+## Build on Linux
 
-# Documentation
-https://smileipic.github.io/Smilei
-
-# Build on Linux
-download the source code
+Download the source code to the path of your choice:
 ```
+cd /path/of/your/choice/
 git clone https://github.com/SmileiPIC/Smilei.git smilei
 ```
 
-move to the right directory
+Move to the downloaded directory:
 ```
 cd smilei
 ```
 
-you can set the environment variables in your `.bashrc` file
-
-then compile
+then compile:
 ```
-make -j 2
+make -j 2 config="omptasks"
 ``` 
 
-build the Python module to manage the output 
+build the Python module to manage the output: 
 ```
 make happi
 ```
 
-in a Python script you can now do
+Now in a Python script you can now do:
 ```
 import happi
 ```
 
 # Build on Mac
 
-Firstly you need to install Homebrew (check Basics.md). Then you could either follow the steps on:
-
-https://smileipic.github.io/Smilei/Use/install_macos.html#brew-install-smilei
-
-Either installing the dependencies as shown here:
-```
-brew install iltommi/brews/smilei --HEAD --only-dependencies
-```
-Or following the commands on *Dependencies_on_laptop.md* (this second one might be preferred even though little more tedious).
-
-Then, update the profile `~/.zprofile` (or `~/.bash_profile` in some older versions of MacOS):
+Update the profile `~/.zprofile` (or `~/.bash_profile` in some older versions of MacOS):
 ```
 cd
 nano .zprofile
@@ -166,9 +142,8 @@ make happi
 To run efficiently in parallel on your machine you need to know your architecture.
 For example, you can find out the number of threads per core and cores per socket on your machine with the command: `lscpu` (Linux) or `sysctl -a | grep machdep.cpu` (MacOS).
 
-copy the executable (smilei) and an input file (input.py) in a directory (mydir) and move there 
-
-set the number of threads per core depending on the machine 
+Copy from the smilei/bin directory the executable (smilei) and an input file (input.py) in a directory of your choice and move there.
+Set the number of threads per core depending on the machine 
 for example, if Thread(s) per core = 2 (in the output of the `lscpu` command), then
 ```
 export OMP_NUM_THREADS=2
