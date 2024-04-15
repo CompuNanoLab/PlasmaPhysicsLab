@@ -16,6 +16,6 @@ Please complete the following steps before the lectures (new steps are in **bold
    - Installing Jupyter using Anaconda: [Link to Installing the classic Jupyter Notebook interface](https://docs.jupyter.org/en/latest/install/notebook-classic.html).
    
    Alternative if you don't want to install anything: use [Google Colab](https://colab.research.google.com/) or fork this repository (button on the top right) and use [Github developer option](https://github.dev/github/dev) to work on your forked version of this repository.
-3. **Download, compile and Install the particle-in-cell code [Smilei](https://smileipic.github.io/Smilei/) following this [guide](./smilei_guide.md).**
+3. **Download, compile and install the particle-in-cell code [Smilei](https://smileipic.github.io/Smilei/) following this [guide](./smilei_guide.md).**
   
 For any doubt or question regarding the material, contact Marta Galbiati ([marta.galbiati@polimi.it](marta.galbiati@polimi.it)).
