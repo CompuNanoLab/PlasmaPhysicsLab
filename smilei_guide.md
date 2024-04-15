@@ -19,7 +19,7 @@ sudo dnf install gcc-c++ git hdf5-openmpi hdf5-openmpi-devel openmpi-devel pytho
 and add the following lines to your ``~/.bashrc`` or ``~/.bash_profile`` file
 
 ```bash
-	module load mpi
+module load mpi
 ```
 
  For **ArchLinux OS**:
