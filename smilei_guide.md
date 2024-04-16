@@ -1,14 +1,14 @@
 # Smilei Installation Guide
 
-The supported platforms are Linux and MacOS. If you use Windows, follow the instructions to set up a running Linux platform:
+The supported platforms are Linux and MacOS. If you use Windows, follow these instructions to set up a running Linux platform:
 
 - Go to Start. Search for "Turn Windows features on or off."
 - Check the option Windows Subsystem for Linux.
 
-  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75fe59a8-35c6-47c9-9b3e-fef7ff2c0fad" width="300" />
+  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75fe59a8-35c6-47c9-9b3e-fef7ff2c0fad" width="400" />
 - Open Command Prompt as an administrator.
 
-  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/96052034-10c0-417a-90dc-71180df4704d" width="300" />
+  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/96052034-10c0-417a-90dc-71180df4704d" width="400" />
   
 - Run the command below to install the Distro (e.g. Ubuntu, Debian, ...) of your choice:
   ```bash
