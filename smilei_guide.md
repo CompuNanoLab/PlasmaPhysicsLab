@@ -14,7 +14,7 @@ The supported platforms are Linux and MacOS. If you use Windows, follow the inst
   ```bash
   wsl --install -d <Distro>
   ```
-- Launch the Distro by searching from the start menu.
+- Launch the Distro by searching from the start menu and insert a username and password.
 
 ## General dependencies
 First, install on your laptop using a package manager the following fundamental software (dependencies) necessary to compile and run Smilei:
@@ -23,6 +23,7 @@ First, install on your laptop using a package manager the following fundamental 
 
 For **Debian-based (Ubuntu) OS**:
 ```bash
+sudo apt-get update
 sudo apt-get install git python3-h5py python3-ipython python3-pint python3-sphinx python3-matplotlib python3-dev python3-numpy python3-scipy python3-pip build-essential gcc libhdf5-openmpi-dev 
 ```
 
