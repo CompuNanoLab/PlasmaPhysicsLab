@@ -1,6 +1,14 @@
 # Smilei Installation Guide
 
-The supported platforms are Linux and MacOS. If you use Windows, follow the instructions [here](https://www.freecodecamp.org/news/how-to-install-wsl2-windows-subsystem-for-linux-2-on-windows-10/) to set up a running Linux platform.
+The supported platforms are Linux and MacOS. If you use Windows, follow the instructions to set up a running Linux platform:
+
+- Go to Start. Search for "Turn Windows features on or off."
+- Check the option Windows Subsystem for Linux.
+  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/75fe59a8-35c6-47c9-9b3e-fef7ff2c0fad" width="200" />
+- Open Command Prompt as an administrator.
+  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/96052034-10c0-417a-90dc-71180df4704d" width="200" />
+- 
+
 
 ## General dependencies
 First, install on your laptop using a package manager the following fundamental software (dependencies) necessary to compile and run Smilei:
