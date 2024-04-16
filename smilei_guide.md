@@ -11,7 +11,7 @@ The supported platforms are Linux and MacOS. If you use Windows, follow these in
   <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/96052034-10c0-417a-90dc-71180df4704d" width="400" />
   
 - Run the command below to install the Distro (e.g. Ubuntu, Debian, ...) of your choice:
-  ```bash
+  ```
   wsl --install -d <Distro>
   ```
 - Launch the Distro by searching from the start menu and insert a username and password.
@@ -22,7 +22,7 @@ First, install on your laptop using a package manager the following fundamental 
 ### Linux
 
 For **Debian-based (Ubuntu) OS**:
-```bash
+```
 sudo apt-get update
 sudo apt-get install git python3-h5py python3-ipython python3-pint python3-sphinx python3-matplotlib python3-dev python3-numpy python3-scipy python3-pip build-essential gcc libhdf5-openmpi-dev 
 ```
@@ -56,20 +56,20 @@ If you encounter problems, you may need to install openmpi and/or hdf5 directly 
 ### MacOS
 
 First install Homebrew via:
-```bash
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 Once installed, to use Homebrew on the command line you need to modify the ".zprofile" on your home by running the following commands:
-```bash
+```
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/<your_account>/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)""
 ```
 Then install git and Python using Homebrew:
-```bash
+```
 brew install git python 
 ```
 To use the installed Python as the default one you will need to modify the ".zprofile" by adding the following line:
-```bash
+```
 export PATH="/opt/homebrew/opt/python@3.12/libexec/bin:$PATH"
 ```
 the path may change, use the one shown at the end of the installation. Once Python has been installed on your Laptop you have to create a virtual environment on your home to be able to install the Python packages via pip:
