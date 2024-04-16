@@ -24,7 +24,14 @@ First, install on your laptop using a package manager the following fundamental 
 For **Debian-based (Ubuntu) OS**:
 ```bash
 sudo apt-get update
+```
+```bash
 sudo apt-get install git python3-h5py python3-ipython python3-pint python3-sphinx python3-matplotlib python3-dev python3-numpy python3-scipy python3-pip build-essential gcc libhdf5-openmpi-dev 
+```
+and add the following lines to your ~/.bashrc or ~/.bash_profile file
+```
+export PYTHONEXE=python3
+export HDF5_ROOT_DIR=/usr/lib/x86_64-linux-gnu/hdf5/openmpi
 ```
 
 For **Fedora OS**:
