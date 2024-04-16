@@ -26,10 +26,14 @@ For **Debian-based (Ubuntu) OS**:
 sudo apt-get update
 sudo apt-get install git python3-h5py python3-ipython python3-pint python3-sphinx python3-matplotlib python3-dev python3-numpy python3-scipy python3-pip build-essential gcc libhdf5-openmpi-dev 
 ```
-  and add the following lines to your ~/.bashrc or ~/.bash_profile file
+  and add the following lines to your .bashrc or .bash_profile file in your $HOME
 ```
 export PYTHONEXE=python3
 export HDF5_ROOT_DIR=/usr/lib/x86_64-linux-gnu/hdf5/openmpi
+```
+and source it:
+```
+source .bashrc
 ```
 
 For **Fedora OS**:
