@@ -43,6 +43,7 @@ sudo dnf install gcc-c++ git hdf5-openmpi hdf5-openmpi-devel openmpi-devel pytho
   and add the following lines to your ``~/.bashrc`` or ``~/.bash_profile`` file
 ```bash
 module load mpi
+export HDF5_ROOT_DIR=/usr/lib64/openmpi/
 ```
 
  For **ArchLinux OS**:
@@ -170,6 +171,7 @@ Set the number of threads per core depending on the machine
 for example, if Thread(s) per core = 2 (in the output of the `lscpu` command), then
 ```
 export OMP_NUM_THREADS=2
+export OMP_SCHEDULE=dynamic
 ```
 
 and if you have Core(s) per socket = 4, you can run on the 4 cores like this 
