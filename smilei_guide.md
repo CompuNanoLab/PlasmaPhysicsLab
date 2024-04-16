@@ -26,7 +26,7 @@ For **Debian-based (Ubuntu) OS**:
 sudo apt-get update
 sudo apt-get install git python3-h5py python3-ipython python3-pint python3-sphinx python3-matplotlib python3-dev python3-numpy python3-scipy python3-pip build-essential gcc libhdf5-openmpi-dev 
 ```
-  and add the following lines to your .bashrc or .bash_profile file in your $HOME
+  and add the following lines to your ``.bashrc`` or ``.bash_profile`` file in your $HOME
 ```
 export PYTHONEXE=python3
 export HDF5_ROOT_DIR=/usr/lib/x86_64-linux-gnu/hdf5/openmpi
@@ -37,17 +37,17 @@ source .bashrc
 ```
 
 For **Fedora OS**:
-```bash
+```
 sudo dnf install gcc-c++ git hdf5-openmpi hdf5-openmpi-devel openmpi-devel python python-devel python3-h5py ipython python3-pint python3-sphinx python3-matplotlib 
 ```
-  and add the following lines to your ``~/.bashrc`` or ``~/.bash_profile`` file
-```bash
+  and add the following lines to your ``.bashrc`` or ``.bash_profile`` file in your $HOME
+```
 module load mpi
 export HDF5_ROOT_DIR=/usr/lib64/openmpi/
 ```
 
  For **ArchLinux OS**:
-```bash
+```
 sudo pacman -S git hdf5-openmpi python-numpy python-sphinx python-h5py-openmpi python-matplotlib python-pint make gcc 
 ```
 
