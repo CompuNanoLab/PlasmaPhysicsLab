@@ -146,13 +146,13 @@ export OMPI_CXX=g++-13
 export HDF5_ROOT_DIR=/opt/homebrew/opt/hdf5-mpi
 export PYTHONEXE=python3
 ```
-You may need to change the `g++-13` to some other version you have on your laptop. To check the version use the `brew info gcc` command, do not forget the number of the version: by using in fact `g++` only, you will call `clang++` compiler which is provided by Apple. Such a compiler does not work with `openmpi` that is necessary for Smilei compilation instead.
+You may need to change the `g++-13` to some other version you have on your laptop. To check the version use the `brew info gcc` command, do not forget the number of the version: by using in fact `g++` only, you will call `clang++` compiler which is provided by Apple. Such a compiler does not work with `openmpi` which is necessary for Smilei compilation instead.
 
-Use then `git` to copy Smilei on your home:
+Use `git` to copy Smilei on your home:
 ```
 git clone https://github.com/SmileiPIC/Smilei.git smilei
 ```
-move in the folder and use `make` to copile the source (remind to activate the python environment):
+move to the folder and use `make` to compile the source (remind to activate the Python environment):
 ```
 cd smilei
 make -j 8
