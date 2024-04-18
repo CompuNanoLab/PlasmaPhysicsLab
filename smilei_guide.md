@@ -120,7 +120,7 @@ cd smilei
 
 then compile:
 ```
-make -j 2 config="omptasks"
+make -j 2
 ``` 
 
 build the Python module to manage the output: 
@@ -155,7 +155,7 @@ git clone https://github.com/SmileiPIC/Smilei.git smilei
 move to the folder and use `make` to compile the source (remind to activate the Python environment):
 ```
 cd smilei
-make -j 8
+make -j 2
 ```
 To use the post-processing tools offered by Smilei, once you have compiled the source:
 ```
