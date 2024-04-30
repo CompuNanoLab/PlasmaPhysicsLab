@@ -103,42 +103,47 @@ One of the passages of the PIC loop is the resolution of the Maxwell equations g
 
 $$\dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{B}\right) =\nabla\cdot\dfrac{\partial\mathbf{B}}{\partial t}=-c\nabla \cdot (\nabla \times \mathbf{E})= 0 $$
 
-$$ \dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{E}-4 \pi \rho\right)=\nabla\cdot\dfrac{\partial\mathbf{E}}{\partial t}-4\pi\dfrac{\partial\rho}{\partial t}=\nabla\cdot(c\nabla \times \mathbf{B}-4\pi\mathbf{J})-4\pi\dfrac{\partial\rho}{\partial t}=-4\pi\left(\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0
-$$
+$$ \dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{E}-4 \pi \rho\right)=\nabla\cdot\dfrac{\partial\mathbf{E}}{\partial t}-4\pi\dfrac{\partial\rho}{\partial t}=\nabla\cdot(c\nabla \times \mathbf{B}-4\pi\mathbf{J})-4\pi\dfrac{\partial\rho}{\partial t}=-4\pi\left(\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0 $$
 
 Thus the code will solve only Ampère-Maxwell and Faraday equations. 
 In general, there are many numerical methods to solve Maxwell equations, one of the most used method in the context of the PIC codes consists in the use of a second-order finite difference time domain (FDTD)solver on a Yee-lattice. It gives a solution to the non-approximated differential form of Maxwell equations adopting as numerical approximation spatial and temporal discretization so that derivatives are substituted by finite differences. The solver operates in the temporal domain. 
 The spatial and time derivatives are computed with second-order centred finite differences according to what is called the *leap-frog scheme*. More precisely this scheme employs both integer and half-integer points placed at the nodes of a spatial grid and at the nodes of its shifted version respectively. These points can be identified by triplets $(i,j,k)$ and $(i+1/2,j+1/2,+k+1/2)$, with $i$ ranging from $1$ to $N_x$, $j$ from $1$ to $N_y$, and $k$ ranging from $1$ to $N_z$. They are equally spaced by $\Delta x$, $\Delta y$, and  $\Delta z$ respectively along each direction. Time is discretized too, each instant is identified by $t^n$, with $n$ ranging from $1$ to $N_t$ with spacing $\Delta t$ from the next instant. The discretization introduced can be synthesized in this way:
 
-$$ t^n=n\Delta t \quad \quad & t^{n+1/2}=(n+1/2)\Delta t $$
-$$x_i=x_{min}+i\Delta x \quad \quad & x_{i+1/2}=x_{min}+(i+1/2)\Delta x $$
-$$y_j=y_{min}+j\Delta y \quad \quad & y_{j+1/2}=y_{min}+(j+1/2)\Delta y $$
-$$z_k=z_{min}+k\Delta z \quad \quad & z_{k+1/2}=z_{min}+(k+1/2)\Delta z $$
+$$ t^n=n\Delta t \quad \quad t^{n+1/2}=(n+1/2)\Delta t $$
+
+$$ x_i=x_{min}+i\Delta x \quad \quad x_{i+1/2}=x_{min}+(i+1/2)\Delta x $$
+
+$$ y_j=y_{min}+j\Delta y \quad \quad y_{j+1/2}=y_{min}+(j+1/2)\Delta y $$
+
+$$ z_k=z_{min}+k\Delta z \quad \quad z_{k+1/2}=z_{min}+(k+1/2)\Delta z $$
 
 where $min$ values identify the origin of the grid. Therefore, the scheme works on a \textit{staggered grid} consisting of two meshes shifted by half-cell along the three spatial directions; analogous considerations can be made for the one-dimensional grid of temporal discretization.
 
-The leap-frog scheme is a second-order method to relate quantities, evaluated on the proposed spatial and temporal grids, with its fist and second derivatives. Calling $a_{ijk}^n$ the starting quantity, $b_{ijk}^n$ its first derivative, and $c_{ijk}^n$ its second derivative, the relationship imposed are the following, according to the type of derivative considered:
+The leap-frog scheme is a second-order method to relate quantities, evaluated on the proposed spatial and temporal grids, with its first and second derivatives. Calling $a_{ijk}^n$ the starting quantity, $b_{ijk}^n$ its first derivative, and $c_{ijk}^n$ its second derivative, the relationship imposed are the following, according to the type of derivative considered:
 
-$$ \text{Time derivatives} \quad \quad & \text{Spatial derivatives in $x$} $$
-$$a_{ijk}^{n+1}=a_{ijk}^n+ b_{ijk}^{n+1/2}\Delta t\quad \quad & a^n_{(i+1)jk}=a_{ijk}^n+ b^n_{(i+1/2)jk}\Delta x $$
-$$b_{ijk}^{n+1/2}=b_{ijk}^{n-1/2}+c_{ijk}^n\Delta t\quad \quad & b^n_{(i+1/2)jk}=b_{(i-1/2)jk}^n+ c^n_{ijk}\Delta x $$
-$$ c_{ijk}^n=C(a_{ijk}^n) \quad \quad & c_{ijk}^n=C(a_{ijk}^n) $$
+$$ \text{Time derivatives} \quad \quad \text{Spatial derivatives in $x$} $$
+
+$$a_{ijk}^{n+1}=a_{ijk}^n+ b_{ijk}^{n+1/2}\Delta t\quad \quad a^n_{(i+1)jk}=a_{ijk}^n+ b^n_{(i+1/2)jk}\Delta x $$
+
+$$b_{ijk}^{n+1/2}=b_{ijk}^{n-1/2}+c_{ijk}^n\Delta t\quad \quad b^n_{(i+1/2)jk}=b_{(i-1/2)jk}^n+ c^n_{ijk}\Delta x $$
+
+$$ c_{ijk}^n=C(a_{ijk}^n) \quad \quad c_{ijk}^n=C(a_{ijk}^n) $$
 
 where $C$ indicates a generic function.
 Since the time derivative of the electric field $\mathbf{E}$ is related to the curl of the magnetic field $\mathbf{B}$ and viceversa, it is convenient to approximate the electromagnetic field in such a way that the $\mathbf{B}$ field is shifted in time by $\Delta t/2$ with respect to $\mathbf{E}$ field. Thus the time evolution of $\mathbf{E}$, from step $n$ to step $n + 1$, depends on the values of the $\mathbf{B}$ field at time step $n + 1/2$, while the time evolution of $\mathbf{B}$ from step $n + 1/2$ to step $n + 3/2$ depends on the values of the $\mathbf{E}$ field at time step $n + 1$, and so on. Consequently, the computation of electromagnetic fields goes as:
 
 $$ \mathbf{E}^{n+1}=\mathbf{E}^{n}+\Delta t\left[c(\nabla\times\mathbf{B})^{n+1/2}-4\pi\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-c\Delta t(\nabla\times\mathbf{E})^{n} $$
 
-From the spatial point of view, real electromagnetic fields are approximated by the values on the grid shifted by half-cell, while consistently with this choice also $\mathbf{J}$ is approximated at the middle of the cell while $\rho$ is taken on the nodes of the cell. In Figure \ref{fig:Yee} there is a representation of how the field components are arranged on a 3D grid. 
+From the spatial point of view, real electromagnetic fields are approximated by the values on the grid shifted by half-cell, while consistently with this choice also $\mathbf{J}$ is approximated at the middle of the cell while $\rho$ is taken on the nodes of the cell. In Figure (**Figure 2**) there is a representation of how the field components are arranged on a 3D grid. 
 Summarizing, the numerical approximations realized with the leap-frog scheme are:
 
-$$ \mathbf{E}(\mathbf{x},t)\approx\left( {E_x}_ {(i+1/2)jk}^n {E_y}_ {i(j+1/2)k}^n {E_z}_ {ij(k+1/2)}^n\right)$$
+$$ \mathbf{E}(\mathbf{x},t)\approx\left( {E_x}_ {(i+1/2)jk}^n {E_y}_ {i(j+1/2)k}^n {E_z}_ {ij(k+1/2)}^n\right) $$
 
-$$\mathbf{B}(\mathbf{x},t)\approx\left( {B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2} {B_y}_ {(i+1/2)j(k+1/2)}^{n+1/2} {B_z}_ {(i+1/2)(j+1/2)k}^{n+1/2}\right) $$
+$$ \mathbf{B}(\mathbf{x},t)\approx\left( {B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2} {B_y}_ {(i+1/2)j(k+1/2)}^{n+1/2} {B_z}_ {(i+1/2)(j+1/2)k}^{n+1/2}\right) $$
     
-$$\mathbf{J}(\mathbf{x},t)\approx\left( {J_x}_ {(i+1/2)jk}^{n+1/2} {J_y}_ {i(j+1/2)k}^{n+1/2} {J_z}_ {ij(k+1/2)}^{n+1/2}\right)$$
+$$ \mathbf{J}(\mathbf{x},t)\approx\left( {J_x}_ {(i+1/2)jk}^{n+1/2} {J_y}_ {i(j+1/2)k}^{n+1/2} {J_z}_ {ij(k+1/2)}^{n+1/2}\right) $$
     
-$$\rho(\mathbf{x},t)\approx\rho_{ijk}^n $$
+$$ \rho(\mathbf{x},t)\approx\rho_{ijk}^n $$
 
 |<img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/b2267106-98e3-4aec-b7e0-bcf1e0a02491" width="400">|
 |:--:| 
@@ -167,21 +172,18 @@ where $c$ is the speed of light.
 
 The second-order leap-frog scheme in space and time is easy to implement and efficient, however, higher accuracy is gained only by significantly increasing the space-time resolution. Alternative schemes exist to get high accuracy with limited computational requirements.
 
-
-
 # Field Interpolation
-\subsection{Field interpolation}
 In the PIC algorithm, the electromagnetic field is computed on the grid, whereas all the quantities related to the macro-particles are evaluated at the particle positions. To compute the Lorentz force acting on each macro-particle at time $t^n$, electric and magnetic fields must be interpolated at the particle position and evaluated at the correct time. The electric field is already known at time $t^n$ so it is only needed to interpolate it at macro-particle position $\mathbf{x}_p^n$:
  
- $$ \mathbf{E}^n(\mathbf{x}_p)=\int \mathbf{E}^n S(\mathbf{x}-\mathbf{x}_{p}^n(t)) d\mathbf{x} $$
+$$ \mathbf{E}^n(\mathbf{x}_ p)=\int \mathbf{E}^n S(\mathbf{x}-\mathbf{x}_ {p}^n(t)) d\mathbf{x} $$
  
- The magnetic field is known only at half-integer times so it must be first evaluated at correct time with an approximation and then it can be interpolated as above:
+The magnetic field is known only at half-integer times so it must be first evaluated at correct time with an approximation and then it can be interpolated as above:
 
 $$ \mathbf{B}^n=\dfrac{\mathbf{B}^{n+1/2}+\mathbf{B}^{n-1/2}}{2} $$
 
-$$ \mathbf{B}^n(\mathbf{x}_p)=\int \mathbf{B}^n S(\mathbf{x}-\mathbf{x}_{p}^n(t)) d\mathbf{x} $$
+$$ \mathbf{B}^n(\mathbf{x}_ p)=\int \mathbf{B}^n S(\mathbf{x}-\mathbf{x}_{p}^n(t)) d\mathbf{x} $$
 
-To perform interpolation the exact shape of $S$ must be decided. There are different possible choices but a standard one are B-splines. A spline function $B_n(x)$ of order $n$ is a piecewise polynomial function of degree $(n-1)$ in the variable $x$. The places where the pieces meet are known as knots and in the PIC implementation the distance between knots coincides with grid spacing. In Figure \ref{fig:spline}, B-splines up to third order are represented in one dimension. These functions are normalized to unity and have the dimension of the inverse of a volume, inside a PIC code a suitable discrete version of them is used. The second order B-spline is the one usually used to represent macro-particles, since the first order shape function has a too sharp profile, while the third order has too long tails.
+To perform interpolation the exact shape of $S$ must be decided. There are different possible choices but a standard one are B-splines. A spline function $B_n(x)$ of order $n$ is a piecewise polynomial function of degree $(n-1)$ in the variable $x$. The places where the pieces meet are known as knots and in the PIC implementation the distance between knots coincides with grid spacing. In Figure (**Figure 3**), B-splines up to third order are represented in one dimension. These functions are normalized to unity and have the dimension of the inverse of a volume, inside a PIC code a suitable discrete version of them is used. The second order B-spline is the one usually used to represent macro-particles, since the first order shape function has a too sharp profile, while the third order has too long tails.
 
 |![splines](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/4b6ca82a-c96f-4613-865f-c7dc2fe11a70)|
 |:--:| 
