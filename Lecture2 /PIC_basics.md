@@ -244,5 +244,4 @@ exploiting integration by parts. The second equation of motion is easily retriev
 * Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
 * Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
 * [Open source PIC code Smilei](https://smileipic.github.io/Smilei/)
-* Esirkepov, T. Zh. (2001). Exact charge conservation scheme for Particle-in-Cell simulation with an arbitrary form-factor. In Computer Physics Communications (Vol. 135, Issue 2, pp. 144–153). Elsevier BV. [10.1016/s0010-4655(00)00228-9](https://doi.org/10.1016/s0010-4655(00)00228-9)
-* 
+* Esirkepov, T. Zh. (2001). Exact charge conservation scheme for Particle-in-Cell simulation with an arbitrary form-factor. In Computer Physics Communications (Vol. 135, Issue 2, pp. 144–153). Elsevier BV. [https://doi.org/10.1016/s0010-4655(00)00228-9](https://doi.org/10.1016/s0010-4655(00)00228-9)
