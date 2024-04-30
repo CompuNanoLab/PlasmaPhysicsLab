@@ -99,11 +99,11 @@ where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the adva
 ## All the other steps...
 
 # Maxwell Solver
-One of the passages of the PIC loop is the resolution of the Maxwell equations given the current density. It is not necessary to mention the charge density because actually, it is not necessary to solve Maxwell divergences equations at each timestep: if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. Indeed, using the Maxwell curl equations and a vectorial identity, one can easily verify that:
+One step of the PIC loop consists of solving the Maxwell equations given the current density. It is not necessary to solve Maxwell divergences equations at each timestep: if they are satisfied at the initial time, they remain valid provided that the continuity equation is satisfied for all times. Indeed, using the Maxwell curl equations and a vectorial identity, one can easily verify that:
 
 $$\dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{B}\right) =\nabla\cdot\dfrac{\partial\mathbf{B}}{\partial t}=-c\nabla \cdot (\nabla \times \mathbf{E})= 0 $$
 
-$$ \dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{E}-4 \pi \rho\right)=\nabla\cdot\dfrac{\partial\mathbf{E}}{\partial t}-4\pi\dfrac{\partial\rho}{\partial t}=\nabla\cdot(c\nabla \times \mathbf{B}-4\pi\mathbf{J})-4\pi\dfrac{\partial\rho}{\partial t}=-4\pi\left(\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0 $$
+$$ \dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{E}-\dfrac{1}{\epsilon_0}  \rho\right)=\nabla\cdot\dfrac{\partial\mathbf{E}}{\partial t}-\dfrac{1}{\epsilon_0}\dfrac{\partial\rho}{\partial t}=\nabla\cdot(c\nabla \times \mathbf{B}-\dfrac{1}{\epsilon_0}\mathbf{J})-\dfrac{1}{\epsilon_0}\dfrac{\partial\rho}{\partial t}=-\dfrac{1}{\epsilon_0}\left(\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0 $$
 
 Thus the code will solve only Ampère-Maxwell and Faraday equations. 
 In general, there are many numerical methods to solve Maxwell equations, one of the most used method in the context of the PIC codes consists in the use of a second-order finite difference time domain (FDTD)solver on a Yee-lattice. It gives a solution to the non-approximated differential form of Maxwell equations adopting as numerical approximation spatial and temporal discretization so that derivatives are substituted by finite differences. The solver operates in the temporal domain. 
