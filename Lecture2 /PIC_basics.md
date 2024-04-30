@@ -188,34 +188,28 @@ $$ \mathbf{B}^n=\dfrac{\mathbf{B}^{n+1/2}+\mathbf{B}^{n-1/2}}{2} $$
 
 $$ \mathbf{B}^n(\mathbf{x}_ p)=\int \mathbf{B}^n S(\mathbf{x}-\mathbf{x}_{p}^n(t)) d\mathbf{x} $$
 
-Numerically this step consists in assigning a combination of the fields at the nearest grid points to the particle.
+The interpolation is numerically performed by combining the field values at the nearest grid points to the particle. This combination depends on the specific shape function $S$. A common choice for shape functions is B-splines. A spline function $B_n(x)$ of order $n$ is a piecewise polynomial function of degree $(n-1)$ in the variable $x$. The points where the pieces meet are referred to as knots, and in the PIC implementation, the spacing between knots matches the grid spacing. In **Figure 3**, B-splines up to third order are depicted in one dimension. These functions are normalized to unity and have units of inverse volume. The shape function of second-order interpolation is typically used to represent macro-particles, as the first-order shape function has a too-sharp profile, while the third-order one has tails that are too long.
 
-To perform interpolation the exact shape of $S$ must be decided. A standard choice is B-splines. A spline function $B_n(x)$ of order $n$ is a piecewise polynomial function of degree $(n-1)$ in the variable $x$. The places where the pieces meet are known as knots and in the PIC implementation, the distance between knots coincides with the  grid spacing. In **Figure 3**, B-splines up to third order are represented in one dimension. These functions are normalized to unity and have the dimension of the inverse of a volume, inside a PIC code a suitable discrete version of them is used. The shape function of interpolation order 2 is the one usually used to represent macro-particles, since the first-order shape function has a too-sharp profile, while the third-order one has too-long tails.
-
-|![splines](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/4b6ca82a-c96f-4613-865f-c7dc2fe11a70)|
+|<img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/4b6ca82a-c96f-4613-865f-c7dc2fe11a70" width="400">|
 |:--:| 
 |**Figure 3** B-splines $B_n(x)$ with $n=0,1,2,3$.|
 
-We will focus on the second-order splines
+During the procedure of field gathering, using second-order splines, the contributions to the field felt by the particle come from the nearest grid point and the next adjacent points. These contributions are weighted proportionally to the volume of the shape function contained in the cell around each grid point.
 
-if the particle sits exactly at a
-grid point → the contributions
-to the field n the particle are:
-
-75% from the nearest point
-
-12.5% from each of the
-other two adjacent points
-
+For example, if the particle sits exactly at a grid point in 1D, the contributions to the field felt by the particle come for 75% from the nearest point and 12.5% from each of the other two adjacent points. 
 
 ### Current Deposition
-The last but not least step concerns the reconstruction of the charge and current densities on the grid from the velocities and positions of the particles. The current density is then needed to advance the Maxwell solver.
-The simpler approach to current projection onto the grid consists in simply summing the weighted contribution to the current of every macro-particle at a given grid point. Although this procedure is used to calculate charge density and is consistent with the single-particle energy balance, it does not guarantee the continuity equation, i.e. charge conservation, because of unavoidable discrepancies between the weighting on the grid of the charge and current density fields. A charge-conserving algorithm for the deposition of the current density vector from the particles to the grid can be obtained by forcing the continuity equation. Local current density is computed from the discrete version of the continuity equation for the single macro-particle, and then the contributions of all macro-particles are summed on each grid point. This scheme is known as **Esirkepov method**.
+The final step to discuss involves reconstructing the charge and current densities on the grid from the velocities and positions of the particles. The current density is necessary to advance the Maxwell solver.
+A straightforward method for projecting the current onto the grid involves summing the weighted contribution to the current of each macro-particle at a given grid point. Essentially, a portion of the particle's current is allocated to the nearest grid points, as illustrated in **Figure 4**.
 
-assign a fraction of the particles
-current to the nearest grid points
+|<img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/8d63ba45-7e4d-48c4-9864-8608d4432b4a" width="400">|
+|:--:| 
+|**Figure 4** 1D scheme of current and charge deposition.|
+
+Although this procedure is used to calculate charge density and is consistent with the single-particle energy balance, it does not guarantee the continuity equation, i.e. charge conservation, because of unavoidable discrepancies between the weighting on the grid of the charge and current density fields. A charge-conserving algorithm for the deposition of the current density vector from the particles to the grid can be obtained by forcing the continuity equation. Local current density is computed from the discrete version of the continuity equation for the single macro-particle, and then the contributions of all macro-particles are summed on each grid point. This scheme is known as **Esirkepov method**.
 
 ### Boundary and Initial Conditions
+To conclude the overview of the PIC method, it's important to mention the conditions required for initializing particles and fields to start the simulation and to manage the boundaries of the simulation grid. Fields can be initialized with static contributions or through laser injection. Typical boundary conditions for fields include injecting/absorbing conditions like the Silver-Muller ones, periodic conditions, or reflective conditions. On the other hand, particle initialization involves setting initial positions, momenta, and weights for all macro-particles. At boundary conditions, particles can be removed, reflected, absorbed, thermalized, or reinjected by imposing periodicity.
 
 ## <a name="appendix"></a>Appendix
 
@@ -247,9 +241,8 @@ exploiting integration by parts. The second equation of motion is easily retriev
 
 ## Bibliography
 
-* Tajima, T. (2004). Computational Plasma Physics: With Applications To Fusion And Astrophysics. United Kingdom: Avalon Publishing.
-* Jardin, S. (2010). Computational Methods in Plasma Physics. United States: CRC Press.
 * Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
 * Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
 * [Open source PIC code Smilei](https://smileipic.github.io/Smilei/)
+* Esirkepov, T. Zh. (2001). Exact charge conservation scheme for Particle-in-Cell simulation with an arbitrary form-factor. In Computer Physics Communications (Vol. 135, Issue 2, pp. 144–153). Elsevier BV. [10.1016/s0010-4655(00)00228-9](https://doi.org/10.1016/s0010-4655(00)00228-9)
 * 
