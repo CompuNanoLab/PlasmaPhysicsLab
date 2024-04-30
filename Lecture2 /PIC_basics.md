@@ -104,11 +104,11 @@ $$\dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{B}\right) =\nabla\cdot\
 
 $$ \dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{E}-\dfrac{1}{\epsilon_0}  \rho\right)=\nabla\cdot\dfrac{\partial\mathbf{E}}{\partial t}-\dfrac{1}{\epsilon_0}\dfrac{\partial\rho}{\partial t}=$$
 
-$$=\dfrac{1}{\epsilon_0} \nabla\cdot(\nabla \times \mathbf{B}-\mu_0\mathbf{J})-\dfrac{1}{\epsilon_0}\dfrac{\partial\rho}{\partial t}=-\dfrac{1}{\epsilon_0}\left(\mu_0\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0 $$
+$$=\dfrac{1}{\epsilon_0\mu_0} \nabla\cdot(\nabla \times \mathbf{B}-\mu_0\mathbf{J})-\dfrac{1}{\epsilon_0}\dfrac{\partial\rho}{\partial t}=-\dfrac{1}{\epsilon_0}\left(\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0 $$
 
 Therefore, the code only needs to solve the Ampère-Maxwell and Faraday equations. There are numerous numerical methods to solve them; we focus on one of the most commonly used methods in PIC codes: a second-order finite difference time domain (FDTD) solver on a Yee lattice. This method provides a solution to the non-approximated differential form of Maxwell's equations by adopting spatial and temporal discretizations, replacing derivatives with finite differences. This solver operates in the temporal domain.
 
-The spatial and temporal derivatives are computed using second-order centered finite differences based on the leap-frog scheme. Specifically, this scheme employs integer points placed at the nodes of a spatial grid and half-integer points placed at the nodes of a shifted spatial grid. These points can be identified by triplets $(i, j, k)$ and $(i+1/2, j+1/2, k+1/2)$, where $i$ ranges from $1$ to $N_x$, $j$ from $1$ to $N_y$, and $k$ from $1$ to $N_z$. They are equally spaced by $\Delta x$, $\Delta y$, and $\Delta z$, respectively, along each direction. Time is also discretized, with each instant identified by $t^n$, where $n$ ranges from $1$ to $N_t$ with a spacing of $\Delta t$ from the next instant. This discretization can be summarized as follows:
+The spatial and temporal derivatives are computed using second-order centred finite differences based on the leap-frog scheme. Specifically, this scheme employs integer points placed at the nodes of a spatial grid and half-integer points placed at the nodes of a shifted spatial grid. These points can be identified by triplets $(i, j, k)$ and $(i+1/2, j+1/2, k+1/2)$, where $i$ ranges from $1$ to $N_x$, $j$ from $1$ to $N_y$, and $k$ from $1$ to $N_z$. They are equally spaced by $\Delta x$, $\Delta y$, and $\Delta z$, respectively, along each direction. Time is also discretized, with each instant identified by $t^n$, where $n$ ranges from $1$ to $N_t$ with a spacing of $\Delta t$ from the next instant. This discretization can be summarized as follows:
 
 $$ t^n=n\Delta t \quad \quad t^{n+1/2}=(n+1/2)\Delta t $$
 
@@ -136,13 +136,12 @@ We can apply this scheme to the curl equations.
 
 Concerning time, since the time derivative of the electric field $\mathbf{E}$ is related to the curl of the magnetic field $\mathbf{B}$ and vice versa, it is convenient to stagger the electromagnetic field in time. This means that the $\mathbf{B}$ field is shifted in time by $\Delta t/2$ relative to the $\mathbf{E}$ field. Thus, the time evolution of $\mathbf{E}$ from step $n$ to step $n + 1$ depends on the values of the $\mathbf{B}$ field at time step $n + 1/2$, while the time evolution of $\mathbf{B}$ from step $n + 1/2$ to step $n + 3/2$ depends on the values of the $\mathbf{E}$ field at time step $n + 1$, and so on. Consequently, the computation of electromagnetic fields proceeds as follows:
 
-$$ \mathbf{E}^{n+1}=\mathbf{E}^{n}+\dfrac{1}{\epsilon_0}\Delta t\left[(\nabla\times\mathbf{B})^{n+1/2}-\mu_0\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-\Delta t(\nabla\times\mathbf{E})^{n} $$
-
-Concerning space, real electromagnetic fields are approximated by the values on the grid shifted by half-cell.  Spatial derivatives appear in the curl calculations. To get, for example, the (\nabla\times\mathbf{E})^{n} at nodes $(i,j,k)$ we need to centre the derivatives around these nodes starting from $E_y$ and $E_z$ staggered around $i$ at $(i+1/2)$ and $(i-1/2)$, $E_x$ and $E_z$ staggered around $j$ and $E_x$ and $E_y$ staggered around $k$. We end up with   while consistently with this choice also $\mathbf{J}$ is approximated at the middle of the cell while $\rho$ is taken on the nodes of the cell. In **Figure 2** there is a representation of how the field components are arranged on a 3D grid. 
+$$ \mathbf{E}^{n+1}=\mathbf{E}^{n}+\dfrac{1}{\epsilon_0\mu_0}\Delta t\left[(\nabla\times\mathbf{B})^{n+1/2}-\mu_0\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-\Delta t(\nabla\times\mathbf{E})^{n} $$
+Concerning space, electromagnetic fields are approximated by the values on the grid, properly shifted by half a cell, following the relations established by the curl equations. Consequently, $\mathbf{J}$ is also approximated at the middle of the cell, while $\rho$ is taken at the nodes of the cell. **Figure 2** illustrates how the field components can be arranged on a 3D grid.
 
 |<img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/b2267106-98e3-4aec-b7e0-bcf1e0a02491" width="400">|
 |:--:| 
-|**Figure 2** Representation of the cell of a 3D grid with indications of the positions at which $\mathbf{E}$, $\mathbf{B}$, $\mathbf{J}$ and $\rho$ are computed.|
+|**Figure 2** Representation of a cell in a 3D grid with indications of the positions where $\mathbf{E}$, $\mathbf{B}$, $\mathbf{J}$, and $\rho$ are computed.|
 
 Summarizing, the numerical approximations realized with the leap-frog scheme are:
 
@@ -167,12 +166,13 @@ $$ (\nabla\times\mathbf{B})^{n+1/2}=\begin{bmatrix}
     -\dfrac{{B_z}_ {(i+1/2)(j+1/2)k}^{n+1/2}-{B_z}_ {(i-1/2)(j+1/2)k}^{n+1/2}}{\Delta x}+\dfrac{{B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2}-{B_x}_ {i(j+1/2)(k-1/2)}^{n+1/2}}{\Delta z}\\\
     \dfrac{{B_y}_ {(i+1/2)j(k+1/2)}^{n+1/2}-{B_y}_ {(i-1/2)j(k+1/2)}^{n+1/2}}{\Delta x}-\dfrac{{B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2}-{B_x}_ {i(j-1/2)(k+1/2)}^{n+1/2}}{\Delta y}  \end{bmatrix} $$
 
-To guarantee numerical stability, the spatial and time steps must satisfy the **Courant-Friedrichs-Lewy condition**.
-The condition is imposed by the fact that if a wave is moving across a discrete spatial grid and we want to compute its amplitude at discrete time steps of equal duration, then this duration must be less than the time for the wave to travel to adjacent grid points. Therefore, the condition is expressed by:
+To ensure numerical stability, the spatial and temporal steps must satisfy the **Courant-Friedrichs-Lewy condition**.
+This condition is imposed by the requirement that if a wave is traversing a discrete spatial grid and we wish to compute its amplitude at discrete time steps of equal duration, this duration must be shorter than the time it takes for the wave to travel to adjacent grid points. Thus, the condition is expressed as:
 
 $$ c \Delta t \sqrt{\dfrac{1}{{\Delta x}^2}+\dfrac{1}{{\Delta y}^2}+\dfrac{1}{{\Delta z}^2}}=CFL<1 $$
 
-in 1D:
+in 1D is:
+
 $$ c \Delta t < \Delta x $$
 
 where $c$ is the speed of light.
@@ -196,7 +196,7 @@ To perform interpolation the exact shape of $S$ must be decided. A standard choi
 |:--:| 
 |**Figure 3** B-splines $B_n(x)$ with $n=0,1,2,3$.|
 
-We will focus on the second order splines
+We will focus on the second-order splines
 
 if the particle sits exactly at a
 grid point → the contributions
