@@ -1,6 +1,6 @@
 # Particle-In-Cell (PIC) codes
 
-## From the previous lecture..
+## From the previous lecture...
 ### Particle-In-Cell (PIC) method
 
 Particle codes are the most successful tool for the simulation of the kinetic dynamics of plasmas. They approximately solve the Vlasov-Maxwell system by replacing (sampling) the distribution function of every plasma species with a collection of computational particles – the macro-particles – each one representing multiple physical particles. Particle-In-Cell (PIC) methods specifically adopt this strategy and make macro-particles evolve self-consistently with electromagnetic fields computed with Maxwell equations on a discrete spatial grid. Since the invention of PIC methods ([Dawson,1983](https://doi.org/10.1103/revmodphys.55.403)), the development of new algorithms and the availability of more powerful computers has allowed continuous progress of PIC simulation from simple, one-dimensional, electrostatic problems to more complex and realistic situations, involving electromagnetic fields in three dimensions and tracking millions of macro-particles.
@@ -42,14 +42,14 @@ $$\mathbf{E}_ {pa}(t)=\int \mathbf{E}(\mathbf{x},t)S(\mathbf{x}- \mathbf{x}_ {pa
 
 $$\mathbf{B}_ {pa}(t)=\int \mathbf{B}(\mathbf{x},t)S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}$$
 
-These equations of motion are used inside the PIC algorithm. In the following, we will focus on the simpler scheme of finite-difference-time-domain (FDTD) PIC: we adopt a temporal discretization, a spatial grid in 1D,2D or 3D, and spatial and time derivatives are computed with second-order centred finite differences according to the [**leap-frog scheme**](https://en.wikipedia.org/wiki/Leapfrog_integration) that will be discussed later. Starting from initial conditions, every time step $\delta t$, the PIC algorithm follows these steps to evolve the plasma dynamics:
+These equations of motion are used inside the PIC algorithm. In the following, we will focus on the simpler scheme of finite-difference-time-domain (FDTD) PIC: we adopt a temporal discretization, a spatial grid in 1D, 2D or 3D, and spatial and time derivatives are computed with second-order centred finite differences according to the [**leap-frog scheme**](https://en.wikipedia.org/wiki/Leapfrog_integration) that will be discussed later. Starting from initial conditions, every time step $\delta t$, the PIC algorithm follows these steps to evolve the plasma dynamics:
 
 * Evaluation of the current density field on the spatial grid nodes from macro-particle charges, positions and velocities.
 * Determination of the electromagnetic field on the grid solving Maxwell equations with the computed current density.
-* Interpolation of the fields from the grid nodes to the macro-particles positions.
+* Interpolation of the fields from the grid nodes to the macro-particles' positions.
 * Update of macro-particle momenta and positions with the Lorentz force acting on them (particle pushing).
 
-These operations constitute a loop (see **Figure 1**) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase. The following section is devoted to explaining better the last step of the loop devoted to particle pushing.
+These operations constitute a loop (see **Figure 1**) that can be reiterated, advancing in time, step by step. Maxwell equations are easily solved by direct integration with finite differences, and it is not necessary to solve divergences equations at each timestep: if they are satisfied at the initial time, they remain valid for all times provided that the continuity equation is satisfied for all times. The problem requires boundary conditions for fields and particles. The most used ones are periodic boundary conditions. Particle and field data are saved during the simulation and analysed in the post-processing phase. The following section is devoted to explaining better the last step of the loop devoted to particle pushing.
 
 |![imagine](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/35ffc328-c75d-4f89-937f-cc4e41cfabf3)|
 |:--:| 
@@ -98,7 +98,7 @@ where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the adva
 ## All the other steps...
 
 ### Maxwell Solver
-One step of the PIC loop consists of solving the Maxwell equations given the current density. It is not necessary to solve Maxwell divergences equations at each timestep: if they are satisfied at the initial time, they remain valid provided that the continuity equation is satisfied for all times. Indeed, using the Maxwell curl equations and a vectorial identity, one can easily verify that:
+One step of the PIC loop involves solving the Maxwell equations given the current density. It's unnecessary to solve Maxwell's divergence equations at each timestep: if they are satisfied at the initial time, they remain valid provided that the continuity equation is satisfied for all times. Indeed, utilizing the Maxwell curl equations and a vector identity, one can readily verify that:
 
 $$\dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{B}\right) =\nabla\cdot\dfrac{\partial\mathbf{B}}{\partial t}=-\nabla \cdot (\nabla \times \mathbf{E})= 0 $$
 
@@ -106,8 +106,9 @@ $$ \dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{E}-\dfrac{1}{\epsilon_
 
 $$=\dfrac{1}{\epsilon_0} \nabla\cdot(\nabla \times \mathbf{B}-\mu_0\mathbf{J})-\dfrac{1}{\epsilon_0}\dfrac{\partial\rho}{\partial t}=-\dfrac{1}{\epsilon_0}\left(\mu_0\nabla\cdot\mathbf{J}+\dfrac{\partial\rho}{\partial t}\right)=0 $$
 
-Therefore, the code needs to solve only Ampère-Maxwell and Faraday equations. There are many numerical methods to solve them, we focus on one of the most used methods in PIC codes: a second-order finite difference time domain (FDTD) solver on a Yee-lattice. It gives a solution to the non-approximated differential form of Maxwell equations adopting spatial and temporal discretizations so that derivatives are substituted by finite differences. This solver operates in the temporal domain. 
-The spatial and time derivatives are computed with second-order centred finite differences according to the leap-frog scheme. More precisely this scheme employs integer points placed at the nodes of a spatial grid and and half-integer points placed at the nodes of a shifted spatial grid. These points can be identified by triplets $(i,j,k)$ and $(i+1/2,j+1/2,+k+1/2)$, with $i$ ranging from $1$ to $N_x$, $j$ from $1$ to $N_y$, and $k$ ranging from $1$ to $N_z$. They are equally spaced by $\Delta x$, $\Delta y$, and  $\Delta z$ respectively along each direction. Time is discretized too, each instant is identified by $t^n$, with $n$ ranging from $1$ to $N_t$ with spacing $\Delta t$ from the next instant. The discretization introduced can be synthesized in this way:
+Therefore, the code only needs to solve the Ampère-Maxwell and Faraday equations. There are numerous numerical methods to solve them; we focus on one of the most commonly used methods in PIC codes: a second-order finite difference time domain (FDTD) solver on a Yee lattice. This method provides a solution to the non-approximated differential form of Maxwell's equations by adopting spatial and temporal discretizations, replacing derivatives with finite differences. This solver operates in the temporal domain.
+
+The spatial and temporal derivatives are computed using second-order centered finite differences based on the leap-frog scheme. Specifically, this scheme employs integer points placed at the nodes of a spatial grid and half-integer points placed at the nodes of a shifted spatial grid. These points can be identified by triplets $(i, j, k)$ and $(i+1/2, j+1/2, k+1/2)$, where $i$ ranges from $1$ to $N_x$, $j$ from $1$ to $N_y$, and $k$ from $1$ to $N_z$. They are equally spaced by $\Delta x$, $\Delta y$, and $\Delta z$, respectively, along each direction. Time is also discretized, with each instant identified by $t^n$, where $n$ ranges from $1$ to $N_t$ with a spacing of $\Delta t$ from the next instant. This discretization can be summarized as follows:
 
 $$ t^n=n\Delta t \quad \quad t^{n+1/2}=(n+1/2)\Delta t $$
 
@@ -130,11 +131,14 @@ $$b_{ijk}^{n+1/2}=b_{ijk}^{n-1/2}+c_{ijk}^n\Delta t\quad \quad b^n_{(i+1/2)jk}=b
 $$ c_{ijk}^n=C(a_{ijk}^n) \quad \quad c_{ijk}^n=C(a_{ijk}^n) $$
 
 where $C$ indicates a generic function.
-Since the time derivative of the electric field $\mathbf{E}$ is related to the curl of the magnetic field $\mathbf{B}$ and the other way round, it is convenient to approximate the electromagnetic field in such a way that the $\mathbf{B}$ field is shifted in time by $\Delta t/2$ with respect to the $\mathbf{E}$ field. Thus the time evolution of $\mathbf{E}$, from step $n$ to step $n + 1$, depends on the values of the $\mathbf{B}$ field at time step $n + 1/2$, while the time evolution of $\mathbf{B}$ from step $n + 1/2$ to step $n + 3/2$ depends on the values of the $\mathbf{E}$ field at time step $n + 1$, and so on. Consequently, the computation of electromagnetic fields goes as:
+
+We can apply this scheme to the curl equations. 
+
+Concerning time, since the time derivative of the electric field $\mathbf{E}$ is related to the curl of the magnetic field $\mathbf{B}$ and vice versa, it is convenient to stagger the electromagnetic field in time. This means that the $\mathbf{B}$ field is shifted in time by $\Delta t/2$ relative to the $\mathbf{E}$ field. Thus, the time evolution of $\mathbf{E}$ from step $n$ to step $n + 1$ depends on the values of the $\mathbf{B}$ field at time step $n + 1/2$, while the time evolution of $\mathbf{B}$ from step $n + 1/2$ to step $n + 3/2$ depends on the values of the $\mathbf{E}$ field at time step $n + 1$, and so on. Consequently, the computation of electromagnetic fields proceeds as follows:
 
 $$ \mathbf{E}^{n+1}=\mathbf{E}^{n}+\dfrac{1}{\epsilon_0}\Delta t\left[(\nabla\times\mathbf{B})^{n+1/2}-\mu_0\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-\Delta t(\nabla\times\mathbf{E})^{n} $$
 
-From the spatial point of view, real electromagnetic fields are approximated by the values on the grid shifted by half-cell, while consistently with this choice also $\mathbf{J}$ is approximated at the middle of the cell while $\rho$ is taken on the nodes of the cell. In **Figure 2** there is a representation of how the field components are arranged on a 3D grid. 
+Concerning space, real electromagnetic fields are approximated by the values on the grid shifted by half-cell.  Spatial derivatives appear in the curl calculations. To get, for example, the (\nabla\times\mathbf{E})^{n} at nodes $(i,j,k)$ we need to centre the derivatives around these nodes starting from $E_y$ and $E_z$ staggered around $i$ at $(i+1/2)$ and $(i-1/2)$, $E_x$ and $E_z$ staggered around $j$ and $E_x$ and $E_y$ staggered around $k$. We end up with   while consistently with this choice also $\mathbf{J}$ is approximated at the middle of the cell while $\rho$ is taken on the nodes of the cell. In **Figure 2** there is a representation of how the field components are arranged on a 3D grid. 
 
 |<img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/b2267106-98e3-4aec-b7e0-bcf1e0a02491" width="400">|
 |:--:| 
@@ -150,7 +154,7 @@ $$ \mathbf{J}(\mathbf{x},t)\approx\left( {J_x}_ {(i+1/2)jk}^{n+1/2} {J_y}_ {i(j+
     
 $$ \rho(\mathbf{x},t)\approx\rho_{ijk}^n $$
 
-Lastly, we have to consider the calculation of the curl of the electric and magnetic field. $(\nabla\times\mathbf{E})^{n}$ must be computed on the same points of the corresponding $\mathbf{B}$ component, while $(\nabla\times\mathbf{B})^{n+1/2}$ must be computed at the points of $\mathbf{E}$. In this calculation spatial derivatives are obtained according to the leapfrog scheme:
+Lastly, we have to consider the calculation of the curl of the electric and magnetic fields. $(\nabla\times\mathbf{E})^{n}$ must be computed on the same points of the corresponding $\mathbf{B}$ component, while $(\nabla\times\mathbf{B})^{n+1/2}$ must be computed at the points of $\mathbf{E}$. In this calculation spatial derivatives are obtained according to the leapfrog scheme:
 
 $$ (\nabla\times\mathbf{E})^{n}=\begin{bmatrix}
     \dfrac{{E_z}_ {i(j+1)(k+1/2)}^n-{E_z}_ {ij(k+1/2)}^n}{\Delta y}-\dfrac{{E_y}_ {i(j+1/2)(k+1)}^n-{E_y}_ {i(j+1/2)k}^n}{\Delta z}\\\
@@ -168,9 +172,12 @@ The condition is imposed by the fact that if a wave is moving across a discrete 
 
 $$ c \Delta t \sqrt{\dfrac{1}{{\Delta x}^2}+\dfrac{1}{{\Delta y}^2}+\dfrac{1}{{\Delta z}^2}}=CFL<1 $$
 
+in 1D:
+$$ c \Delta t < \Delta x $$
+
 where $c$ is the speed of light.
 
-### Field Interpolation
+### Field Gathering
 In the PIC algorithm, the electromagnetic field is computed on the grid, whereas all the quantities related to the macro-particles are evaluated at the particle positions. To compute the Lorentz force acting on each macro-particle at time $t^n$, electric and magnetic fields must be interpolated at the particle position and evaluated at the correct time. The electric field is already known at time $t^n$ so we need only to interpolate it at macro-particle positions $\mathbf{x}_p^n$:
  
 $$ \mathbf{E}^n(\mathbf{x}_ p)=\int \mathbf{E}^n S(\mathbf{x}-\mathbf{x}_ {p}^n(t)) d\mathbf{x} $$
@@ -181,12 +188,68 @@ $$ \mathbf{B}^n=\dfrac{\mathbf{B}^{n+1/2}+\mathbf{B}^{n-1/2}}{2} $$
 
 $$ \mathbf{B}^n(\mathbf{x}_ p)=\int \mathbf{B}^n S(\mathbf{x}-\mathbf{x}_{p}^n(t)) d\mathbf{x} $$
 
-To perform interpolation the exact shape of $S$ must be decided. A standard choice is B-splines. A spline function $B_n(x)$ of order $n$ is a piecewise polynomial function of degree $(n-1)$ in the variable $x$. The places where the pieces meet are known as knots and in the PIC implementation, the distance between knots coincides with the  grid spacing. In **Figure 3**, B-splines up to third order are represented in one dimension. These functions are normalized to unity and have the dimension of the inverse of a volume, inside a PIC code a suitable discrete version of them is used. The second-order B-spline is the one usually used to represent macro-particles, since the first-order shape function has a too-sharp profile, while the third-order one has too-long tails.
+Numerically this step consists in assigning a combination of the fields at the nearest grid points to the particle.
+
+To perform interpolation the exact shape of $S$ must be decided. A standard choice is B-splines. A spline function $B_n(x)$ of order $n$ is a piecewise polynomial function of degree $(n-1)$ in the variable $x$. The places where the pieces meet are known as knots and in the PIC implementation, the distance between knots coincides with the  grid spacing. In **Figure 3**, B-splines up to third order are represented in one dimension. These functions are normalized to unity and have the dimension of the inverse of a volume, inside a PIC code a suitable discrete version of them is used. The shape function of interpolation order 2 is the one usually used to represent macro-particles, since the first-order shape function has a too-sharp profile, while the third-order one has too-long tails.
 
 |![splines](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/4b6ca82a-c96f-4613-865f-c7dc2fe11a70)|
 |:--:| 
 |**Figure 3** B-splines $B_n(x)$ with $n=0,1,2,3$.|
 
+We will focus on the second order splines
+
+if the particle sits exactly at a
+grid point → the contributions
+to the field n the particle are:
+
+75% from the nearest point
+
+12.5% from each of the
+other two adjacent points
+
+
 ### Current Deposition
 The last but not least step concerns the reconstruction of the charge and current densities on the grid from the velocities and positions of the particles. The current density is then needed to advance the Maxwell solver.
 The simpler approach to current projection onto the grid consists in simply summing the weighted contribution to the current of every macro-particle at a given grid point. Although this procedure is used to calculate charge density and is consistent with the single-particle energy balance, it does not guarantee the continuity equation, i.e. charge conservation, because of unavoidable discrepancies between the weighting on the grid of the charge and current density fields. A charge-conserving algorithm for the deposition of the current density vector from the particles to the grid can be obtained by forcing the continuity equation. Local current density is computed from the discrete version of the continuity equation for the single macro-particle, and then the contributions of all macro-particles are summed on each grid point. This scheme is known as **Esirkepov method**.
+
+assign a fraction of the particles
+current to the nearest grid points
+
+### Boundary and Initial Conditions
+
+## <a name="appendix"></a>Appendix
+
+Let's write explicitly the moment of zero order in the $x-y-z$ components:
+
+$$ \int \int \left[\dfrac{\partial f_h}{\partial t}+v_x\dfrac{\partial f_h}{\partial x}+v_y\dfrac{\partial f_h}{\partial y}+v_z\dfrac{\partial f_h}{\partial z}+F_ {Lx}\dfrac{\partial f_ h}{\partial px}+F_ {Ly}\dfrac{\partial f_ h}{\partial py}+F_ {Lz}\dfrac{\partial f_ h}{\partial pz}\right] dp_xdp_ydp_zdxdydz=0$$
+
+$\int\frac{\partial f_h}{\partial x}dx$, $\int\frac{\partial f_h}{\partial p_x}dp_x$,  and analogous terms in $y$ and $z$ are zero because we require a compact support for the shape function $S$ like the Dirac delta (i.e. it is zero outside a small range). The conservation of the macro-particle weight $w_{pa}$ follows from the first term where the time derivative can be taken out of the integrations.
+
+In the moment of first order, due to the same reasons, the only non-zero elements are the element
+
+$$\dfrac{\partial}{\partial t} \int \int \mathbf{x} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial}{\partial t} \int \mathbf{x} S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}=$$
+
+$$=\sum w_{pa} \left( \dfrac{\partial}{\partial t} \int (\mathbf{x}- \mathbf{x}_ {pa} (t)) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} + \dfrac{\partial}{\partial t} \int \mathbf{x}_ {pa} (t) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x} \right)= \sum w_{pa} \dfrac{\partial\mathbf{x}_ {pa} (t)}{\partial t} $$
+
+where the symmetry of $S$ has been used to delete one term, and elements like the following for every coordinate $x$, $y$ and $z$:
+
+$$\int \int x v_x \dfrac{\partial f_h}{\partial x} d\mathbf{p}d\mathbf{x}=-\int \int  v_x  f_h d\mathbf{p}d\mathbf{x} = - \sum w_{pa} v_{pax}$$
+
+using integration by part in $x$. Considering all components, these terms lead to the first equation of motion for the macroparticle. The second-order moment has the term
+
+$$\dfrac{\partial}{\partial t} \int \int \mathbf{p} f_h d\mathbf{p}d\mathbf{x}= \sum w_{pa} \dfrac{\partial\mathbf{p}_ {pa} (t)}{\partial t} $$
+
+using the property of the Dirac delta inside $f_h$, and other non-zero terms like:
+
+$$\int \int p_x F_{Lx} \dfrac{\partial f_h}{\partial p_x} d\mathbf{p}d\mathbf{x}=-\int \int  F_{Lx}  f_h d\mathbf{p}d\mathbf{x} = - \sum w_{pa} q_a \int\left(E_x(\mathbf{x},t)+(\mathbf{v}_ {pa}\times\mathbf{B}(\mathbf{x},t))_ x\right) S(\mathbf{x}- \mathbf{x}_ {pa} (t)) d\mathbf{x}$$
+
+exploiting integration by parts. The second equation of motion is easily retrieved considering the same relations for all components.
+
+## Bibliography
+
+* Tajima, T. (2004). Computational Plasma Physics: With Applications To Fusion And Astrophysics. United Kingdom: Avalon Publishing.
+* Jardin, S. (2010). Computational Methods in Plasma Physics. United States: CRC Press.
+* Dawson, J. M. (1983). Particle simulation of plasmas. In Reviews of Modern Physics (Vol. 55, Issue 2, pp. 403–447). American Physical Society (APS). https://doi.org/10.1103/revmodphys.55.403
+* Birdsall, C.K., & Langdon, A.B. (1991). Plasma Physics via Computer Simulation (1st ed.). CRC Press. https://doi.org/10.1201/9781315275048
+* [Open source PIC code Smilei](https://smileipic.github.io/Smilei/)
+* 
