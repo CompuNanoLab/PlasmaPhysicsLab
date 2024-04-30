@@ -7,8 +7,8 @@ Please follow the following steps before this lecture:
 3. Perform a Smilei simulation following the provided instructions.
 
  Here is a list of the material:
-* [A 1D PIC code](./1DPIC_basics.md)
-* [Exercise with 1D PIC](./Exercise1DPIC.ipynb)
-* [Instructions for Smilei simulation](./Instructions_PIC_smilei.md)
+* [A 1D PIC code](./PIC_basics.md)
+* [Exercise with 1D PIC](./1DPIC.ipynb)
+* [Instructions for Smilei simulation](./PIC_smilei.md)
   
 For any doubt or question, contact Marta Galbiati ([marta.galbiati@polimi.it](marta.galbiati@polimi.it)).
