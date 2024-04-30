@@ -97,7 +97,7 @@ where $b$ is the magnitude of $\mathbf{b}$. Now all the ingredients for the adva
 
 ## All the other steps...
 
-# Maxwell Solver
+### Maxwell Solver
 One step of the PIC loop consists of solving the Maxwell equations given the current density. It is not necessary to solve Maxwell divergences equations at each timestep: if they are satisfied at the initial time, they remain valid provided that the continuity equation is satisfied for all times. Indeed, using the Maxwell curl equations and a vectorial identity, one can easily verify that:
 
 $$\dfrac{\partial}{\partial t}\left(\nabla \cdot \mathbf{B}\right) =\nabla\cdot\dfrac{\partial\mathbf{B}}{\partial t}=-\nabla \cdot (\nabla \times \mathbf{E})= 0 $$
@@ -170,7 +170,7 @@ $$ c \Delta t \sqrt{\dfrac{1}{{\Delta x}^2}+\dfrac{1}{{\Delta y}^2}+\dfrac{1}{{\
 
 where $c$ is the speed of light.
 
-# Field Interpolation
+### Field Interpolation
 In the PIC algorithm, the electromagnetic field is computed on the grid, whereas all the quantities related to the macro-particles are evaluated at the particle positions. To compute the Lorentz force acting on each macro-particle at time $t^n$, electric and magnetic fields must be interpolated at the particle position and evaluated at the correct time. The electric field is already known at time $t^n$ so we need only to interpolate it at macro-particle positions $\mathbf{x}_p^n$:
  
 $$ \mathbf{E}^n(\mathbf{x}_ p)=\int \mathbf{E}^n S(\mathbf{x}-\mathbf{x}_ {p}^n(t)) d\mathbf{x} $$
@@ -187,6 +187,6 @@ To perform interpolation the exact shape of $S$ must be decided. A standard choi
 |:--:| 
 |**Figure 3** B-splines $B_n(x)$ with $n=0,1,2,3$.|
 
-# Current Deposition
+### Current Deposition
 The last but not least step concerns the reconstruction of the charge and current densities on the grid from the velocities and positions of the particles. The current density is then needed to advance the Maxwell solver.
 The simpler approach to current projection onto the grid consists in simply summing the weighted contribution to the current of every macro-particle at a given grid point. Although this procedure is used to calculate charge density and is consistent with the single-particle energy balance, it does not guarantee the continuity equation, i.e. charge conservation, because of unavoidable discrepancies between the weighting on the grid of the charge and current density fields. A charge-conserving algorithm for the deposition of the current density vector from the particles to the grid can be obtained by forcing the continuity equation. Local current density is computed from the discrete version of the continuity equation for the single macro-particle, and then the contributions of all macro-particles are summed on each grid point. This scheme is known as **Esirkepov method**.
