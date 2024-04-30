@@ -1,4 +1,4 @@
-# A 1D Particle-In-Cell (PIC) code
+# Particle-In-Cell (PIC) codes
 
 ## From the previous lecture..
 ### Particle-In-Cell (PIC) method
@@ -114,68 +114,60 @@ Thus the code will solve only Ampère-Maxwell and Faraday equations.
 In general, there are many numerical methods to solve Maxwell equations, one of the most used method in the context of the PIC codes consists in the use of a second-order finite difference time domain (FDTD)solver on a Yee-lattice, first proposed by K.Y. Yee in \cite{Yee1966}. It gives a solution to the non-approximated differential form of Maxwell equations adopting as numerical approximation spatial and temporal discretization so that derivatives are substituted by finite differences. The solver operates in the temporal domain. 
 The spatial and time derivatives are computed with second-order centred finite differences according to what is called the \textit{leap-frog scheme}. More precisely this scheme employs both integer and half-integer points placed at the nodes of a spatial grid and at the nodes of its shifted version respectively. These points can be identified by triplets $(i,j,k)$ and $(i+1/2,j+1/2,+k+1/2)$, with $i$ ranging from $1$ to $N_x$, $j$ from $1$ to $N_y$, and $k$ ranging from $1$ to $N_z$. They are equally spaced by $\Delta x$, $\Delta y$, and  $\Delta z$ respectively along each direction. Time is discretized too, each instant is identified by $t^n$, with $n$ ranging from $1$ to $N_t$ with spacing $\Delta t$ from the next instant. The discretization introduced can be synthesized in this way:
 
-$$
-  t^n=n\Delta t \quad \quad & t^{n+1/2}=(n+1/2)\Delta t \\
-  x_i=x_{min}+i\Delta x \quad \quad & x_{i+1/2}=x_{min}+(i+1/2)\Delta x \\
-  y_j=y_{min}+j\Delta y \quad \quad & y_{j+1/2}=y_{min}+(j+1/2)\Delta y \\
-  z_k=z_{min}+k\Delta z \quad \quad & z_{k+1/2}=z_{min}+(k+1/2)\Delta z \\
-$$
+$$ t^n=n\Delta t \quad \quad & t^{n+1/2}=(n+1/2)\Delta t \\\
+  x_i=x_{min}+i\Delta x \quad \quad & x_{i+1/2}=x_{min}+(i+1/2)\Delta x \\\
+  y_j=y_{min}+j\Delta y \quad \quad & y_{j+1/2}=y_{min}+(j+1/2)\Delta y \\\
+  z_k=z_{min}+k\Delta z \quad \quad & z_{k+1/2}=z_{min}+(k+1/2)\Delta z \\\$$
 
 where $min$ values identify the origin of the grid. Therefore, the scheme works on a \textit{staggered grid} consisting of two meshes shifted by half-cell along the three spatial direction; analogous considerations can be made for the one dimensional grid of temporal discretization.
 
 The leap-frog scheme is a second-order method to relate quantities, evaluated on the proposed spatial and temporal grids, with its fist and second derivatives. Calling $a_{ijk}^n$ the starting quantity, $b_{ijk}^n$ its first derivative, and $c_{ijk}^n$ its second derivative, the relationship imposed are the following, according to the type of derivative considered:
-\begin{equation}
-    \begin{matrix}
-  \text{Time derivatives} \quad \quad & \text{Spatial derivatives in $x$} \\
+
+$$ \text{Time derivatives} \quad \quad & \text{Spatial derivatives in $x$} \\
   a_{ijk}^{n+1}=a_{ijk}^n+ b_{ijk}^{n+1/2}\Delta t\quad \quad & a^n_{(i+1)jk}=a_{ijk}^n+ b^n_{(i+1/2)jk}\Delta x\\
   b_{ijk}^{n+1/2}=b_{ijk}^{n-1/2}+c_{ijk}^n\Delta t\quad \quad & b^n_{(i+1/2)jk}=b_{(i-1/2)jk}^n+ c^n_{ijk}\Delta x\\
-  c_{ijk}^n=C(a_{ijk}^n) \quad \quad & c_{ijk}^n=C(a_{ijk}^n) \\
- \end{matrix}
- \label{sonfolle}
-\end{equation}
+  c_{ijk}^n=C(a_{ijk}^n) \quad \quad & c_{ijk}^n=C(a_{ijk}^n) $$
+
 where $C$ indicates a generic function.
 Since the time derivative of the electric field $\mathbf{E}$ is related to the curl of the magnetic field $\mathbf{B}$ and viceversa, it is convenient to approximate the electromagnetic field in such a way that the $\mathbf{B}$ field is shifted in time by $\Delta t/2$ with respect to $\mathbf{E}$ field. Thus the time evolution of $\mathbf{E}$, from step $n$ to step $n + 1$, depends on the values of the $\mathbf{B}$ field at time step $n + 1/2$, while the time evolution of $\mathbf{B}$ from step $n + 1/2$ to step $n + 3/2$ depends on the values of the $\mathbf{E}$ field at time step $n + 1$, and so on. Consequently, the computation of electromagnetic fields goes as:
-\begin{equation}
-    \mathbf{E}^{n+1}=\mathbf{E}^{n}+\Delta t\left[c(\nabla\times\mathbf{B})^{n+1/2}-4\pi\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-c\Delta t(\nabla\times\mathbf{E})^{n}
-\end{equation}
+
+$$ \mathbf{E}^{n+1}=\mathbf{E}^{n}+\Delta t\left[c(\nabla\times\mathbf{B})^{n+1/2}-4\pi\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-c\Delta t(\nabla\times\mathbf{E})^{n} $$
+
 From the spatial point of view, real electromagnetic fields are approximated by the values on the grid shifted by half-cell, while consistently with this choice also $\mathbf{J}$ is approximated at the middle of the cell while $\rho$ is taken on the nodes of the cell. In Figure \ref{fig:Yee} there is a representation of how the field components are arranged on a 3D grid. 
 Summarizing, the numerical approximations realized with the leap-frog scheme are:
-\begin{equation}
-    \begin{matrix}
-    \mathbf{E}(\mathbf{x},t)\approx\left( {E_x}_{(i+1/2)jk}^n {E_y}_{i(j+1/2)k}^n {E_z}_{ij(k+1/2)}^n\right) \\
-    \mathbf{B}(\mathbf{x},t)\approx\left( {B_x}_{i(j+1/2)(k+1/2)}^{n+1/2} {B_y}_{(i+1/2)j(k+1/2)}^{n+1/2} {B_z}_{(i+1/2)(j+1/2)k}^{n+1/2}\right) \\
-    \mathbf{J}(\mathbf{x},t)\approx\left( {J_x}_{(i+1/2)jk}^{n+1/2} {J_y}_{i(j+1/2)k}^{n+1/2} {J_z}_{ij(k+1/2)}^{n+1/2}\right) \\
-    \rho(\mathbf{x},t)\approx\rho_{ijk}^n
-    \end{matrix}
-\end{equation}
-\begin{figure}[ht!]
-\centering
-\includegraphics[scale=0.3]{immagini/cap3/figYee.png}
+
+$$ \mathbf{E}(\mathbf{x},t)\approx\left( {E_x}_ {(i+1/2)jk}^n {E_y}_ {i(j+1/2)k}^n {E_z}_ {ij(k+1/2)}^n\right) \\\
+    \mathbf{B}(\mathbf{x},t)\approx\left( {B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2} {B_y}_ {(i+1/2)j(k+1/2)}^{n+1/2} {B_z}_ {(i+1/2)(j+1/2)k}^{n+1/2}\right) \\\
+    \mathbf{J}(\mathbf{x},t)\approx\left( {J_x}_ {(i+1/2)jk}^{n+1/2} {J_y}_ {i(j+1/2)k}^{n+1/2} {J_z}_ {ij(k+1/2)}^{n+1/2}\right) \\\
+    \rho(\mathbf{x},t)\approx\rho_{ijk}^n $$
+
+
+![figYee](https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/b2267106-98e3-4aec-b7e0-bcf1e0a02491)
 \caption{Representation of the cell of a 3D grid with indications of the positions at which $\mathbf{E}$, $\mathbf{B}$, $\mathbf{J}$ and $\rho$ are computed. Taken from \cite{Derouillat2018}.}
-\label{fig:Yee}
-\end{figure}
 
 What remains to do is the calculation of the curl of the electric and magnetic field. $(\nabla\times\mathbf{E})^{n}$ must be computed on the same points of the corresponding $\mathbf{B}$ component, while $(\nabla\times\mathbf{B})^{n+1/2}$ must be computed at the points of $\mathbf{E}$. In this calculation spatial derivatives are obtained according to the leap frog scheme:
-\begin{equation}
-(\nabla\times\mathbf{E})^{n}=\begin{bmatrix}
-    \dfrac{{E_z}_{i(j+1)(k+1/2)}^n-{E_z}_{ij(k+1/2)}^n}{\Delta y}-\dfrac{{E_y}_{i(j+1/2)(k+1)}^n-{E_y}_{i(j+1/2)k}^n}{\Delta z}\\
-    -\dfrac{{E_z}_{(i+1)j(k+1/2)}^n-{E_z}_{ij(k+1/2)}^n}{\Delta x}+\dfrac{{E_x}_{(i+1/2)j(k+1)}^n-{E_x}_{(i+1/2)jk}^n}{\Delta z}\\
-    \dfrac{{E_y}_{(i+1)(j+1/2)k}^n-{E_y}_{i(j+1/2)k}^n}{\Delta x}-\dfrac{{E_x}_{(i+1/2)(j+1)k}^n-{E_x}_{(i+1/2)jk}^n}{\Delta y}
+
+$$ (\nabla\times\mathbf{E})^{n}=\begin{bmatrix}
+    \dfrac{{E_z}_ {i(j+1)(k+1/2)}^n-{E_z}_ {ij(k+1/2)}^n}{\Delta y}-\dfrac{{E_y}_ {i(j+1/2)(k+1)}^n-{E_y}_{i(j+1/2)k}^n}{\Delta z}\\\
+    -\dfrac{{E_z}_ {(i+1)j(k+1/2)}^n-{E_z}_ {ij(k+1/2)}^n}{\Delta x}+\dfrac{{E_x}_ {(i+1/2)j(k+1)}^n-{E_x}_ {(i+1/2)jk}^n}{\Delta z}\\\
+    \dfrac{{E_y}_ {(i+1)(j+1/2)k}^n-{E_y}_ {i(j+1/2)k}^n}{\Delta x}-\dfrac{{E_x}_ {(i+1/2)(j+1)k}^n-{E_x}_ {(i+1/2)jk}^n}{\Delta y}
     \end{bmatrix}
-\end{equation}
-\begin{equation}  
+$$
+
+$$
 (\nabla\times\mathbf{B})^{n+1/2}=\begin{bmatrix}
-     \dfrac{{B_z}_{(i+1/2)(j+1/2)k}^{n+1/2}-{B_z}_{(i+1/2)(j-1/2)k}^{n+1/2}}{\Delta y}-\dfrac{{B_y}_{(i+1/2)j(k+1/2)}^{n+1/2}-{B_y}_{(i+1/2)j(k-1/2)}^{n+1/2}}{\Delta z}\\
-    -\dfrac{{B_z}_{(i+1/2)(j+1/2)k}^{n+1/2}-{B_z}_{(i-1/2)(j+1/2)k}^{n+1/2}}{\Delta x}+\dfrac{{B_x}_{i(j+1/2)(k+1/2)}^{n+1/2}-{B_x}_{i(j+1/2)(k-1/2)}^{n+1/2}}{\Delta z}\\
-    \dfrac{{B_y}_{(i+1/2)j(k+1/2)}^{n+1/2}-{B_y}_{(i-1/2)j(k+1/2)}^{n+1/2}}{\Delta x}-\dfrac{{B_x}_{i(j+1/2)(k+1/2)}^{n+1/2}-{B_x}_{i(j-1/2)(k+1/2)}^{n+1/2}}{\Delta y}  
-    \end{bmatrix}
-\end{equation}
+     \dfrac{{B_z}_ {(i+1/2)(j+1/2)k}^{n+1/2}-{B_z}_ {(i+1/2)(j-1/2)k}^{n+1/2}}{\Delta y}-\dfrac{{B_y}_ {(i+1/2)j(k+1/2)}^{n+1/2}-{B_y}_{(i+1/2)j(k-1/2)}^{n+1/2}}{\Delta z}\\\
+    -\dfrac{{B_z}_ {(i+1/2)(j+1/2)k}^{n+1/2}-{B_z}_ {(i-1/2)(j+1/2)k}^{n+1/2}}{\Delta x}+\dfrac{{B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2}-{B_x}_{i(j+1/2)(k-1/2)}^{n+1/2}}{\Delta z}\\\
+    \dfrac{{B_y}_ {(i+1/2)j(k+1/2)}^{n+1/2}-{B_y}_ {(i-1/2)j(k+1/2)}^{n+1/2}}{\Delta x}-\dfrac{{B_x}_ {i(j+1/2)(k+1/2)}^{n+1/2}-{B_x}_{i(j-1/2)(k+1/2)}^{n+1/2}}{\Delta y}  \end{bmatrix}
+$$
+
 In order to guarantee numerical stability, the spatial and time steps must satisfy the \textit{Courant-Friedrichs-Lewy condition}.
 The condition is imposed by the fact that if a wave is moving across a discrete spatial grid and we want to compute its amplitude at discrete time steps of equal duration, then this duration must be less than the time for the wave to travel to adjacent grid points. Therefore, the condition is expressed by:
-\begin{equation}
+
+$$
     c \Delta t \sqrt{\dfrac{1}{{\Delta x}^2}+\dfrac{1}{{\Delta y}^2}+\dfrac{1}{{\Delta z}^2}}=CFL<1
-    \label{cfl}
-\end{equation}
+$$
+
 where $c$ is the speed of light.
 
 The second-order leap-frog scheme in space and time is easy to implement and efficient, however higher accuracy is gained only significantly increasing the space-time resolution. Alternative schemes exist to get high accuracy with limited computational requirements.
