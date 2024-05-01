@@ -160,6 +160,6 @@ DiagFields(
   mpirun -np 2 <path_to_smilei_folder/smilei input.py
   ```
 
-- In the directory ``Lecture2`` run the script ``plot.py`` by typing in the terminal ``python plot.py``. This script prepares plots comparing the results of this code and the results of the 1D Python PIC code in the ``Data`` folder. Before launching it be sure to have run the 1DPIC in the jupyter notebook
+- In the directory ``Lecture2`` run the script ``plot.py`` by typing in the terminal ``python plot.py``. This script prepares plots comparing the results of this code and the results of the 1D Python PIC code in the ``Data`` folder.
 
 - Now you can visualise some plots in the folder ``Output``.
