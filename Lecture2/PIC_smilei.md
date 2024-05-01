@@ -1,4 +1,4 @@
-# Instruction to run a PIC simulation with Smilei
+# Instructions to run a PIC simulation with Smilei
 
 - Prepare an input file ``input.py`` with this content.
 
