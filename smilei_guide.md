@@ -89,7 +89,7 @@ build the Python module to manage the output:
 make happi
 ```
 
-Now in a Python script you can now do:
+Now in a Python script you can do:
 ```
 import happi
 ```
