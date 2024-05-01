@@ -27,8 +27,8 @@ pemr = 1836.15267343
 
 # DISCRETIZATION
 dx = um / 20
-Lx = 50 * um 
-nx = int( Lx / dx ) 
+Lx = 60 * um
+nx = int( Lx / dx )
 Tsim = 300 * fs
 cfl = 0.98
 dt = cfl * dx
@@ -44,8 +44,8 @@ mi = pemr * Ap
 
 # LASER PARAMETERS
 a0 = 1
-fwhm = 30 * fs	
-laser_center = 2 * fwhm  
+fwhm = 30 * fs
+laser_center = 2 * fwhm
 
 # DIAGNOSTICS
 shift = int(4*fwhm/dt)
@@ -69,7 +69,7 @@ Main(
     print_every = int(nt/100.0),
     reference_angular_frequency_SI = omega_SI,
     solve_poisson = False,
-    number_of_patches = [2],
+    number_of_patches = [16],
     patch_arrangement = 'hilbertian',
 )
 
@@ -99,7 +99,7 @@ Species(
   mass = me,
   number_density = trapezoidal(ne0, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
   charge = -1.,
-  boundary_conditions = [["periodic", "periodic"]],
+  boundary_conditions = [["reflective", "reflective"]],
   pusher = "boris",
 )
 
@@ -112,7 +112,7 @@ Species(
   mass = mi,
   number_density = trapezoidal(ne0 / Zp, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
   charge = Zp,
-  boundary_conditions = [["periodic", "periodic"]],
+  boundary_conditions = [["reflective", "reflective"]],
   pusher = "boris",
 )
 
@@ -124,16 +124,16 @@ Species(
 DiagScalar(every=1.0)
 
 DiagTrackParticles(
-    species = "ele",
+    species = "ELE",
     every = [shift, every_out], # [start, period]
-    attributes = ["x","w", "px", "py", "pz"]
+    attributes = ["x", "w", "px", "py", "pz"]
 )
 
 # TRACKPARTICLES
 DiagTrackParticles(
-    species = "ion",
+    species = "ION",
     every = [shift, every_out],
-    attributes = ["x","w", "px", "py", "pz"]
+    attributes = ["x", "w", "px", "py", "pz"]
 )
 
 # FIELDS
