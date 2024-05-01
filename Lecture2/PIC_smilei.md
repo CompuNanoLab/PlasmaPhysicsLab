@@ -149,6 +149,7 @@ DiagFields(
 - Copy there the input file.
 
 - Run a test simulation with this input file following the instructions at the end of [Smilei Guide](../smilei_guide.md):
+  
   type in a terminal
   ```
   export OMP_NUM_THREADS=2
