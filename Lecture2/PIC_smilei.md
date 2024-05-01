@@ -61,7 +61,7 @@ Main(
     cell_length = [dx],
     grid_length = [Lx],
     timestep = dt,
-    simulation_time = T_sim,
+    simulation_time = Tsim,
     interpolation_order = 2,
     EM_boundary_conditions = [ ['silver-muller'] ],
     maxwell_solver = 'Yee',
@@ -144,12 +144,21 @@ DiagFields(
 )
 
 ```
-- Create a folder named ``smilei`` inside the directory ``Lecture2``. 
+- Create a folder named smilei (``mkdir smilei``) inside the directory ``Lecture2``. 
 
 - Copy there the input file.
 
-- Run a test simulation with this input file following the instructions at the end of [Smilei Guide](../smilei_guide.md).
+- Run a test simulation with this input file following the instructions at the end of [Smilei Guide](../smilei_guide.md):
+  type in a terminal
+  ```
+  export OMP_NUM_THREADS=2
+  export OMP_SCHEDULE=dynamic
+  ```
+  and run the simulation
+  ```
+  mpirun -np 4 <path_to_smilei_folder/smilei input.py
+  ```
 
-- In the directory ``Lecture2`` run the script ``plot.py`` by typing in a terminal ``python plot.py``.
+- In the directory ``Lecture2`` run the script ``plot.py`` by typing in the terminal ``python plot.py``.
 
 - Now you can visualise some plots in the folder ``output``.
