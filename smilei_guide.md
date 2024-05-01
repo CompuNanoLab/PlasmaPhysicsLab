@@ -27,24 +27,36 @@ For **Debian-based (Ubuntu) OS**:
 sudo apt-get update
 sudo apt-get install git python3-h5py python3-ipython python3-pint python3-sphinx python3-matplotlib python3-dev python3-numpy python3-scipy python3-pip build-essential gcc libhdf5-openmpi-dev 
 ```
-  and add the following lines to your ``.bashrc`` or ``.bash_profile`` file in your $HOME
+Open your ``.bashrc`` or ``.bash_profile`` file in your $HOME. For example, if you want to use the nano editor, type in the terminal:
+```
+nano $HOME/.bashrc
+```
+Add the following lines:
 ```
 export PYTHONEXE=python3
 export HDF5_ROOT_DIR=/usr/lib/x86_64-linux-gnu/hdf5/openmpi
 ```
 and source it:
 ```
-source .bashrc
+source $HOME/.bashrc
 ```
 
 For **Fedora OS**:
 ```
 sudo dnf install gcc-c++ git hdf5-openmpi hdf5-openmpi-devel openmpi-devel python python-devel python3-h5py ipython python3-pint python3-sphinx python3-matplotlib 
 ```
-  and add the following lines to your ``.bashrc`` or ``.bash_profile`` file in your $HOME
+Open your ``.bashrc`` or ``.bash_profile`` file in your $HOME. For example, if you want to use the nano editor, type in the terminal:
+```
+nano $HOME/.bashrc
+```
+Add the following lines:
 ```
 module load mpi
 export HDF5_ROOT_DIR=/usr/lib64/openmpi/
+```
+and source it:
+```
+source $HOME/.bashrc
 ```
 
  For **ArchLinux OS**:
