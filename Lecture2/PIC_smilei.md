@@ -110,8 +110,8 @@ Species(
   momentum_initialization = "cold",
   particles_per_cell = nppc,
   mass = mi,
-  number_density = trapezoidal(ne0, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
-  charge = Z,
+  number_density = trapezoidal(ne0 / Zp, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
+  charge = Zp,
   boundary_conditions = [["periodic", "periodic"]],
   pusher = "boris",
 )
