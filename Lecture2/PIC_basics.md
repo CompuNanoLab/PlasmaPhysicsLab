@@ -137,6 +137,7 @@ We can apply this scheme to the curl equations.
 Concerning time, since the time derivative of the electric field $\mathbf{E}$ is related to the curl of the magnetic field $\mathbf{B}$ and vice versa, it is convenient to stagger the electromagnetic field in time. This means that the $\mathbf{B}$ field is shifted in time by $\Delta t/2$ relative to the $\mathbf{E}$ field. Thus, the time evolution of $\mathbf{E}$ from step $n$ to step $n + 1$ depends on the values of the $\mathbf{B}$ field at time step $n + 1/2$, while the time evolution of $\mathbf{B}$ from step $n + 1/2$ to step $n + 3/2$ depends on the values of the $\mathbf{E}$ field at time step $n + 1$, and so on. Consequently, the computation of electromagnetic fields proceeds as follows:
 
 $$ \mathbf{E}^{n+1}=\mathbf{E}^{n}+\dfrac{1}{\epsilon_0\mu_0}\Delta t\left[(\nabla\times\mathbf{B})^{n+1/2}-\mu_0\mathbf{J}^{n+1/2}\right] \quad \mathbf{B}^{n+1/2}=\mathbf{B}^{n-1/2}-\Delta t(\nabla\times\mathbf{E})^{n} $$
+
 Concerning space, electromagnetic fields are approximated by the values on the grid, properly shifted by half a cell, following the relations established by the curl equations. Consequently, $\mathbf{J}$ is also approximated at the middle of the cell, while $\rho$ is taken at the nodes of the cell. **Figure 2** illustrates how the field components can be arranged on a 3D grid.
 
 |<img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/b2267106-98e3-4aec-b7e0-bcf1e0a02491" width="400">|
