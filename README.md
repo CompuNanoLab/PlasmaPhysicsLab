@@ -4,8 +4,6 @@ This repository contains the material for the lectures on computational plasma p
 - [Computational Plasma Physics and Orbit Theory](./Lecture1) (29th February 2024)
 - [Particle-in-cell Simulations for Laser-plasma Interaction](./Lecture2) (2nd May 2024)
 
-These lectures are provided in flipped class mode.
-
 Please complete the following steps before the lectures (new steps are in **bold**):
 1. Download this repository. Click on **<> Code** on the top right of this page.
 2. Install Python and Jupyter on your PC. Some useful links:
