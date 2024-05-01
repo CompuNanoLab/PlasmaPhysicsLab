@@ -48,10 +48,9 @@ fwhm = 30 * fs
 laser_center = 2 * fwhm
 
 # DIAGNOSTICS
-shift = int(4*fwhm/dt)
 every_fs = int(fs/dt)
 every_out = 20*every_fs
-
+shift = every_out
 ## ---------------------------------- ##
 ##         SIMULATION SETUP           ##
 ## ---------------------------------- ##
@@ -69,7 +68,7 @@ Main(
     print_every = int(nt/100.0),
     reference_angular_frequency_SI = omega_SI,
     solve_poisson = False,
-    number_of_patches = [16],
+    number_of_patches = [2],
     patch_arrangement = 'hilbertian',
 )
 
@@ -93,11 +92,12 @@ LaserPlanar1D(
 # ELECTRONS
 Species(
   name = "ELE",
-  position_initialization = "random",
+  position_initialization = "regular",
+  regular_number = [nppc],
   momentum_initialization = "cold",
   particles_per_cell = nppc,
   mass = me,
-  number_density = trapezoidal(ne0, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
+  number_density = trapezoidal(ne0, xvacuum = 0.4 * Lx, xplateau = 0.2 * Lx, xslope1 = 0, xslope2 = 0), 
   charge = -1.,
   boundary_conditions = [["reflective", "reflective"]],
   pusher = "boris",
@@ -106,11 +106,12 @@ Species(
 # IONS
 Species(
   name = "ION",
-  position_initialization = "random",
+  position_initialization = "regular",
+  regular_number = [nppc],
   momentum_initialization = "cold",
   particles_per_cell = nppc,
   mass = mi,
-  number_density = trapezoidal(ne0 / Zp, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
+  number_density = trapezoidal(ne0 / Zp, xvacuum = 0.4 * Lx, xplateau = 0.2 * Lx, xslope1 = 0, xslope2 = 0), 
   charge = Zp,
   boundary_conditions = [["reflective", "reflective"]],
   pusher = "boris",
@@ -142,7 +143,6 @@ DiagFields(
     time_average = 1,
     fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "Jx_ELE", "Jy_ELE", "Jz_ELE", "Jx_ION", "Jy_ION", "Jz_ION", "Rho_ELE", "Rho_ION", "Rho"],
 )
-
 ```
 - Create a folder named smilei (``mkdir smilei``) inside the directory ``Lecture2``. 
 
@@ -157,9 +157,9 @@ DiagFields(
   ```
   and run the simulation
   ```
-  mpirun -np 4 <path_to_smilei_folder/smilei input.py
+  mpirun -np 2 <path_to_smilei_folder/smilei input.py
   ```
 
-- In the directory ``Lecture2`` run the script ``plot.py`` by typing in the terminal ``python plot.py``.
+- In the directory ``Lecture2`` run the script ``plot.py`` by typing in the terminal ``python plot.py``. This script prepares plots comparing the results of this code and the results of the 1D Python PIC code in the ``Data`` folder. Before launching it be sure to have run the 1DPIC in the jupyter notebook
 
-- Now you can visualise some plots in the folder ``output``.
+- Now you can visualise some plots in the folder ``Output``.
