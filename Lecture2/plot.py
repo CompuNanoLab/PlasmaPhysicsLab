@@ -1,13 +1,9 @@
 import happi
-import math
-from math import pi,sqrt,sin,tan,log10,exp,cos
 import numpy as np
-from numpy import random, vectorize, trapz
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
 import os 
 import shutil
-import matplotlib.pylab as pl
 from matplotlib import rcParams
 
 rcParams.update({'font.size': 14})
