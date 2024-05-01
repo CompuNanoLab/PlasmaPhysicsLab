@@ -141,7 +141,7 @@ DiagTrackParticles(
 DiagFields(
     every = [shift, every_out],
     time_average = 1,
-    fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "Jx_ELE", "Jy_ELE", "Jz_ELE", "Jx_ION", "Jy_ION", "Jz_ION", "Rho_ELE", "Rho_ION", "Rho"],
+    fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "Jx", "Jy", "Jz", "Rho_ELE", "Rho_ION", "Rho"],
 )
 ```
 - Create a folder named smilei (``mkdir smilei``) inside the directory ``Lecture2``. 
