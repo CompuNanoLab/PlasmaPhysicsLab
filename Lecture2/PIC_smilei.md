@@ -35,35 +35,12 @@ dt = cfl * dx
 nt = int(Tsim / dt)
 
 # PLASMA PARAMETERS
-ZC = 6.
-AC = 6.
-ne0 = 1
+Zp = 1.
+Ap = 1.
+ne0 = 1e-2
 nppc = 2
 me = 1
-mi = pemr * AC
-
-p0x=0.
-p0y=0.
-p0z=0.
-dpx=0.
-dpy=0.
-dpz=0.
-g0 = sqrt(1.+p0x**2+p0y**2+p0z**2)
-v0ex = p0x/g0/me
-v0ey = p0y/g0/me
-v0ez = p0z/g0/me
-Tx = dpx**2/me #mass*dpx**2
-Ty = dpy**2/me #mass*dpy**2
-Tz = dpz**2/me #mass*dpz**2
-Te = [dpx**2,dpy**2,dpz**2]
-#Te = [Tx, Ty, Tz]
-#Ti = [Tx, Ty, Tz]
-
-g0 = sqrt(1.+(p0x**2+p0y**2+p0z**2)/mi**2)
-v0ix = p0x/g0/mi
-v0iy = p0y/g0/mi
-v0iz = p0z/g0/mi
-Ti = [dpx**2/mi,dpy**2/mi,dpz**2/mi]
+mi = pemr * Ap
 
 # LASER PARAMETERS
 a0 = 1
@@ -81,18 +58,19 @@ every_out = 20*every_fs
 
 Main(
     geometry = "1Dcartesian",
-    interpolation_order = 2,
     cell_length = [dx],
-    #number_of_cells = [nx], 
     grid_length = [Lx],
-    number_of_patches = [2],
     timestep = dt,
     simulation_time = T_sim,
+    interpolation_order = 2,
     EM_boundary_conditions = [ ['silver-muller'] ],
+    maxwell_solver = 'Yee',
     random_seed = smilei_mpi_rank,
     print_every = int(nt/100.0),
     reference_angular_frequency_SI = omega_SI,
-    solve_poisson = False
+    solve_poisson = False,
+    number_of_patches = [2],
+    patch_arrangement = 'hilbertian',
 )
 
 ## ---------------------------------- ##
@@ -115,37 +93,27 @@ LaserPlanar1D(
 # ELECTRONS
 Species(
   name = "ELE",
-  position_initialization = "regular",
-  regular_number = [nppc],
-  momentum_initialization = "rectangular",
-  mean_velocity = [v0ex, v0ey, v0ez],
-  temperature = Te,
+  position_initialization = "random",
+  momentum_initialization = "cold",
   particles_per_cell = nppc,
   mass = me,
-  number_density = trapezoidal(n0, xvacuum = 3 * fwhm, xplateau = Lx - 2 * fwhm, xslope1 = 0, xslope2 = 0), 
+  number_density = trapezoidal(n0, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
   charge = -1.,
-  boundary_conditions = [["reflective", "reflective"]],
-  time_frozen = 0.0,
-  is_test = False,
+  boundary_conditions = [["periodic", "periodic"]],
   pusher = "boris",
 )
 
 # IONS
 Species(
-    name = "ION",
-    position_initialization = "regular",
-    regular_number = [nppc],
-    momentum_initialization = "rectangular",
-    mean_velocity = [v0ix, v0iy, v0iz],
-    temperature = Ti,
-    particles_per_cell = nppc,
-    mass = mi,
-    number_density = trapezoidal(n0 / Z, xvacuum = 3 * fwhm, xplateau = Lx - 2 * fwhm, xslope1 = 0, xslope2 = 0), 
-    charge = Z,
-    boundary_conditions = [["reflective", "reflective"]],
-    time_frozen = 0.0,
-    is_test = False,
-    pusher = "boris",
+  name = "ION",
+  position_initialization = "random",
+  momentum_initialization = "cold",
+  particles_per_cell = nppc,
+  mass = mi,
+  number_density = trapezoidal(n0, xvacuum = 0.4 * Lx, xplateau = 0.6 * Lx, xslope1 = 0, xslope2 = 0), 
+  charge = Z,
+  boundary_conditions = [["periodic", "periodic"]],
+  pusher = "boris",
 )
 
 ## ---------------------------------- ##
@@ -172,7 +140,7 @@ DiagTrackParticles(
 DiagFields(
     every = [shift, every_out],
     time_average = 1,
-    fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "Jx_ele", "Jy_ele", "Jz_ele","Jx_ion", "Jy_ion", "Jz_ion", "Rho_ele", "Rho_ion", "Rho"],
+    fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "Jx_ELE", "Jy_ELE", "Jz_ELE", "Jx_ION", "Jy_ION", "Jz_ION", "Rho_ELE", "Rho_ION", "Rho"],
 )
 
 ```
