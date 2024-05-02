@@ -1,7 +1,7 @@
 ########################################
 ## ---------------------------------- ##
 ## INPUT FILE FOR THE PIC-CODE SMILEI ##
-##   APOLLON EXPERIMENT SIMULATIONS   ##
+##    2D LASER-PLASMA INTERACTION     ##
 ## ---------------------------------- ##
 ########################################
 import math
