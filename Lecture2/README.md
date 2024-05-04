@@ -4,6 +4,9 @@ This folder contains the material for the lecture of the Laboratory of Plasma Ph
  Here is a list of the material:
 * [PIC Basics](./PIC_basics.md)
 * [1D PIC code](./1DPIC.ipynb)
-* [Instructions for a Smilei simulation](./PIC_smilei.md)
+* [Instructions to run PIC simulations](./PIC_instructions.md)
+* [Python script to plot 1D results](./plot.py)
+* [Folder containing the input file for a 2D Smilei simulation and the Python scripts for its plots](./2D)
+* [Instructions for an assignment (optional)](./Assignment.md)
   
 For any doubt or question, contact Marta Galbiati ([marta.galbiati@polimi.it](marta.galbiati@polimi.it)).
