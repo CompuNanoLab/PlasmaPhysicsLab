@@ -90,10 +90,7 @@ build the Python module to manage the output:
 make happi
 ```
 
-Now in a Python script you can do:
-```
-import happi
-```
+Now you can use the command ```import happi``` in Python scripts to get access to the functions that allow you to read the output of a Smilei simulation. 
 
 ## Install on Mac
 
