@@ -15,6 +15,8 @@ The supported platforms are Linux and MacOS. If you use Windows, follow these in
   wsl --install -d <Distro>
   ```
 - Launch the Distro by searching from the start menu and insert a username and password.
+- 
+  <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/fb762f06-3d6b-4ddc-b090-e2569d73d3fa" width="400" />
 
 ## Install on Linux
 
