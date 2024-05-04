@@ -21,8 +21,7 @@ The supported platforms are Linux and MacOS. If you use Windows, follow these in
 ## Install on Linux
 
 ### General dependencies
-First, install on your laptop using a package manager the following fundamental software (dependencies) necessary to compile and run Smilei:
-
+First, install on your laptop using a package manager the following fundamental software (dependencies) necessary to compile and run Smilei. With the same steps, you are also installing Python which will allow you to run Python scripts (.py) and jupyter notebooks.
 
 For **Debian-based (Ubuntu) OS**:
 ```
