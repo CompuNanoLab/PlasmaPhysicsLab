@@ -14,15 +14,15 @@ The supported platforms are Linux and MacOS. If you use Windows, follow these in
   ```
   wsl --install -d <Distro>
   ```
-- Launch the Distro by searching from the start menu and insert a username and password.
+- Launch the Distro by searching from the start menu and insert a username and password. Remember that when you launch the virtual machine you are opening a terminal in the ```$HOME``` of your Linux platform.
   
   <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/fb762f06-3d6b-4ddc-b090-e2569d73d3fa" width="400" />
 
-You can access the files of your virtual machine by opening the Windows File Explorer and looking for the Linux folder: 
+You can access the files of your virtual machine by opening the Windows File Explorer and looking for the Linux folder. Inside the folder with the name of your Distro you can find your ```home``` directory.
 
 <img src="https://github.com/CompuNanoLab/PlasmaPhysicsLab/assets/140382467/3278d5b3-cbc6-43a3-959e-78b11d40ac9a" width="600" />
 
-Remember that when you launch the virtual machine you are opening a terminal in the $HOME of your Linux platform.
+
 
 ## Install on Linux
 
