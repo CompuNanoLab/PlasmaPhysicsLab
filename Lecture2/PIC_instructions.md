@@ -92,7 +92,7 @@ Prepare an input file ``input.py`` for the simulation:
 ```bash
 nano input.py
 ```
-where you can copy the following lines:
+where you can copy the following lines ( look at the [Smilei documentation](https://smileipic.github.io/Smilei/Use/namelist.html) for more details on the syntax of the input file):
 
 ```python
 ########################################
