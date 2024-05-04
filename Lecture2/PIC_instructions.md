@@ -1,6 +1,6 @@
 # Instructions to run Particle-In-Cell (PIC) simulations
 
-This document explains how to perform PIC simulations with a 1D Python code and with the Smilei code as done during the lecture on 02/05/2024.
+This document explains you how to perform PIC simulations with a 1D Python code and with the Smilei code as done during the lecture on 02/05/2024.
 
 ## Before starting
 
@@ -8,7 +8,7 @@ First, you need to prepare your laptop for the activity. You should have a Linux
 
 This [guide](./smilei_guide.md) helps you to prepare the machine. 
 
-Before starting, here is a list of basic useful commands that you can use in a terminal:
+Here is a list of basic useful commands that you can use in a terminal:
 
 ```
     cat --- for creating and displaying short files
@@ -44,7 +44,7 @@ To edit files you can use a command-line editor like Nano. To open a file using 
 ```bash
 nano text.txt
 ```
-Then, you can move in the file with arrow keys and edit it as you want. Use Ctrl + O to save changes to the file Ctrl + X to exit.
+Then, you can move with arrow keys and edit the file as you want. Use Ctrl + O to save changes to the file and Ctrl + X to exit.
 
 ## Running simulations
 
@@ -61,7 +61,7 @@ Go to the right folder:
 cd PlasmaPhysicsLab/Lecture2
 ```
 
-Check that you have istalled what you need to run Jupyter Notebboks (you may need to use pip3 instead of pip):
+Check that you have installed what you need to run Jupyter Notebooks (you may need to use pip3 instead of pip):
 
 ```bash
 pip install jupyter
@@ -80,6 +80,7 @@ Now open a new terminal and move again to the ```Lecture2``` folder:
 ```bash
 cd PlasmaPhysicsLab/Lecture2
 ```
+
 Generate a folder in which you will perform the Smilei simulation:
 
 ```bash
@@ -89,7 +90,7 @@ cd smilei
 Prepare an input file ``input.py`` for the simulation:
 
 ```bash
-input.py
+nano input.py
 ```
 where you can copy the following lines:
 
@@ -239,6 +240,7 @@ DiagFields(
     fields = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "Jx", "Jy", "Jz", "Rho_ELE", "Rho_ION", "Rho"],  # Fields to save
 )
 ```
+
 Run the simulation with this input file:
 
 ```bash
@@ -258,7 +260,7 @@ Go back to the directory ``Lecture2``:
 cd ..
 ```
 
-Check to have all the required packages:
+Check to have all the required packages to use the Python script for plotting:
 
 ```bash
 pip install numpy scipy matplotlib
@@ -283,13 +285,14 @@ Run a Smilei simulation with the input file in this folder:
 ```bash
 mpirun -np 2 <your_path_to_smilei_installation_folder>/smilei input.py
 ```
-Then we plot some figures in the ``PLOTS`` folder:
+
+Then you can plot some figures in the ``PLOTS`` folder:
 
 ```bash
 cd PLOTS
 ```
 
-and run all the python scripts
+and run all the Python scripts:
 
 ```bash
 python plot_maps.py 
@@ -297,5 +300,4 @@ python plot_scalars.py
 python plot_spectra.py 
 ```
 
-In this folder, (accessible from your file explorer), you can see maps of the Magnetic field and the electron and ion density, plots of the evolution of the electromagnetic and kinetic energy, and spectra of electrons at different simulation times.
-
+In this folder (accessible from your file explorer), you can see maps of the magnetic field and the electron and ion densities, plots of the evolution of the electromagnetic and kinetic energy, and spectra of electrons at different simulation times.
