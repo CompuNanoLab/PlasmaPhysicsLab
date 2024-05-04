@@ -1,4 +1,9 @@
-# Instructions to run a PIC simulation with Smilei
+# Instructions to run Particle-In-Cell (PIC) simulations
+
+This document explains how to perform PIC simulations with a 1D Python code and with the Smilei code.
+
+First, you need to prepare your laptop for the activity. You should have a Linux machine (virtual if you use Windows) or MacOS with a running Python interpreter and the PIC code [Smilei](https://smileipic.github.io/Smilei/) installed.
+This [guide](./smilei_guide.md)
 
 - Prepare an input file ``input.py`` with this content.
 
@@ -157,7 +162,7 @@ DiagFields(
   ```
   and run the simulation
   ```
-  mpirun -np 2 <path_to_smilei_folder/smilei input.py
+  mpirun -np 2 <path_to_smilei_folder>/smilei input.py
   ```
 
 - In the directory ``Lecture2`` run the script [plot.py](./plot.py) by typing in the terminal ``python plot.py``. This script prints plots comparing the results of this code and the results of the 1D Python PIC code in the ``Data`` folder. Check to have installed all the required Python modules.
