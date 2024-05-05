@@ -8,7 +8,9 @@ Try to do the following steps:
 - Investigate three conditions of plasma density:
   - $n_e = 10^{-2}  n_c$
   - $n_e = 1  n_c$
-  - $n_e = 100  n_c$
+  - $n_e = 80  n_c$
+  
+  (hint: when you increase density you need higher resolution, to resolve at least 3 times the skin depth, and a higher number of particles per cell)
 - Show some plots of these three scenarios and tell if you can identify the  typical  properties of laser interaction in the underdense, critical, and overdense regimes.
 - Identify possible numerical problems in the simulations (low spatial resolution, low number of particles per cell, box too small, ...) and possible effects that you are seeing
 (numerical heating of the plasma, anomalous behaviour at the boundaries, ...).
